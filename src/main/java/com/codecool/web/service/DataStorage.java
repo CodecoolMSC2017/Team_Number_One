@@ -4,12 +4,14 @@ import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DataStorage {
     private List<User> allUsers = new ArrayList<User>();
     //private List<SubPages> allPages = new ArrayList<SubPages>();
-    private List<TextPage> allTextPages = new ArrayList<>();
+    private Map<Integer, TextPage> allTextPages = new HashMap<>();
 
     private DataStorage() {
     }
@@ -28,7 +30,12 @@ public class DataStorage {
         return allUsers;
     }
 
-    public void addTextPage(TextPage textPage) { allTextPages.add(textPage); }
+    public void addTextPage(TextPage textPage) {
 
-    public List<TextPage> getAllTextPages() { return allTextPages; }
+        int textId = allTextPages.size();
+        textPage.setTextId(textId);
+        allTextPages.put(textId, textPage);
+    }
+
+    public Map<Integer, TextPage> getAllTextPages() { return allTextPages; }
 }
