@@ -1,18 +1,22 @@
 package com.codecool.web.model;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class User {
     private String name;
     private String email;
     private String role;
     private String password;
+    private long uniqueId;
 
     public User(String name, String email, String role, String password) {
+        Random r = new Random();
         this.name = name;
         this.email = email;
         this.role = role;
         this.password = password;
+        uniqueId = r.nextLong();
     }
 
     public User(String name, String password) {
@@ -36,6 +40,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public long getUniqueId() {
+        return uniqueId;
     }
 
     @Override
