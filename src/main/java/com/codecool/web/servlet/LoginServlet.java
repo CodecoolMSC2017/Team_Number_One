@@ -21,7 +21,9 @@ public class LoginServlet extends HttpServlet {
 
         List<User> registered = DataStorage.getInstance().getUserList();
 
-        if(registered.contains(tempForCheck)){
+
+
+        if(registered.size() > 0 && registered.contains(tempForCheck)){
             //temporary for testing
             String yes = "<html><body>ok</body></html>";
             PrintWriter writer = response.getWriter();
@@ -31,7 +33,7 @@ public class LoginServlet extends HttpServlet {
         }
         else {
             //temporary for testing
-            String no = "<html><body>wrong pw or name<br>" + "registered:" + registered.get(0) + "</body></html>";
+            String no = "<html><body>wrong pw or name<br></body></html>";
             PrintWriter writer = response.getWriter();
             writer.println(no);
         }
