@@ -21,4 +21,8 @@ public class DataStorage {
     public void addList(User user){
         allUsers.add(user);
     }
+
+    public List<User> getUserList(){
+        return allUsers;
+    }
 }

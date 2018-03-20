@@ -1,6 +1,7 @@
 package com.codecool.web.servlet;
 
 import com.codecool.web.model.User;
+import com.codecool.web.service.DataStorage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +15,14 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User newUser = new User(req.getParameter("name"), req.getParameter("email"), req.getParameter("role"), req.getParameter("password"));
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
+        User newUser = new User(req.getParameter("username"),
+                                req.getParameter("email"),
+                                req.getParameter("role"),
+                                req.getParameter("password"));
+
+        DataStorage.getInstance().addList(newUser);
+
+        resp.sendRedirect("index.html");
     }
 
 }
