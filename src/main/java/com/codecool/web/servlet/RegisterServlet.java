@@ -15,7 +15,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User newUser = new User(req.getParameter("name"), req.getParameter("email"), req.getParameter("role"), req.getParameter("password"));
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
+        req.getRequestDispatcher("index.html").forward(req, resp);
     }
 
 }
