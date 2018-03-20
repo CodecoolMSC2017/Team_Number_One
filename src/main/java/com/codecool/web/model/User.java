@@ -1,4 +1,4 @@
-package com.codecool.web.service;
+package com.codecool.web.model;
 
 public class User {
     private String name;

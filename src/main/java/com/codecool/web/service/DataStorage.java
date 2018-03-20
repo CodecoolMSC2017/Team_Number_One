@@ -1,5 +1,7 @@
 package com.codecool.web.service;
 
+import com.codecool.web.model.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
