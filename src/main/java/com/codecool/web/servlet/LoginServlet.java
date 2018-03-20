@@ -33,12 +33,21 @@ public class LoginServlet extends HttpServlet {
         }
         else {
             //temporary for testing
-            String no = "<html><body>wrong pw or name<br></body></html>";
+            String no = "<html><head>" +
+                    "<meta http-equiv=refresh content=1; />" +
+                    "<head><body>" +
+                    "<h2>Wrong password or user name!<br><h2>" +
+                    "</body></html>";
             PrintWriter writer = response.getWriter();
             writer.println(no);
         }
+    }
 
 
-
+    // <meta http-equiv=refresh content=1; /> send a GET to to the servlet, what this method catch, nd redirect to the index.html
+    // might need to find a more elegant way later
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("index.html");
     }
 }
