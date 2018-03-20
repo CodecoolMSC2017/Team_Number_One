@@ -27,15 +27,16 @@ public class LoginServlet extends HttpServlet {
         if(registered.size() > 0 && registered.contains(tempForCheck)){
             //for testing
             Long userID = null;
-            for (User user: registered) {
+            for (User user: registered) {  //this is redundant
                 if (user.equals(tempForCheck)){
                     userID = user.getUniqueId();
                 }
             }
-            Cookie cookie = new Cookie("mysession", userID != null ? userID.toString() : "0");
-            cookie.setMaxAge(60*10); // 10 minutes
+            Cookie cookie = new Cookie("loginsession", userID != null ? userID.toString() : "0");
+            cookie.setMaxAge(60*10); // 10 minutes before cookie is expired
             response.addCookie(cookie);
             request.getRequestDispatcher("test.jsp").forward(request, response);
+            //test section end
         }
 
         else {

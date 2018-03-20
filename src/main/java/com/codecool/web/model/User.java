@@ -16,7 +16,7 @@ public class User {
         this.email = email;
         this.role = role;
         this.password = password;
-        uniqueId = r.nextLong();
+        uniqueId = r.nextLong(); // no checking for existing IDs at other users
     }
 
     public User(String name, String password) {
@@ -24,6 +24,7 @@ public class User {
         this.password = password;
         this.email = "";
         this.role = "";
+        uniqueId = 0;
     }
 
     public String getName() {
@@ -61,6 +62,7 @@ public class User {
         return Objects.hash(name, password);
     }
 
+
     //for testing
     @Override
     public String toString() {
@@ -69,6 +71,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
                 ", password='" + password + '\'' +
+                ", uniqueId=" + uniqueId +
                 '}';
     }
 }
