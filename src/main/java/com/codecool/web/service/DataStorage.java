@@ -5,7 +5,10 @@ import java.util.List;
 
 public class DataStorage {
     private List<User> allUsers = new ArrayList<User>();
-    private List<SubPages> allPages = new ArrayList<SubPages>();
+    //private List<SubPages> allPages = new ArrayList<SubPages>();
+
+    private DataStorage() {
+    }
 
     private static DataStorage ourInstance = new DataStorage();
 
@@ -13,6 +16,7 @@ public class DataStorage {
         return ourInstance;
     }
 
-    private DataStorage() {
+    public void addList(User user){
+        allUsers.add(user);
     }
 }
