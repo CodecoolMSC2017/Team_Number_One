@@ -5,6 +5,7 @@ public class TextPage {
     private int textId;
     private String textTitle = "";
     private String textContent = "";
+    private boolean isPublished = false;
 
     public TextPage(String textTitle, String textContent) {
         this.textTitle = textTitle;
@@ -35,5 +36,17 @@ public class TextPage {
 
     public void setTextContent(String textContent) {
         this.textContent = textContent;
+    }
+
+    public boolean isPublished() {
+        return isPublished;
+    }
+
+    public void setPublished() {
+        isPublished = true;
+    }
+
+    public void setUnpublished() {
+        isPublished = false;
     }
 }
