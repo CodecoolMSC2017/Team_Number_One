@@ -1,6 +1,9 @@
 *.iml
 target/*
-idea/*
+.idea/*
+
+# do not ignore these files
+!uiDesigner.xml
 
 # Compiled class file
 *.class
