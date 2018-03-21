@@ -9,12 +9,14 @@
 </head>
 <body>
 <h1>Welcome ${name.text}!</h1>
-<c:forEach value="${pageList}" var="page">
-    <form method="get" id="${page.getId()}" action="curriculum">>
-        <input type="submit" value="${page.getTitle()}">
-        <br>
-    </form>
-</c:forEach>
+<c:if test="${pageList.size() > 0}">
+    <c:forEach items="${pageList}" var="page">
+        <form method="get" id="${page.getId()}" action="curriculum">>
+            <input type="submit" value="${page.getTitle()}">
+            <br>
+        </form>
+    </c:forEach>
+</c:if>
 <form method="get" id="newText" action="curriculum">>
     <input type="submit" value="Create New Text Page">
     <br>
