@@ -1,6 +1,7 @@
 package com.codecool.web.service;
 
 import com.codecool.web.model.AssignmentPage;
+import com.codecool.web.model.SubPage;
 import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
 
@@ -12,8 +13,7 @@ import java.util.Map;
 public class DataStorage {
     private List<User> allUsers = new ArrayList<User>();
     //private List<SubPages> allPages = new ArrayList<SubPages>();
-    private Map<Integer, TextPage> allTextPages = new HashMap<>();
-    private Map<Integer, AssignmentPage> allAssignmentPages = new HashMap<>();
+    private Map<Integer, SubPage> allSubPages = new HashMap<>();
 
     private DataStorage() {
     }
@@ -32,23 +32,13 @@ public class DataStorage {
         return allUsers;
     }
 
-    public void addTextPage(TextPage textPage) {
+    public void addSubPage(TextPage textPage) {
 
-        int textId = allTextPages.size();
-        textPage.setTextId(textId);
-        allTextPages.put(textId, textPage);
+        int id = allSubPages.size();
+        textPage.setId(id);
+        allSubPages.put(id, textPage);
     }
 
-    public Map<Integer, TextPage> getAllTextPages() { return allTextPages; }
+    public Map<Integer, SubPage> getAllSubPages() { return allSubPages; }
 
-    public void addAssignmentPage(AssignmentPage assignPage) {
-
-        int assignId = allAssignmentPages.size();
-        assignPage.setAssignId(assignId);
-        allAssignmentPages.put(assignId, assignPage);
-    }
-
-    public Map<Integer, AssignmentPage> getAllAssignmentPages() {
-        return allAssignmentPages;
-    }
 }
