@@ -5,28 +5,18 @@ import java.util.List;
 
 public class AssignmentPage extends SubPage {
 
-    private String assignQuestion = "";
-    private List<String> assignAnswers = new ArrayList<>();
+    private List<Question> listOfTasks = new ArrayList<>();
 
-    public AssignmentPage(String title, String assignQuestion, List<String> assignAnswers) {
+    public AssignmentPage(String title, List<Question> listOfTasks) {
         super(title);
-        this.assignQuestion = assignQuestion;
-        this.assignAnswers = assignAnswers;
+        this.listOfTasks = listOfTasks;
     }
 
-    public String getAssignQuestion() {
-        return assignQuestion;
+    public List<Question> getListOfTasks() {
+        return listOfTasks;
     }
 
-    public void setAssignQuestion(String assignQuestion) {
-        this.assignQuestion = assignQuestion;
-    }
-
-    public List<String> getAssignAnswers() {
-        return assignAnswers;
-    }
-
-    public void setAssignAnswers(List<String> assignAnswers) {
-        this.assignAnswers = assignAnswers;
+    public void setListOfTasks(List<Question> listOfTasks) {
+        this.listOfTasks = listOfTasks;
     }
 }
