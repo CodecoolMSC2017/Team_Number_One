@@ -16,14 +16,29 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User newUser = new User(req.getParameter("username"),
-                                req.getParameter("email"),
-                                req.getParameter("role"),
-                                req.getParameter("password"));
+        List<User> registered = DataStorage.getInstance().getUserList();
 
-        DataStorage.getInstance().addList(newUser);
+        String userName = req.getParameter("username");
 
-        resp.sendRedirect("index.html");
+        boolean notOccupiedName = true;
+        for (User usr: registered) {
+            if (usr.getName().equals(userName)) {
+                notOccupiedName = false;
+            }
+        }
+
+        if(notOccupiedName){
+            User newUser = new User(userName,
+                    req.getParameter("email"),
+                    req.getParameter("role"),
+                    req.getParameter("password"));
+
+            DataStorage.getInstance().addList(newUser);
+
+            resp.sendRedirect("index.html");
+        }
+        else {
+            resp.sendRedirect("register.html");  // no error message yet
+        }
     }
-
 }
