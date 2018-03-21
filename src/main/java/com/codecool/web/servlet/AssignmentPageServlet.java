@@ -17,7 +17,7 @@ public class AssignmentPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int assignId = Integer.parseInt(req.getParameter("id"));
-        AssignmentPage tempAssign = DataStorage.getInstance().getAllAssignmentPages().get(assignId);
+        AssignmentPage tempAssign = (AssignmentPage)DataStorage.getInstance().getAllSubPages().get(assignId);
         req.setAttribute("ap",tempAssign);
         req.getRequestDispatcher("displayAssignPage.jsp").forward(req, resp);
     }

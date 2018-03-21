@@ -16,7 +16,7 @@ public class TextPageServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int textId = Integer.parseInt(req.getParameter("id"));
-        TextPage tempText = DataStorage.getInstance().getAllTextPages().get(textId);
+        TextPage tempText = (TextPage)DataStorage.getInstance().getAllSubPages().get(textId);
         req.setAttribute("tp",tempText);
         req.getRequestDispatcher("displayTextPage.jsp").forward(req, resp);
     }
