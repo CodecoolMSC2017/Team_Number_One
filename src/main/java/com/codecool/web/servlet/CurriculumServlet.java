@@ -1,6 +1,8 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.model.AssignmentPage;
 import com.codecool.web.model.SubPage;
+import com.codecool.web.model.TextPage;
 import com.codecool.web.service.DataStorage;
 
 import javax.servlet.ServletException;
@@ -22,11 +24,16 @@ public class CurriculumServlet extends HttpServlet {
         } else if (req.getParameter("id").equals("newAssignment")) {
             resp.sendRedirect("submitTextPage.html");
         } else {
-            for (SubPage sp : )
-            DataStorage.getInstance().addList(newUser);
+            for (SubPage sp : ds.getAllSubPages()) {
+                if (sp.getId() == Integer.parseInt(req.getParameter("id"))) {
+                    if (sp instanceof TextPage) {
+                        resp.sendRedirect("displayTextPage.html");
+                    } else if (sp instanceof AssignmentPage) {
+                        resp.sendRedirect("displayAssignPage.html");
+                    }
+                }
+            }
 
-            resp.sendRedirect("index.html");
         }
-
     }
 }
