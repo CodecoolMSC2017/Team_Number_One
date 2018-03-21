@@ -20,23 +20,27 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User tempForCheck = new User(request.getParameter("username"), request.getParameter("password"));
 
+        DataStorage.getInstance().addList(new User("a", "a@a", "a", "a")); //for testing, delete later
+
         List<User> registered = DataStorage.getInstance().getUserList();
 
 
 
+
         if(registered.size() > 0 && registered.contains(tempForCheck)){
-            //for testing
+            //rewrite to store the id in string later
             Long userID = null;
-            for (User user: registered) {  //this is redundant
+            for (User user: registered) {  //this is redundant, refractor later
                 if (user.equals(tempForCheck)){
                     userID = user.getUniqueId();
                 }
             }
             Cookie cookie = new Cookie("loginsession", userID != null ? userID.toString() : "0");
-            cookie.setMaxAge(60*10); // 10 minutes before cookie is expired
+            cookie.setMaxAge(60*2); // 10 minutes before cookie is expired
+            cookie.setHttpOnly(true);
             response.addCookie(cookie);
             request.getRequestDispatcher("test.jsp").forward(request, response);
-            //test section end
+
         }
 
         else {

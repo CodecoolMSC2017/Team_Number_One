@@ -24,7 +24,7 @@ public class LoginFilter implements Filter {
         List<User> users = DataStorage.getInstance().getUserList();
         boolean notAuthorised = true;
 
-        if (cookies != null) {
+        if (cookies != null) { //refactor later
             for (Cookie ck : cookies) {
                 for (User usr: users){
                     if(Long.toString(usr.getUniqueId()).equals(ck.getValue())){
