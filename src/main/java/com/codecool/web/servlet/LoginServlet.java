@@ -25,18 +25,15 @@ public class LoginServlet extends HttpServlet {
         List<User> registered = DataStorage.getInstance().getUserList();
 
 
-
-
         if(registered.size() > 0 && registered.contains(tempForCheck)){
-            //rewrite to store the id in string later
             String userID = null;
             for (User user: registered) {  //this is redundant, refractor later
                 if (user.equals(tempForCheck)){
                     userID = user.getUniqueId();
                 }
             }
-            Cookie cookie = new Cookie("loginsession", userID != null ? userID.toString() : "0");
-            cookie.setMaxAge(60*2); // 10 minutes before cookie is expired
+            Cookie cookie = new Cookie("loginsession", userID != null ? userID : "Failed_to_get_user_id");
+            cookie.setMaxAge(60*2); // 2 minutes before cookie is expired
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
             request.getRequestDispatcher("test.jsp").forward(request, response);

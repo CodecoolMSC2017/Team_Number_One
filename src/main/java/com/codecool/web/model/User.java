@@ -54,8 +54,8 @@ public class User {
         Random r = new Random();
         StringBuilder sb = new StringBuilder("");
         SimpleDateFormat dateFormat = new SimpleDateFormat("00yyyyMMddHHmmssms");
-
         int counter = 0;
+
         while (counter <= 32){
             counter++;
             sb.append(Integer.toString(r.nextInt(9)));
