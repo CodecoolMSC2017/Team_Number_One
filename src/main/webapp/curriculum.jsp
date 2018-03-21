@@ -11,17 +11,17 @@
 <h1>Welcome ${name.text}!</h1>
 <c:if test="${pageList.size() > 0}">
     <c:forEach items="${pageList}" var="page">
-        <form method="get" id="${page.getId()}" action="curriculum">>
+        <form method="get" id="${page.getId()}" action="curriculum">
             <input type="submit" value="${page.getTitle()}">
             <br>
         </form>
     </c:forEach>
 </c:if>
-<form method="get" id="newText" action="curriculum">>
+<form method="get" id="newText" action="curriculum" name="id">
     <input type="submit" value="Create New Text Page">
     <br>
 </form>
-<form method="get" id="newAssignment" action="curriculum">>
+<form method="get" id="newAssignment" action="curriculum">
     <input type="submit" value="Create New Assignment">
     <br>
 </form>

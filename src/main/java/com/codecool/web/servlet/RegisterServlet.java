@@ -38,7 +38,9 @@ public class RegisterServlet extends HttpServlet {
             resp.sendRedirect("index.html");
         }
         else {
-            resp.sendRedirect("register.html");  // no error message yet
+            req.setAttribute("notAvailable", true);
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
+
         }
     }
 }
