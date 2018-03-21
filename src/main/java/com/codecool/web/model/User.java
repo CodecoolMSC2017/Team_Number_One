@@ -1,5 +1,8 @@
 package com.codecool.web.model;
 
+import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 
@@ -8,7 +11,7 @@ public class User {
     private String email;
     private String role;
     private String password;
-    private long uniqueId;
+    private String uniqueId;
 
     public User(String name, String email, String role, String password) {
         Random r = new Random();
@@ -16,7 +19,7 @@ public class User {
         this.email = email;
         this.role = role;
         this.password = password;
-        uniqueId = r.nextLong(); // no checking for existing IDs at other users
+        uniqueId = generateId();
     }
 
     public User(String name, String password) {
@@ -24,7 +27,7 @@ public class User {
         this.password = password;
         this.email = "";
         this.role = "";
-        uniqueId = 0;
+        uniqueId = "0";
     }
 
     public String getName() {
@@ -43,8 +46,23 @@ public class User {
         return password;
     }
 
-    public long getUniqueId() {
+    public String getUniqueId() {
         return uniqueId;
+    }
+
+    private String generateId(){
+        Random r = new Random();
+        StringBuilder sb = new StringBuilder("");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("00yyyyMMddHHmmssms");
+
+        int counter = 0;
+        while (counter <= 32){
+            counter++;
+            sb.append(Integer.toString(r.nextInt(9)));
+        }
+        sb.append(dateFormat.format(new Date()));
+
+        return sb.toString();
     }
 
     @Override

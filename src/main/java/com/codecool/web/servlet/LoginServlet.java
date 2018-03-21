@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 
         if(registered.size() > 0 && registered.contains(tempForCheck)){
             //rewrite to store the id in string later
-            Long userID = null;
+            String userID = null;
             for (User user: registered) {  //this is redundant, refractor later
                 if (user.equals(tempForCheck)){
                     userID = user.getUniqueId();

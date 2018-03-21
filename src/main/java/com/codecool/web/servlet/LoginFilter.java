@@ -27,7 +27,7 @@ public class LoginFilter implements Filter {
         if (cookies != null) { //refactor later
             for (Cookie ck : cookies) {
                 for (User usr: users){
-                    if(Long.toString(usr.getUniqueId()).equals(ck.getValue())){
+                    if(usr.getUniqueId().equals(ck.getValue())){
                         notAuthorised = false;
                         chain.doFilter(request, res);
 
