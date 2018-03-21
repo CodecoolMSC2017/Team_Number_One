@@ -13,7 +13,7 @@ import java.util.Map;
 public class DataStorage {
     private List<User> allUsers = new ArrayList<User>();
     //private List<SubPages> allPages = new ArrayList<SubPages>();
-    private Map<Integer, SubPage> allSubPages = new HashMap<>();
+    private List<SubPage> allSubPages = new ArrayList<>();
 
     private DataStorage() {
     }
@@ -32,13 +32,13 @@ public class DataStorage {
         return allUsers;
     }
 
-    public void addSubPage(TextPage textPage) {
+    public void addSubPage(SubPage subPage) {
 
         int id = allSubPages.size();
-        textPage.setId(id);
-        allSubPages.put(id, textPage);
+        subPage.setId(id);
+        allSubPages.add(subPage);
     }
 
-    public Map<Integer, SubPage> getAllSubPages() { return allSubPages; }
+    public List<SubPage> getAllSubPages() { return allSubPages; }
 
 }
