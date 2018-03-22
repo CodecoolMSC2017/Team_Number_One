@@ -39,9 +39,11 @@ public class LoginServlet extends HttpServlet {
             cookie.setMaxAge(60*2); // 10 minutes before cookie is expired
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
+            System.out.println(cookie.getName());
+            request.setAttribute("userID", userID);
+            request.setAttribute("userList", DataStorage.getInstance().getUserList());
             request.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
             request.getRequestDispatcher("curriculum.jsp").forward(request, response);
-
         }
 
         else {
