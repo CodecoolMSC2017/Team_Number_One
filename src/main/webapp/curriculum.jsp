@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
 <body>
-<h1>Welcome ${name.text}!</h1>
+<h1 id="welcomeText">Welcome ${name.text}!</h1>
 <c:if test="${pageList.size() > 0}">
     <c:forEach items="${pageList}" var="page">
         <form method="get" id="${page.getId()}" action="curriculum">
