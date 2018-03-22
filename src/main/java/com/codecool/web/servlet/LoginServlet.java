@@ -1,5 +1,6 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
 import com.codecool.web.service.DataStorage;
 
@@ -21,6 +22,7 @@ public class LoginServlet extends HttpServlet {
         User tempForCheck = new User(request.getParameter("username"), request.getParameter("password"));
 
         DataStorage.getInstance().addList(new User("a", "a@a", "Mentor", "a")); //for testing, delete later
+        DataStorage.getInstance().addSubPage(new TextPage("Test", "TestText"));
 
         List<User> registered = DataStorage.getInstance().getUserList();
 

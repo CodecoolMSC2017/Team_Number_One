@@ -12,14 +12,12 @@
 <body>
 <h1 id="welcomeText">Welcome ${name.text}!</h1>
 <div id="choices">
-    <% System.out.println(pageContext.findAttribute("userRole")); %>
     <c:if test="${pageList.size() > 0}">
         <c:forEach items="${pageList}" var="page">
             <c:if test="${userRole eq 'Mentor' || page.isPublished()}">
                 <c:if test="${userRole eq 'Mentor'}">
-                    <tr>
-                        <td><html:checkbox property="select" value="${page.getId()}"/></td>
-                    </tr>
+                    <% System.out.println("Anyad"); %>
+                    <input type="checkbox" id="${page.getId()}">
                 </c:if>
                 <form method="get" id="${page.getId()}" action="curriculum">
                     <input type="submit" value="${page.getTitle()}">
@@ -31,7 +29,9 @@
     <c:if test="${userRole eq 'Mentor'}">
         <form action="curriculum" method="POST">
             <input type="submit" name="addPages" value="Add Content">
-            <br>
+        </form>
+        <form action="curriculum" method="POST">
+            <input type="submit" name="publish" value="Publish/Unpublish pages">
         </form>
     </c:if>
 </div>

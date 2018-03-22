@@ -12,7 +12,6 @@ import java.util.Map;
 
 public class DataStorage {
     private List<User> allUsers = new ArrayList<User>();
-    //private List<SubPages> allPages = new ArrayList<SubPages>();
     private List<SubPage> allSubPages = new ArrayList<>();
 
     private DataStorage() {
