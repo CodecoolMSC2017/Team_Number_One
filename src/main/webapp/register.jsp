@@ -27,7 +27,7 @@ if (wrongName) {
 	<input type="text/html" name="password" id="password" required>
 	<br>
 	<br>
-	<input type="submit" value="Register">
+	<input id="button" type="submit" value="Register">
 	<br>
 	<a id="registerLink" href="index.html"><p>Back to homepage</p></a>
 </form>

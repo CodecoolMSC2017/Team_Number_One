@@ -8,30 +8,21 @@
     <body>
         <form id="addForm" action="addpage" method="POST">
             <p>Title:</p>
-            <input type="text/html" name="textTitle" id="textTitle" required>
+            <input id="titleTextArea" type="text/html" name="textTitle" id="textTitle" required>
             <br>
+        </form>
+        <div id="textPageContentDiv">
             <p>Content:</p>
-            <input type="text/html" name="textContent" id="textContent" required>
-            <br>
-            <br>
-            <input type="submit" value="Submit">
-        </form>
-        <br>
-        <form id="addForm" action="addpage" method="POST">
-            <br>
-            <p>Title:</p>
-            <br>
-            <input type="text" name="assTitle" id="assTitle" required>
-            <br>
-            <br>
-            <input type="submit" value="Submit">
-        </form>
+            <textarea cols="100" name="textContent" id="contentTextArea" form="addForm" wrap="soft">
+            </textarea>
+        </div>
 
+        <input id="button" type="submit" value="Submit" form="addForm">
+        <br>
+        <br>
 
         <form id="backToCurriculum" action="addpage" method="GET">
-        <br>
-        <br>
-            <input type="submit" value="Back to curriculum">
+            <input id="button" type="submit" value="Back to curriculum">
         </form>
         
     </body>

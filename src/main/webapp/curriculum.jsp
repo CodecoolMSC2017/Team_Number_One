@@ -33,10 +33,11 @@ if (wrongName) {
             <c:if test="${userRole eq 'Mentor' || page.isPublished()}">
                 <c:if test="${userRole eq 'Mentor'}">
                     <% System.out.println("Anyad"); %>
-                    <input type="checkbox" id="${page.getId()}">
+
                 </c:if>
                 <form method="get" id="${page.getId()}" action="curriculum">
-                    <input type="submit" value="${page.getTitle()}">
+                    <input id="textPageButton" type="button" value="${page.getTitle()}" onclick="location.href='sub-page?id=${page.getId()}';">
+                    <input type="checkbox" id="${page.getId()}">
                     <br>
                 </form>
             </c:if>
@@ -53,7 +54,7 @@ if (wrongName) {
 </div>
 <br>
 <form action="curriculum" method="GET">
-    <input type="submit" value="logout" name="logout">
+    <input id="button" type="submit" value="logout" name="logout">
 </form>
 </body>
 </html>
