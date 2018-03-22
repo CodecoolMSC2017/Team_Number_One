@@ -1,5 +1,6 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
 import com.codecool.web.service.DataStorage;
 
@@ -20,16 +21,18 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User tempForCheck = new User(request.getParameter("username"), request.getParameter("password"));
 
-        DataStorage.getInstance().addList(new User("a", "a@a", "a", "a")); //for testing, delete later
+        DataStorage.getInstance().addList(new User("a", "a@a", "Mentor", "a")); //for testing, delete later
+        DataStorage.getInstance().addSubPage(new TextPage("Test", "TestText"));
 
         List<User> registered = DataStorage.getInstance().getUserList();
-
 
         if(registered.size() > 0 && registered.contains(tempForCheck)){
             String userID = null;
             for (User user: registered) {  //this is redundant, refractor later
                 if (user.equals(tempForCheck)){
                     userID = user.getUniqueId();
+                    request.setAttribute("userID", userID);
+                    request.setAttribute("userRole", user.getRole());
                 }
             }
             Cookie cookie = new Cookie("loginsession", userID != null ? userID : "Failed_to_get_user_id");
@@ -37,21 +40,13 @@ public class LoginServlet extends HttpServlet {
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
             System.out.println(cookie.getName());
-            request.setAttribute("userID", userID);
-            request.setAttribute("userList", DataStorage.getInstance().getUserList());
             request.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
             request.getRequestDispatcher("curriculum.jsp").forward(request, response);
         }
 
         else {
-            //temporary for testing
-            String no = "<html><head>" +
-                    "<meta http-equiv=refresh content=1; />" +
-                    "<head><body>" +
-                    "<h2>Wrong password or user name!<br><h2>" +
-                    "</body></html>";
-            PrintWriter writer = response.getWriter();
-            writer.println(no);
+            PrintWriter out = response.getWriter();
+            out.println ("<html><body><script>alert('Wrong username or password!');window.location.href = \"index.html\"</script></body></html>");
         }
     }
 

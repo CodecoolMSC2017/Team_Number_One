@@ -11,6 +11,7 @@
 </head>
 <body>
 
+
 <script type="text/javascript">
     var wrongName = <%= (Boolean)request.getAttribute("isSuccess") %> ;
 if (wrongName) {
@@ -23,11 +24,17 @@ if (wrongName) {
         <%request.setAttribute("userRole", "${user.getRole()}");%>
     </c:if>
 </c:forEach>
+
+
 <h1 id="welcomeText">Welcome ${name.text}!</h1>
 <div id="choices">
     <c:if test="${pageList.size() > 0}">
         <c:forEach items="${pageList}" var="page">
             <c:if test="${userRole eq 'Mentor' || page.isPublished()}">
+                <c:if test="${userRole eq 'Mentor'}">
+                    <% System.out.println("Anyad"); %>
+                    <input type="checkbox" id="${page.getId()}">
+                </c:if>
                 <form method="get" id="${page.getId()}" action="curriculum">
                     <input type="submit" value="${page.getTitle()}">
                     <br>
@@ -35,19 +42,16 @@ if (wrongName) {
             </c:if>
         </c:forEach>
     </c:if>
-    <form action="curriculum" method="POST" >
-        <input type="submit" name="newText" value="Show Text Page">
-        <br>
-    </form>
-    <form action="curriculum" method="POST" >
-        <input type="submit" name="newAssignment" value="Show Assignment Page">
-        <br>
-    </form>
-    <form action="curriculum" method="POST">
+    <c:if test="${userRole eq 'Mentor'}">
+        <form action="curriculum" method="POST">
             <input type="submit" name="addPages" value="Add Content">
-            <br>
-    </form>
+        </form>
+        <form action="curriculum" method="POST">
+            <input type="submit" name="publish" value="Publish/Unpublish pages">
+        </form>
+    </c:if>
 </div>
+<br>
 <a id="logout" href="index.html">Log Out</a>
 </body>
 </html>
