@@ -52,6 +52,8 @@ if (wrongName) {
     </c:if>
 </div>
 <br>
-<a id="logout" href="index.html">Log Out</a>
+<form action="curriculum" method="GET">
+    <input type="submit" value="logout" name="logout">
+</form>
 </body>
 </html>

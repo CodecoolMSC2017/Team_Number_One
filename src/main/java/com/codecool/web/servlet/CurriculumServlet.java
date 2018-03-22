@@ -3,10 +3,12 @@ package com.codecool.web.servlet;
 import com.codecool.web.model.AssignmentPage;
 import com.codecool.web.model.SubPage;
 import com.codecool.web.model.TextPage;
+import com.codecool.web.model.User;
 import com.codecool.web.service.DataStorage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,5 +41,20 @@ public class CurriculumServlet extends HttpServlet {
             }
 
         }*/
+    }
+
+
+    // for logout
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Cookie[] cookies = req.getCookies();
+        List<User> users = DataStorage.getInstance().getUserList();
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                    cookies[i].setMaxAge(0);
+                    resp.addCookie(cookies[i]);
+            }
+        }
+        resp.sendRedirect("index.html");
     }
 }
