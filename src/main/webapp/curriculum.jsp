@@ -28,6 +28,10 @@
         <input type="submit" value="Create New Assignment">
         <br>
     </form>
+    <form method="get" id="addPages" action="curriculum">
+            <input type="submit" value="Add Pages">
+            <br>
+    </form>
 </div>
 <a id="logout" href="index.html">Log Out</a>
 </body>

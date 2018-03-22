@@ -23,6 +23,8 @@ public class CurriculumServlet extends HttpServlet {
             resp.sendRedirect("submitTextPage.html");
         } else if (req.getParameter("id").equals("newAssignment")) {
             resp.sendRedirect("submitTextPage.html");
+        } else if (req.getParameter("id").equals("addPages")) {
+            resp.sendRedirect("addPages.jsp");
         } else {
             for (SubPage sp : ds.getAllSubPages()) {
                 if (sp.getId() == Integer.parseInt(req.getParameter("id"))) {
