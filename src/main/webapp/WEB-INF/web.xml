@@ -14,5 +14,7 @@
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/test</url-pattern>
+        <url-pattern>/curriculum</url-pattern>
+        <url-pattern>/assignment-page</url-pattern>
     </filter-mapping>
 </web-app>

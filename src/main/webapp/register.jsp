@@ -6,10 +6,20 @@
 </head>
 <body>
 
+
+<script type="text/javascript">
+    var wrongName = <%= (Boolean)request.getAttribute("notAvailable") %> ;
+if (wrongName) {
+    window.alert("This user name is taken!");
+    }
+</script>
+
+
 <form method="post" id="registerForm" action="register">
 	<p>E-mail:</p>
 	<input type="email" name="email" required>
 	<br>
+
 	<p>Username:</p>
 	<input type="text/html" name="username" id="username" required>
 	<br>

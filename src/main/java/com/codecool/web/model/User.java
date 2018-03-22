@@ -2,9 +2,7 @@ package com.codecool.web.model;
 
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class User {
     private String name;
@@ -12,6 +10,7 @@ public class User {
     private String role;
     private String password;
     private String uniqueId;
+    private List<Integer> listOfCompletedAssignmentIds = new ArrayList<>();
 
     public User(String name, String email, String role, String password) {
         Random r = new Random();
@@ -54,8 +53,8 @@ public class User {
         Random r = new Random();
         StringBuilder sb = new StringBuilder("");
         SimpleDateFormat dateFormat = new SimpleDateFormat("00yyyyMMddHHmmssms");
-
         int counter = 0;
+
         while (counter <= 32){
             counter++;
             sb.append(Integer.toString(r.nextInt(9)));
@@ -80,6 +79,9 @@ public class User {
         return Objects.hash(name, password);
     }
 
+    public void addCompletedAssignmentId (int id) {
+        listOfCompletedAssignmentIds.add(id);
+    }
 
     //for testing
     @Override

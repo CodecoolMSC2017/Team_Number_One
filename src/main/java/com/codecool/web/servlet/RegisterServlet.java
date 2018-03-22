@@ -9,20 +9,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User newUser = new User(req.getParameter("username"),
-                                req.getParameter("email"),
-                                req.getParameter("role"),
-                                req.getParameter("password"));
+        List<User> registered = DataStorage.getInstance().getUserList();
 
-        DataStorage.getInstance().addList(newUser);
+        String userName = req.getParameter("username");
 
-        resp.sendRedirect("index.html");
+        boolean notOccupiedName = true;
+        for (User usr: registered) {
+            if (usr.getName().equals(userName)) {
+                notOccupiedName = false;
+            }
+        }
+
+        if(notOccupiedName){
+            User newUser = new User(userName,
+                    req.getParameter("email"),
+                    req.getParameter("role"),
+                    req.getParameter("password"));
+
+            DataStorage.getInstance().addList(newUser);
+
+            resp.sendRedirect("index.html");
+        }
+        else {
+            req.setAttribute("notAvailable", true);
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
+
+        }
     }
-
 }
