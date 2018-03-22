@@ -1,6 +1,6 @@
 package com.codecool.web.model;
 
-import java.math.BigInteger;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -10,7 +10,8 @@ public class User {
     private String role;
     private String password;
     private String uniqueId;
-    private List<Integer> listOfCompletedAssignmentIds = new ArrayList<>();
+
+    private HashMap<Integer, Integer> listOfCompletedAssignments = new HashMap<>();
 
     public User(String name, String email, String role, String password) {
         Random r = new Random();
@@ -79,8 +80,12 @@ public class User {
         return Objects.hash(name, password);
     }
 
-    public void addCompletedAssignmentId (int id) {
-        listOfCompletedAssignmentIds.add(id);
+    public HashMap<Integer, Integer> getListOfCompletedAssignments() {
+        return listOfCompletedAssignments;
+    }
+
+    public void addCompletedAssignment (int assignmentId, int result) {
+        listOfCompletedAssignments.put(assignmentId, result);
     }
 
     //for testing

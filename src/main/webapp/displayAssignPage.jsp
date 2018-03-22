@@ -9,11 +9,15 @@
 </head>
 <body>
     <h1><c:out value = "${ap.title}"></h1>
-    <c:forEach var="q" items="${ap.listOfTasks}">
-        <p>Question:<br><c:out value="${q.question}"/></p>
-        <p>Answers:<br></p>
-        <c:forEach var="a" items="${q.listOfAnswers}">
-            <p><c:out value = "${a.answer}"></p>
+    <form action="AnswerCheckerServlet" method="post">
+        <input type="hidden" name="id" value"${ap.id}">
+        <c:forEach var="q" items="${ap.listOfTasks}">
+            <p>Question:<br><c:out value="${q.question}"/></p>
+            <p>Answers:<br></p>
+            <c:forEach var="a" items="${q.listOfAnswers}">
+                <p><input type="checkbox" name="${q.question}" value="${a.answer}"><c:out value = "${a.answer}"></p>
+            </c:forEach>
         </c:forEach>
-    </c:forEach>
+        <input type="submit" value="Submit">
+    </form>
 </body>
