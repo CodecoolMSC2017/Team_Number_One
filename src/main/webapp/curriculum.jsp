@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curriculum</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
 <body>
 <h1>Welcome ${name.text}!</h1>
@@ -17,14 +19,16 @@
         </form>
     </c:forEach>
 </c:if>
-<form method="get" id="newText" action="curriculum" name="id">
-    <input type="submit" value="Create New Text Page">
-    <br>
-</form>
-<form method="get" id="newAssignment" action="curriculum">
-    <input type="submit" value="Create New Assignment">
-    <br>
-</form>
-<a href="index.html">Log Out</a>
+<div id="choices">
+    <form method="get" id="newText" action="curriculum" name="id">
+        <input type="submit" value="Create New Text Page">
+        <br>
+    </form>
+    <form method="get" id="newAssignment" action="curriculum">
+        <input type="submit" value="Create New Assignment">
+        <br>
+    </form>
+</div>
+<a id="logout" href="index.html">Log Out</a>
 </body>
 </html>
