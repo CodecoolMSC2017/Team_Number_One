@@ -44,14 +44,8 @@ public class LoginServlet extends HttpServlet {
         }
 
         else {
-            //temporary for testing
-            String no = "<html><head>" +
-                    "<meta http-equiv=refresh content=1; />" +
-                    "<head><body>" +
-                    "<h2>Wrong password or user name!<br><h2>" +
-                    "</body></html>";
-            PrintWriter writer = response.getWriter();
-            writer.println(no);
+            PrintWriter out = response.getWriter();
+            out.println ("<html><body><script>alert('Wrong username or password!');window.location.href = \"index.html\"</script></body></html>");
         }
     }
 
