@@ -20,20 +20,24 @@
     <c:if test="${pageList.size() > 0}">
         <c:forEach items="${pageList}" var="page">
             <c:if test="${userRole eq 'Mentor' || page.isPublished()}">
-                <form method="get" id="${page.getId()}" action="curriculum">>
+                <form method="get" id="${page.getId()}" action="curriculum">
                     <input type="submit" value="${page.getTitle()}">
                     <br>
                 </form>
             </c:if>
         </c:forEach>
     </c:if>
-    <form method="get" id="newText" action="curriculum">>
-        <input type="submit" value="Create New Text Page">
+    <form action="curriculum" method="POST" >
+        <input type="submit" name="newText" value="Show Text Page">
         <br>
     </form>
-    <form method="get" id="newAssignment" action="curriculum">>
-        <input type="submit" value="Create New Assignment">
+    <form action="curriculum" method="POST" >
+        <input type="submit" name="newAssignment" value="Show Assignment Page">
         <br>
+    </form>
+    <form action="curriculum" method="POST">
+            <input type="submit" name="addPages" value="Add Content">
+            <br>
     </form>
 </div>
 <a id="logout" href="index.html">Log Out</a>
