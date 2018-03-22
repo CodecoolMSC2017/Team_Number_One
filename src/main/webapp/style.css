@@ -103,4 +103,65 @@ h3 {
     color: rgba(255,0,0,0);
 }
 
+#welcomeText{
+    font-family: 'Josefin Sans', sans-serif;
+    text-align:center;
+
+}
+
+#choices{
+    width:30%;
+    margin-left:35%;
+    margin-right:35%;
+    margin-top:100px;
+    background:white;
+    display:block;
+    border-radius:15px;
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+    padding:50px;
+    text-align:center;
+}
+
+#choices form{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+#choices form input{
+    font-family: 'Josefin Sans', sans-serif;
+    padding:10px;
+    border-radius:15px;
+    transition:1s;
+
+}
+
+#choices form input:hover{
+    background-color:lightgray;
+    transition:1s;
+
+}
+
+
+
+
+#logout{
+    display:block;
+    background-color:white;
+    padding:10px;
+    margin-left:35%;
+    margin-top:30px;
+    width:100px;
+    text-align:center;
+    border-radius:15px;
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+    font-family: 'Josefin Sans', sans-serif;
+    font-color:black;
+    transition:1s;
+}
+
+
 
