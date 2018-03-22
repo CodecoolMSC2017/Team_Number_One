@@ -44,19 +44,23 @@ public class CurriculumServlet extends HttpServlet {
     }
 
 
-    // for logout
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie[] cookies = req.getCookies();
-        List<User> users = DataStorage.getInstance().getUserList();
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("loginsession")) {
-                    cookies[i].setMaxAge(0);
-                    resp.addCookie(cookies[i]);
+
+        // for logout
+        if (req.getParameter("logout") != null) {
+            Cookie[] cookies = req.getCookies();
+            List<User> users = DataStorage.getInstance().getUserList();
+            if (cookies != null) {
+                for (int i = 0; i < cookies.length; i++) {
+                    if (cookies[i].getName().equals("loginsession")) {
+                        cookies[i].setMaxAge(0);
+                        resp.addCookie(cookies[i]);
+                    }
                 }
             }
+            resp.sendRedirect("index.html");
         }
-        resp.sendRedirect("index.html");
     }
 }
