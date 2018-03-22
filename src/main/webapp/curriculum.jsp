@@ -10,21 +10,28 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
 <body>
+<c:forEach items="${userList}" var="user">
+    <c:if test="${user.getUniqueId() eq 'userID'}">
+        <%request.setAttribute("userRole", "${user.getRole()}");%>
+    </c:if>
+</c:forEach>
 <h1 id="welcomeText">Welcome ${name.text}!</h1>
-<c:if test="${pageList.size() > 0}">
-    <c:forEach items="${pageList}" var="page">
-        <form method="get" id="${page.getId()}" action="curriculum">
-            <input type="submit" value="${page.getTitle()}">
-            <br>
-        </form>
-    </c:forEach>
-</c:if>
 <div id="choices">
-    <form method="get" id="newText" action="curriculum" name="id">
+    <c:if test="${pageList.size() > 0}">
+        <c:forEach items="${pageList}" var="page">
+            <c:if test="${userRole eq 'Mentor' || page.isPublished()}">
+                <form method="get" id="${page.getId()}" action="curriculum">>
+                    <input type="submit" value="${page.getTitle()}">
+                    <br>
+                </form>
+            </c:if>
+        </c:forEach>
+    </c:if>
+    <form method="get" id="newText" action="curriculum">>
         <input type="submit" value="Create New Text Page">
         <br>
     </form>
-    <form method="get" id="newAssignment" action="curriculum">
+    <form method="get" id="newAssignment" action="curriculum">>
         <input type="submit" value="Create New Assignment">
         <br>
     </form>
