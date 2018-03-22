@@ -6,6 +6,7 @@
 
     </head>
     <body>
+
         <form id="addForm" action="addPages" method="POST">
             <p>Title:</p>
             <input type="text/html" name="title" id="title" required>

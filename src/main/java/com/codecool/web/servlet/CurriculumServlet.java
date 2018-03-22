@@ -11,31 +11,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/curriculum")
 public class CurriculumServlet extends HttpServlet {
-    DataStorage ds = DataStorage.getInstance();
+    List<SubPage> ds = DataStorage.getInstance().getAllSubPages();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        if (req.getParameter("id").equals("newText")) {
-            resp.sendRedirect("submitTextPage.html");
-        } else if (req.getParameter("id").equals("newAssignment")) {
-            resp.sendRedirect("submitTextPage.html");
-        } else if (req.getParameter("id").equals("addPages")) {
-            resp.sendRedirect("addPages.jsp");
-        } else {
-            for (SubPage sp : ds.getAllSubPages()) {
-                if (sp.getId() == Integer.parseInt(req.getParameter("id"))) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("newText") != null) {
+            System.out.println("newtext");
+            request.getRequestDispatcher("displayAssignPage.jsp").forward(request, response);
+        }
+        if (request.getParameter("newAssignment") != null) {
+            System.out.println("newAssign");
+            request.getRequestDispatcher("displayTextPage.jsp").forward(request, response);
+        }
+        if (request.getParameter("addPages") != null) {
+            System.out.println("addpages");
+            request.getRequestDispatcher("addPages.jsp").forward(request, response);
+        }/* else {
+             for (SubPage sp : ds) {
+                if (sp.getId() == Integer.parseInt(request.getParameter("id"))) {
                     if (sp instanceof TextPage) {
-                        resp.sendRedirect("displayTextPage.html");
+                        response.sendRedirect("displayTextPage.html");
                     } else if (sp instanceof AssignmentPage) {
-                        resp.sendRedirect("displayAssignPage.html");
+                        response.sendRedirect("displayAssignPage.html");
                     }
                 }
             }
 
-        }
+        }*/
     }
 }
