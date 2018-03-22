@@ -16,5 +16,7 @@
         <url-pattern>/test</url-pattern>
         <url-pattern>/curriculum</url-pattern>
         <url-pattern>/assignment-page</url-pattern>
+        <url-pattern>/sub-page</url-pattern>
+        <url-pattern>/addpage</url-pattern>
     </filter-mapping>
 </web-app>

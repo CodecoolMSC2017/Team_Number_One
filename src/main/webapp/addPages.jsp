@@ -6,18 +6,32 @@
 
     </head>
     <body>
-
-        <form id="addForm" action="addPages" method="POST">
+        <form id="addForm" action="addpage" method="POST">
             <p>Title:</p>
-            <input type="text/html" name="title" id="title" required>
+            <input type="text/html" name="textTitle" id="textTitle" required>
             <br>
             <p>Content:</p>
-            <input type="text/html" name="textcontent" id="textcontent" required>
+            <input type="text/html" name="textContent" id="textContent" required>
             <br>
             <br>
             <input type="submit" value="Submit">
+        </form>
+        <br>
+        <form id="addForm" action="addpage" method="POST">
             <br>
-            <a id="registerLink" href="curriculum.jsp"><p>Back to the curriculum</p></a>
+            <p>Title:</p>
+            <br>
+            <input type="text" name="assTitle" id="assTitle" required>
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+
+
+        <form id="backToCurriculum" action="addpage" method="GET">
+        <br>
+        <br>
+            <input type="submit" value="Back to curriculum">
         </form>
         
     </body>
