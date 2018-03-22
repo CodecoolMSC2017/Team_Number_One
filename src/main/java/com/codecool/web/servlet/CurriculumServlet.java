@@ -51,8 +51,10 @@ public class CurriculumServlet extends HttpServlet {
         List<User> users = DataStorage.getInstance().getUserList();
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals("loginsession")) {
                     cookies[i].setMaxAge(0);
                     resp.addCookie(cookies[i]);
+                }
             }
         }
         resp.sendRedirect("index.html");
