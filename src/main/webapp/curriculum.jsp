@@ -10,6 +10,14 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
 <body>
+
+<script type="text/javascript">
+    var wrongName = <%= (Boolean)request.getAttribute("isSuccess") %> ;
+if (wrongName) {
+    window.alert("Your entry has been saved!");
+    }
+</script>
+
 <c:forEach items="${userList}" var="user">
     <c:if test="${user.getUniqueId() eq 'userID'}">
         <%request.setAttribute("userRole", "${user.getRole()}");%>

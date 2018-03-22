@@ -20,15 +20,12 @@ public class CurriculumServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("newText") != null) {
-            System.out.println("newtext");
             request.getRequestDispatcher("displayAssignPage.jsp").forward(request, response);
         }
         if (request.getParameter("newAssignment") != null) {
-            System.out.println("newAssign");
             request.getRequestDispatcher("displayTextPage.jsp").forward(request, response);
         }
         if (request.getParameter("addPages") != null) {
-            System.out.println("addpages");
             request.getRequestDispatcher("addPages.jsp").forward(request, response);
         }/* else {
              for (SubPage sp : ds) {
