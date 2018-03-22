@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User tempForCheck = new User(request.getParameter("username"), request.getParameter("password"));
 
-        DataStorage.getInstance().addList(new User("a", "a@a", "a", "a")); //for testing, delete later
+        DataStorage.getInstance().addList(new User("a", "a@a", "Mentor", "a")); //for testing, delete later
 
         List<User> registered = DataStorage.getInstance().getUserList();
 
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(cookie);
             System.out.println(cookie.getName());
             request.setAttribute("userID", userID);
-            request.setAttribute("userList", DataStorage.getInstance().getUserList());
+            request.setAttribute("userList", registered);
             request.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
             request.getRequestDispatcher("curriculum.jsp").forward(request, response);
         }
