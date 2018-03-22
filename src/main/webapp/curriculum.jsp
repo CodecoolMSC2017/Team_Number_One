@@ -10,12 +10,6 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
 <body>
-<c:forEach items="${userList}" var="user">
-    <c:if test="${user.getUniqueId() eq 'userID'}">
-        <%request.setAttribute("userRole", "${user.getRole()}");%>
-        <%System.out.println(pageContext.findAttribute("user").getRole());%>
-    </c:if>
-</c:forEach>
 <h1 id="welcomeText">Welcome ${name.text}!</h1>
 <div id="choices">
     <% System.out.println(pageContext.findAttribute("userRole")); %>
@@ -35,12 +29,8 @@
         </c:forEach>
     </c:if>
     <c:if test="${userRole eq 'Mentor'}">
-        <form method="get" id="newText" action="curriculum">
-            <input type="submit" value="Create New Text Page">
-            <br>
-        </form>
-        <form method="get" id="newAssignment" action="curriculum">
-            <input type="submit" value="Create New Assignment">
+        <form action="curriculum" method="POST">
+            <input type="submit" name="addPages" value="Add Content">
             <br>
         </form>
     </c:if>
