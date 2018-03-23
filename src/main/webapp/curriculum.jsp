@@ -28,29 +28,25 @@ if (wrongName) {
 
 <h1 id="welcomeText">Welcome ${name.text}!</h1>
 <div id="choices">
-    <c:if test="${pageList.size() > 0}">
-        <c:forEach items="${pageList}" var="page">
-            <c:if test="${userRole eq 'Mentor' || page.isPublished()}">
-                <c:if test="${userRole eq 'Mentor'}">
-                    <% System.out.println("Anyad"); %>
 
-                </c:if>
+        <c:forEach items="${pageList}" var="page">
+
                 <form method="get" id="${page.getId()}" action="curriculum">
                     <input id="textPageButton" type="button" value="${page.getTitle()}" onclick="location.href='sub-page?id=${page.getId()}';">
                     <input type="checkbox" id="${page.getId()}">
                     <br>
                 </form>
-            </c:if>
+
         </c:forEach>
-    </c:if>
-    <c:if test="${userRole eq 'Mentor'}">
+
+
         <form action="curriculum" method="POST">
             <input type="submit" name="addPages" value="Add Content">
         </form>
         <form action="curriculum" method="POST">
             <input type="submit" name="publish" value="Publish/Unpublish pages">
         </form>
-    </c:if>
+
 </div>
 <br>
 <form action="curriculum" method="GET">

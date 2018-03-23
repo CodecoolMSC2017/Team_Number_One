@@ -24,6 +24,8 @@
         <form id="backToCurriculum" action="addpage" method="GET">
             <input id="button" type="submit" value="Back to curriculum">
         </form>
+
+
         
     </body>
 </html>
