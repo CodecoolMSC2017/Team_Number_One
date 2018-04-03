@@ -41,6 +41,9 @@ if (wrongName) {
         <form action="curriculum" method="POST">
             <input type="submit" name="publish" value="Publish/Unpublish pages">
         </form>
+        <form action="curriculum" method="GET">
+            <input type="submit" name="attendance" value="Attendance">
+        </form>
     </c:if>
 </div>
 <br>

@@ -27,14 +27,18 @@ public class LoginServlet extends HttpServlet {
 
         if(registered.size() > 0 && registered.contains(tempForCheck)){
             String userID = null;
-            for (User user: registered) {
+            for (User user: registered) {  //this is redundant, refractor later
                 if (user.equals(tempForCheck)){
-                    HttpSession session = req.getSession();
-                    session.setAttribute("user", user);
-                    session.setMaxInactiveInterval(30*60);
-                    availablePages = ap.selectPages(user);
+                    userID = user.getUniqueId();
                 }
             }
+
+            Cookie cookie = new Cookie("loginsession", userID != null ? userID : "0");
+            cookie.setMaxAge(60*2); // 10 minutes before cookie is expired
+            cookie.setHttpOnly(true);
+            resp.addCookie(cookie);
+
+
             req.setAttribute("pageList", availablePages);
             req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
         }

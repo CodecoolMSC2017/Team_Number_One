@@ -32,9 +32,7 @@ public class LoginFilter implements Filter {
         }
 
 
-        if (notAuthorised)
-
-        {
+        if (notAuthorised){
             HttpServletResponse httpResponse = (HttpServletResponse) res;
             httpResponse.sendRedirect("index.html");
         }

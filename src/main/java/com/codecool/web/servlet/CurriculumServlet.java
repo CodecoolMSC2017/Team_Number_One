@@ -34,8 +34,6 @@ public class CurriculumServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         if (req.getParameter("id") != null) {
             for (SubPage page : ds) {
                 if (page.getId() == Integer.parseInt(req.getParameter("id"))) {
@@ -48,7 +46,13 @@ public class CurriculumServlet extends HttpServlet {
             }
         }
 
-        // for logout
+
+        //attendance
+        if (req.getParameter("Attendance") != null) {
+            req.getRequestDispatcher("attendance.jsp").forward(req, resp);
+        }
+
+
         if (req.getParameter("logout") != null) {
             Cookie[] cookies = req.getCookies();
             List<User> users = DataStorage.getInstance().getUserList();
