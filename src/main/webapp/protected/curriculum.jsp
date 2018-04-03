@@ -24,7 +24,7 @@ if (wrongName) {
 
 <h1 id="welcomeText">Welcome ${user.name}!</h1>
 <div id="choices">
-    <c:forEach items="${pageList}" var="page">
+    <c:forEach items="${sessionScope.pageList}" var="page">
         <c:if test="${user.role eq 'Mentor'}">
             <input type="checkbox" id="${page.getId()}">
         </c:if>

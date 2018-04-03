@@ -27,19 +27,15 @@ public class LoginServlet extends HttpServlet {
 
         if(registered.size() > 0 && registered.contains(tempForCheck)){
             String userID = null;
-            for (User user: registered) {  //this is redundant, refractor later
+            for (User user: registered) {
                 if (user.equals(tempForCheck)){
-                    userID = user.getUniqueId();
+                    HttpSession session = req.getSession();
+                    session.setAttribute("user", user);
+                    session.setMaxInactiveInterval(30*60);
+                    availablePages = ap.selectPages(user);
                 }
             }
-
-            Cookie cookie = new Cookie("loginsession", userID != null ? userID : "0");
-            cookie.setMaxAge(60*2); // 10 minutes before cookie is expired
-            cookie.setHttpOnly(true);
-            resp.addCookie(cookie);
-
-
-            req.setAttribute("pageList", availablePages);
+            req.getSession(false).setAttribute("pageList", availablePages);
             req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
         }
 
@@ -54,6 +50,6 @@ public class LoginServlet extends HttpServlet {
     // might need to find a more elegant way later
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("index.html");
+        req.getRequestDispatcher("index.html").forward(req, resp);
     }
 }

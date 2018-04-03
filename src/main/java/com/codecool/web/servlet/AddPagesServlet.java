@@ -28,15 +28,15 @@ public class AddPagesServlet extends HttpServlet {
         DataStorage.getInstance().addSubPage(sp);
         req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
         req.setAttribute("isSuccess", true);
-        req.getRequestDispatcher("/protected/curriculum.jsp").forward(req, resp);
+        req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
     }
 
 
     //for the back bottom
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
-        request.setAttribute("isSuccess", false);
-        request.getRequestDispatcher("curriculum.jsp").forward(request, response);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
+        req.setAttribute("isSuccess", false);
+        req.getRequestDispatcher("curriculum.jsp").forward(req, resp);
     }
 }
