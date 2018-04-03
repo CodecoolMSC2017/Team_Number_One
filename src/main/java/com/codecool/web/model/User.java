@@ -17,15 +17,12 @@ public class User {
         Random r = new Random();
         this.name = name;
         this.email = email;
-        if(role==null) {
-           this.role="Student";
-        }else{
-            this.role=role;
-        }
+        this.role = role == null ? "Student" : role;
         this.password = password;
         uniqueId = generateId();
     }
 
+    // for user checking at login, comes from the loginFilter
     public User(String name, String password) {
         this.name = name;
         this.password = password;
