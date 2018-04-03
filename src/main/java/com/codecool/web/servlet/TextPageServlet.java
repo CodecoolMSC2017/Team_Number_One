@@ -18,6 +18,6 @@ public class TextPageServlet extends HttpServlet{
         int textId = Integer.parseInt(req.getParameter("id"));
         TextPage tempText = (TextPage)DataStorage.getInstance().getAllSubPages().get(textId);
         req.setAttribute("tp",tempText);
-        resp.sendRedirect("protected/displayTextPage.jsp");
+        req.getRequestDispatcher("protected/displayTextPage.jsp").forward(req, resp);
     }
 }

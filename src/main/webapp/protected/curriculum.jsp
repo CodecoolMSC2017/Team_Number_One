@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curriculum</title>
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
 <body>
@@ -28,17 +28,17 @@ if (wrongName) {
         <c:if test="${user.role eq 'Mentor'}">
             <input type="checkbox" id="${page.getId()}">
         </c:if>
-        <form method="get" id="${page.getId()}" action="../curriculum">
+        <form method="get" id="${page.getId()}" action="curriculum">
             <input type="hidden" name="id" value="${page.id}">
             <input type="submit" value="${page.getTitle()}">
             <br>
         </form>
     </c:forEach>
     <c:if test="${user.role eq 'Mentor'}">
-        <form action="../curriculum" method="POST">
+        <form action="curriculum" method="POST">
             <input type="submit" name="addPages" value="Add Content">
         </form>
-        <form action="../curriculum" method="POST">
+        <form action="curriculum" method="POST">
             <input type="submit" name="publish" value="Publish/Unpublish pages">
         </form>
     </c:if>

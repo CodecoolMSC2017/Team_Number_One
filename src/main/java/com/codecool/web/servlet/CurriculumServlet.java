@@ -27,7 +27,7 @@ public class CurriculumServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("addPages") != null) {
-            resp.sendRedirect("protected/addPages.jsp");
+            req.getRequestDispatcher("protected/addPages.jsp").forward(req, resp);
         }
     }
 
