@@ -15,6 +15,10 @@ public class DataStorage {
     private List<SubPage> allSubPages = new ArrayList<>();
 
     private DataStorage() {
+        allUsers.add(new User("a", "a@a", "Mentor", "a"));
+        allSubPages.add(new TextPage("Test", "TestText"));
+        allSubPages.add(new TextPage("Test2", "TestText2"));
+        getAllSubPages().get(1).setPublished();
     }
 
     private static DataStorage ourInstance = new DataStorage();
