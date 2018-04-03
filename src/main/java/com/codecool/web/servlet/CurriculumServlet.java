@@ -39,8 +39,10 @@ public class CurriculumServlet extends HttpServlet {
             for (SubPage page : ds) {
                 if (page.getId() == Integer.parseInt(req.getParameter("id"))) {
                     if (page instanceof TextPage) {
+                        req.setAttribute("tp", page);
                         req.getRequestDispatcher("protected/displayTextPage.jsp").forward(req, resp);
                     } else if (page instanceof AssignmentPage) {
+                        req.setAttribute("ap", page);
                         req.getRequestDispatcher("protected/displayAssignPage.jsp").forward(req, resp);
                     }
                 }
