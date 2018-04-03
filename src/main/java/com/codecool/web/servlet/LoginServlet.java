@@ -35,8 +35,8 @@ public class LoginServlet extends HttpServlet {
                     availablePages = ap.selectPages(user);
                 }
             }
-            req.setAttribute("pageList", availablePages);
-            req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
+            req.getSession(false).setAttribute("pageList", availablePages);
+            resp.sendRedirect("protected/curriculum.jsp");
         }
 
         else {

@@ -22,7 +22,7 @@ public class BackToMainServlet extends HttpServlet {
         AvailablePages ap = new AvailablePages();
         availablePages = ap.selectPages((User)req.getSession().getAttribute("user"));
         req.setAttribute("pageList", availablePages);
-        req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
+        resp.sendRedirect("protected/curriculum.jsp");
 
     }
 }

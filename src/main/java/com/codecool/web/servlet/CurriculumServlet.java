@@ -27,14 +27,13 @@ public class CurriculumServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("addPages") != null) {
-            req.getRequestDispatcher("protected/addPages.jsp").forward(req, resp);
+            resp.sendRedirect("protected/addPages.jsp");
         }
     }
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
         if (req.getParameter("id") != null) {
             for (SubPage page : ds) {
