@@ -16,26 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/addpage")
-public class AddPagesServlet extends HttpServlet{
+public class AddPagesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SubPage sp = null;
 
-        if(req.getParameter("textTitle") != null && req.getParameter("textContent") != null){  //not effective, refractor later
-            String title = req.getParameter("textTitle");       //redundant
-            String content = req.getParameter("textContent");
-            sp = new TextPage(title, content);
-        }
-        else if (req.getParameter("assTitle") != null){
-            String title = req.getParameter("assTitle");
-            sp = new AssignmentPage(title, new ArrayList<Question>());  //INCOMPLETE
-        }
-
-        if (sp != null) {
-            DataStorage.getInstance().addSubPage(sp);
-        }
-
+        String title = req.getParameter("textTitle");       //redundant
+        String content = req.getParameter("textContent");
+        sp = new TextPage(title, content);
+        DataStorage.getInstance().addSubPage(sp);
+        req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
         req.setAttribute("isSuccess", true);
         req.getRequestDispatcher("/protected/curriculum.jsp").forward(req, resp);
     }
@@ -44,6 +35,8 @@ public class AddPagesServlet extends HttpServlet{
     //for the back bottom
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
+        request.setAttribute("isSuccess", false);
         request.getRequestDispatcher("curriculum.jsp").forward(request, response);
     }
 }
