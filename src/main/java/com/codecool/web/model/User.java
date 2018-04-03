@@ -6,18 +6,19 @@ import java.util.*;
 
 public class User {
     private String name;
-    private String email;
-    private String role;
     private String password;
-    private String uniqueId;
+    private String email = "";
+    private String role = "";
+    private String uniqueId = "0";
+    private int grade = 100;
+    private int attendance = 100;
 
     private HashMap<Integer, Integer> listOfCompletedAssignments = new HashMap<>();
 
     public User(String name, String email, String role, String password) {
-        Random r = new Random();
         this.name = name;
         this.email = email;
-        this.role = role == null ? "Student" : role;
+        this.role = (role == null) ? "Student" : role;
         this.password = password;
         uniqueId = generateId();
     }
@@ -26,9 +27,6 @@ public class User {
     public User(String name, String password) {
         this.name = name;
         this.password = password;
-        this.email = "";
-        this.role = "";
-        uniqueId = "0";
     }
 
     private String generateId(){
@@ -46,6 +44,40 @@ public class User {
         return sb.toString();
     }
 
+    public String getName() {
+        return name;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public String getRole() {
+        return role;
+    }
+
+
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public int getAttendance() {
+        return attendance;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public void setAttendance(int attendance) {
+        this.attendance = attendance;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -84,25 +116,4 @@ public class User {
                 ", uniqueId=" + uniqueId +
                 '}';
     }
-
-
-    public String getName() {
-        return name;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-
-    public String getRole() {
-        return role;
-    }
-
-
-    public String getUniqueId() {
-        return uniqueId;
-    }
-
 }
