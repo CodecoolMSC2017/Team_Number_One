@@ -21,7 +21,7 @@
         <br>
         <br>
 
-        <form id="backToCurriculum" action="addpage" method="GET">
+        <form id="backToCurriculum" action="backToMain" method="GET">
             <input id="button" type="submit" value="Back to curriculum">
         </form>
         

@@ -15,6 +15,9 @@
             <c:out value = "${tp.textContent}" />
         </textarea>
         <br>
-        <input id="textPageButton" type="button" value="$Back to curriculum" onclick="location.href='sub-page?id=${page.getId()}';">
+        <form method="get" id="${page.getId()}" action="backToMain">
+            <input id="textPageButton" type="submit" value="Back to curriculum">
+            <input type="hidden" name="id" value="${tp.id}">
+        </form>
     </body>
 </html>

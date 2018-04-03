@@ -4,15 +4,20 @@ import com.codecool.web.model.AssignmentPage;
 import com.codecool.web.model.SubPage;
 import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
+import com.codecool.web.service.AvailablePages;
 import com.codecool.web.service.DataStorage;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/curriculum")
@@ -20,33 +25,28 @@ public class CurriculumServlet extends HttpServlet {
     List<SubPage> ds = DataStorage.getInstance().getAllSubPages();
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("newText") != null) {
-            request.getRequestDispatcher("displayAssignPage.jsp").forward(request, response);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("addPages") != null) {
+            req.getRequestDispatcher("protected/addPages.jsp").forward(req, resp);
         }
-        if (request.getParameter("newAssignment") != null) {
-            request.getRequestDispatcher("displayTextPage.jsp").forward(request, response);
-        }
-        if (request.getParameter("addPages") != null) {
-            request.getRequestDispatcher("addPages.jsp").forward(request, response);
-        }/* else {
-             for (SubPage sp : ds) {
-                if (sp.getId() == Integer.parseInt(request.getParameter("id"))) {
-                    if (sp instanceof TextPage) {
-                        response.sendRedirect("displayTextPage.html");
-                    } else if (sp instanceof AssignmentPage) {
-                        response.sendRedirect("displayAssignPage.html");
-                    }
-                }
-            }
-
-        }*/
     }
-
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+        if (req.getParameter("id") != null) {
+            for (SubPage page : ds) {
+                if (page.getId() == Integer.parseInt(req.getParameter("id"))) {
+                    if (page instanceof TextPage) {
+                        req.getRequestDispatcher("protected/displayTextPage.jsp").forward(req, resp);
+                    } else if (page instanceof AssignmentPage) {
+                        req.getRequestDispatcher("protected/displayAssignPage.jsp").forward(req, resp);
+                    }
+                }
+            }
+        }
 
         // for logout
         if (req.getParameter("logout") != null) {

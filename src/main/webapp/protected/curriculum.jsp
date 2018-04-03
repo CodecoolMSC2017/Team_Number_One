@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import ="com.codecool.web.model.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,31 +20,21 @@ if (wrongName) {
     }
 </script>
 
-<c:forEach items="${userList}" var="user">
-    <c:if test="${user.getUniqueId() eq 'userID'}">
-        <%request.setAttribute("userRole", "${user.getRole()}");%>
-    </c:if>
-</c:forEach>
+<% User user = (User)session.getAttribute("user"); %>
 
-
-<h1 id="welcomeText">Welcome ${name.text}!</h1>
+<h1 id="welcomeText">Welcome ${user.name}!</h1>
 <div id="choices">
-    <c:if test="${pageList.size() > 0}">
-        <c:forEach items="${pageList}" var="page">
-            <c:if test="${userRole eq 'Mentor' || page.isPublished()}">
-                <c:if test="${userRole eq 'Mentor'}">
-                    <% System.out.println("Anyad"); %>
-
-                </c:if>
-                <form method="get" id="${page.getId()}" action="curriculum">
-                    <input id="textPageButton" type="button" value="${page.getTitle()}" onclick="location.href='sub-page?id=${page.getId()}';">
-                    <input type="checkbox" id="${page.getId()}">
-                    <br>
-                </form>
-            </c:if>
-        </c:forEach>
-    </c:if>
-    <c:if test="${userRole eq 'Mentor'}">
+    <c:forEach items="${pageList}" var="page">
+        <c:if test="${user.role eq 'Mentor'}">
+            <input type="checkbox" id="${page.getId()}">
+        </c:if>
+        <form method="get" id="${page.getId()}" action="curriculum">
+            <input type="hidden" name="id" value="${page.id}">
+            <input type="submit" value="${page.getTitle()}">
+            <br>
+        </form>
+    </c:forEach>
+    <c:if test="${user.role eq 'Mentor'}">
         <form action="curriculum" method="POST">
             <input type="submit" name="addPages" value="Add Content">
         </form>

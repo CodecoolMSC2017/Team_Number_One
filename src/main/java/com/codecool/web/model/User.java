@@ -17,7 +17,11 @@ public class User {
         Random r = new Random();
         this.name = name;
         this.email = email;
-        this.role = role;
+        if(role==null) {
+           this.role="Student";
+        }else{
+            this.role=role;
+        }
         this.password = password;
         uniqueId = generateId();
     }
@@ -28,26 +32,6 @@ public class User {
         this.email = "";
         this.role = "";
         uniqueId = "0";
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getUniqueId() {
-        return uniqueId;
     }
 
     private String generateId(){
@@ -65,6 +49,7 @@ public class User {
         return sb.toString();
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,19 +59,22 @@ public class User {
                 Objects.equals(password, user.password);
     }
 
+
     @Override
     public int hashCode() {
-
         return Objects.hash(name, password);
     }
+
 
     public HashMap<Integer, Integer> getListOfCompletedAssignments() {
         return listOfCompletedAssignments;
     }
 
+
     public void addCompletedAssignment (int assignmentId, int result) {
         listOfCompletedAssignments.put(assignmentId, result);
     }
+
 
     //for testing
     @Override
@@ -99,4 +87,25 @@ public class User {
                 ", uniqueId=" + uniqueId +
                 '}';
     }
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public String getRole() {
+        return role;
+    }
+
+
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
 }

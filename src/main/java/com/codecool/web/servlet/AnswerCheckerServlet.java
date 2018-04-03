@@ -88,6 +88,6 @@ public class AnswerCheckerServlet extends HttpServlet {
         req.setAttribute("assignTitle",tempAssign.getTitle());
         req.setAttribute("result", result);
         req.setAttribute("userName", tempUser.getName());
-        req.getRequestDispatcher("displayAssignmentResult.jsp").forward(req, resp);
+        req.getRequestDispatcher("protected/displayAssignmentResult.jsp").forward(req, resp);
     }
 }

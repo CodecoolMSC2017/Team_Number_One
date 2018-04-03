@@ -1,17 +1,17 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.model.SubPage;
 import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
+import com.codecool.web.service.AvailablePages;
 import com.codecool.web.service.DataStorage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/loginServlet")
@@ -23,25 +23,25 @@ public class LoginServlet extends HttpServlet {
 
         DataStorage.getInstance().addList(new User("a", "a@a", "Mentor", "a")); //for testing, delete later
         DataStorage.getInstance().addSubPage(new TextPage("Test", "TestText"));
+        DataStorage.getInstance().addSubPage(new TextPage("Test2", "TestText2"));
+        DataStorage.getInstance().getAllSubPages().get(1).setPublished();
 
         List<User> registered = DataStorage.getInstance().getUserList();
+        List<SubPage> availablePages = new ArrayList<>();
+        AvailablePages ap = new AvailablePages();
 
         if(registered.size() > 0 && registered.contains(tempForCheck)){
             String userID = null;
-            for (User user: registered) {  //this is redundant, refractor later
+            for (User user: registered) {
                 if (user.equals(tempForCheck)){
-                    userID = user.getUniqueId();
-                    request.setAttribute("userID", userID);
-                    request.setAttribute("userRole", user.getRole());
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", user);
+                    session.setMaxInactiveInterval(30*60);
+                    availablePages = ap.selectPages(user);
                 }
             }
-            Cookie cookie = new Cookie("loginsession", userID != null ? userID : "Failed_to_get_user_id");
-            cookie.setMaxAge(60*2); // 2 minutes before cookie is expired
-            cookie.setHttpOnly(true);
-            response.addCookie(cookie);
-            System.out.println(cookie.getName());
-            request.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
-            request.getRequestDispatcher("curriculum.jsp").forward(request, response);
+            request.setAttribute("pageList", availablePages);
+            request.getRequestDispatcher("protected/curriculum.jsp").forward(request, response);
         }
 
         else {

@@ -19,6 +19,6 @@ public class AssignmentPageServlet extends HttpServlet {
         int assignId = Integer.parseInt(req.getParameter("id"));
         AssignmentPage tempAssign = (AssignmentPage)DataStorage.getInstance().getAllSubPages().get(assignId);
         req.setAttribute("ap",tempAssign);
-        req.getRequestDispatcher("displayAssignPage.jsp").forward(req, resp);
+        req.getRequestDispatcher("protected/displayAssignPage.jsp").forward(req, resp);
     }
 }

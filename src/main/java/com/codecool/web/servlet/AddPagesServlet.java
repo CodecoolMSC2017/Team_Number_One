@@ -37,7 +37,7 @@ public class AddPagesServlet extends HttpServlet{
         }
 
         req.setAttribute("isSuccess", true);
-        req.getRequestDispatcher("curriculum.jsp").forward(req, resp);
+        req.getRequestDispatcher("/protected/curriculum.jsp").forward(req, resp);
     }
 
 

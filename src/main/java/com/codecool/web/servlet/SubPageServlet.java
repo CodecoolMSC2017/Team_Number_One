@@ -24,12 +24,12 @@ public class SubPageServlet extends HttpServlet {
         if (tempSubPage instanceof AssignmentPage){
             AssignmentPage tempAssign = (AssignmentPage) tempSubPage;
             req.setAttribute("ap",tempAssign);
-            dispatcher = "displayAssignPage.jsp";
+            dispatcher = "protected/displayAssignPage.jsp";
 
         } else if (tempSubPage instanceof TextPage){
             TextPage tempText = (TextPage) tempSubPage;
             req.setAttribute("tp",tempText);
-            dispatcher = "displayTextPage.jsp";
+            dispatcher = "protected/displayTextPage.jsp";
         }
 
         req.getRequestDispatcher(dispatcher).forward(req, resp);
