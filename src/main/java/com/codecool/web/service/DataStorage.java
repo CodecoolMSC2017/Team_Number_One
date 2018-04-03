@@ -1,9 +1,6 @@
 package com.codecool.web.service;
 
-import com.codecool.web.model.AssignmentPage;
-import com.codecool.web.model.SubPage;
-import com.codecool.web.model.TextPage;
-import com.codecool.web.model.User;
+import com.codecool.web.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +12,11 @@ public class DataStorage {
     private List<SubPage> allSubPages = new ArrayList<>();
 
     private DataStorage() {
+        // for testing
         allUsers.add(new User("a", "a@a", "Mentor", "a"));
+        allUsers.add(new User("s","s@s","Student", "s"));  //test student user
+        allUsers.get(1).incrementAttendance(); // test user attendance
+        allUsers.get(1).incrementAttendance();
         allSubPages.add(new TextPage("Test", "TestText"));
         allSubPages.add(new TextPage("Test2", "TestText2"));
         getAllSubPages().get(1).setPublished();

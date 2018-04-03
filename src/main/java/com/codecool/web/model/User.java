@@ -1,17 +1,21 @@
 package com.codecool.web.model;
 
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class User {
-    private String name;
-    private String password;
-    private String email = "";
-    private String role = "";
-    private String uniqueId = "0";
-    private int grade = 100;
-    private int attendance = 100;
+    String name;
+    String password;
+    String email = "";
+    String role = "";
+    String uniqueId = "0";
+    DateTime registrationTime = null;
+    int grade = 100;        // might need to make subclasses for student,admin
+    int attendance = 1;     // cannot be 0
 
     private HashMap<Integer, Integer> listOfCompletedAssignments = new HashMap<>();
 
@@ -21,6 +25,7 @@ public class User {
         this.role = (role == null) ? "Student" : role;
         this.password = password;
         uniqueId = generateId();
+        registrationTime = new DateTime();
     }
 
     // for user checking at login, comes from the loginFilter
@@ -75,9 +80,19 @@ public class User {
         this.grade = grade;
     }
 
-    public void setAttendance(int attendance) {
-        this.attendance = attendance;
+    public void incrementAttendance() {
+        attendance++;
     }
+
+    public int daysSinceRegistered(){
+        return Days.daysBetween(registrationTime, new DateTime()).getDays();
+    }
+
+    public int fakeDaysSinceRegistered(){
+        return 10;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -113,7 +128,9 @@ public class User {
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
                 ", password='" + password + '\'' +
-                ", uniqueId=" + uniqueId +
-                '}';
+                ", uniqueId=" + uniqueId + '\'' +
+                ", attendance=" + attendance + '\'' +
+                " days_since_registered=" + daysSinceRegistered() +
+                " }";
     }
 }
