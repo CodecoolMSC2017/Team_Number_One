@@ -18,13 +18,8 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User tempForCheck = new User(request.getParameter("username"), request.getParameter("password"));
-
-        DataStorage.getInstance().addList(new User("a", "a@a", "Mentor", "a")); //for testing, delete later
-        DataStorage.getInstance().addSubPage(new TextPage("Test", "TestText"));
-        DataStorage.getInstance().addSubPage(new TextPage("Test2", "TestText2"));
-        DataStorage.getInstance().getAllSubPages().get(1).setPublished();
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User tempForCheck = new User(req.getParameter("username"), req.getParameter("password"));
 
         List<User> registered = DataStorage.getInstance().getUserList();
         List<SubPage> availablePages = new ArrayList<>();
@@ -34,18 +29,18 @@ public class LoginServlet extends HttpServlet {
             String userID = null;
             for (User user: registered) {
                 if (user.equals(tempForCheck)){
-                    HttpSession session = request.getSession();
+                    HttpSession session = req.getSession();
                     session.setAttribute("user", user);
                     session.setMaxInactiveInterval(30*60);
                     availablePages = ap.selectPages(user);
                 }
             }
-            request.setAttribute("pageList", availablePages);
-            request.getRequestDispatcher("protected/curriculum.jsp").forward(request, response);
+            req.setAttribute("pageList", availablePages);
+            req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
         }
 
         else {
-            PrintWriter out = response.getWriter();
+            PrintWriter out = resp.getWriter();
             out.println ("<html><body><script>alert('Wrong username or password!');window.location.href = \"index.html\"</script></body></html>");
         }
     }

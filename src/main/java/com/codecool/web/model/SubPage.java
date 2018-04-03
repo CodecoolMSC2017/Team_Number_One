@@ -27,6 +27,10 @@ public abstract class SubPage {
     }
 
     public void setPublished() {
-        this.published = !this.published;
+        this.published = true;
+    }
+
+    public void setUnPublished(){
+        this.published = false;
     }
 }
