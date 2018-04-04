@@ -63,7 +63,7 @@ public class AnswerCheckerServlet extends HttpServlet {
 
                 if (tempQuestion.getQuestion().equals(key)){
 
-                    rightAnswers = tempQuestion.getRightStringAnswers();
+                    /*rightAnswers = tempQuestion.getRightStringAnswers();*/
                     for (String tempAns: value) {
 
                        if (!rightAnswers.contains(tempAns)){
