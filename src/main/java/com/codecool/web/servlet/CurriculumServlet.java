@@ -23,6 +23,7 @@ import java.util.List;
 @WebServlet("/curriculum")
 public class CurriculumServlet extends HttpServlet {
     List<SubPage> ds = DataStorage.getInstance().getAllSubPages();
+    List<User> users = DataStorage.getInstance().getUserList();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,6 +50,11 @@ public class CurriculumServlet extends HttpServlet {
                     }
                 }
             }
+        }
+
+        if (req.getParameter("showUsers") != null) {
+            req.setAttribute("users", users);
+            req.getRequestDispatcher("protected/users.jsp").forward(req, resp);
         }
 
         // for logout

@@ -34,6 +34,9 @@ if (wrongName) {
             <br>
         </form>
     </c:forEach>
+    <form action="curriculum"  method="GET">
+        <input type="submit" name="showUsers" value="User List">
+    </form>
     <c:if test="${user.role eq 'Mentor'}">
         <form action="curriculum" method="POST">
             <input type="submit" name="addPages" value="Add Assignment">
