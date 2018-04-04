@@ -20,6 +20,7 @@
                 <input type="text/html" name="answerGiven">
 
             </c:forEach>
+            <br>
             <input type="submit" value="Submit">
         </form>
     </body>

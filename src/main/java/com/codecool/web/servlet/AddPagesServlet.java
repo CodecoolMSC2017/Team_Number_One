@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +20,17 @@ public class AddPagesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SubPage sp = null;
         if(req.getParameterMap().containsKey("maxScore")){
-            List<Question> q = new ArrayList<>();
-            String assignTitle=req.getParameter("assignTitle");
-            int maxScore = Integer.parseInt(req.getParameter("maxScore"));
+
+            AssignmentPage ap=(AssignmentPage)req.getSession().getAttribute("tmpAssign");
             String question = req.getParameter("question");
             String answer = req.getParameter("answer");
-            q.add(new Question(question,new Answer(answer)));
-            sp = new AssignmentPage(assignTitle,q,maxScore);
-            DataStorage.getInstance().addSubPage(sp);
+            Question tmpQ = new Question(question,new Answer(answer));
+            ap.addTask(tmpQ);
+            DataStorage.getInstance().addSubPage(ap);
             req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
             req.setAttribute("isSuccess", true);
             req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
+
         }else{
             String title = req.getParameter("textTitle");       //redundant
             String content = req.getParameter("textContent");
