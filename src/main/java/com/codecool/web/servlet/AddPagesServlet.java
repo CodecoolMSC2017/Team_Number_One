@@ -20,12 +20,21 @@ public class AddPagesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SubPage sp = null;
         if(req.getParameterMap().containsKey("maxScore")){
+            AssignmentPage ap;
+            if((AssignmentPage)req.getSession().getAttribute("tmpAssign")!=null){
+                ap=(AssignmentPage)req.getSession().getAttribute("tmpAssign");
+                String question = req.getParameter("question");
+                String answer = req.getParameter("answer");
+                Question tmpQ = new Question(question,new Answer(answer));
+                ap.addTask(tmpQ);
+            }else{
+                List<Question> q = new ArrayList<>();
+                q.add(new Question(req.getParameter("question"),new Answer(req.getParameter("answer"))));
+                ap=new AssignmentPage(req.getParameter("assignTitle"),q,Integer.parseInt(req.getParameter("maxScore")));
 
-            AssignmentPage ap=(AssignmentPage)req.getSession().getAttribute("tmpAssign");
-            String question = req.getParameter("question");
-            String answer = req.getParameter("answer");
-            Question tmpQ = new Question(question,new Answer(answer));
-            ap.addTask(tmpQ);
+            }
+
+
             DataStorage.getInstance().addSubPage(ap);
             req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
             req.setAttribute("isSuccess", true);
