@@ -12,9 +12,9 @@
    </head>
    <body>
    <p3>
-   <form action="attendance" method="POST">
+   <form action="attend" method="POST">
         Student name:<br>
-        <input list="Students" name="student_name">
+        <input list="Students" name="studentName">
             <datalist id="Students">
                 <c:forEach items="${userList}" var="studNames">
                     <option value="${studNames.getName()}">
@@ -28,8 +28,11 @@
 
    </p3>
 
-
-
+   <br><br>
+   <p3>
+    ${matchName}<br>
+    ${matchDate}<br>
+   </p3>
 
     <table style="width:100%">
       <tr>

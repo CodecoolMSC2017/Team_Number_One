@@ -4,7 +4,7 @@ import com.codecool.web.model.AssignmentPage;
 import com.codecool.web.model.SubPage;
 import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
-import com.codecool.web.service.UserListFilter;
+import com.codecool.web.service.AttendanceHandler;
 import com.codecool.web.service.DataStorage;
 
 import javax.servlet.ServletException;
@@ -46,7 +46,7 @@ public class CurriculumServlet extends HttpServlet {
         }
 
         if (req.getParameter("attendance") != null) {
-            req.setAttribute("userList", UserListFilter.getStudentUserList());
+            req.setAttribute("userList", AttendanceHandler.getStudentUserList());
             req.getRequestDispatcher("protected/attendance.jsp").forward(req, resp);
         }
 

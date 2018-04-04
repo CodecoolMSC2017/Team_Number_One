@@ -25,4 +25,8 @@ public class UserAttendace {
     public LocalDate getRegistrationDate() {
         return registrationDate;
     }
+
+
+
+
 }
