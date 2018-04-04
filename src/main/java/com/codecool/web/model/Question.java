@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Question {
 
-    private String question = "";
-    private List<Answer> listOfAnswers = new ArrayList<>();
+    private String question;
+    private Answer answer;
 
-    public Question(String question, List<Answer> listOfAnswers) {
+    public Question(String question, Answer answer) {
         this.question = question;
-        this.listOfAnswers = listOfAnswers;
+        this.answer = answer;
     }
 
     public String getQuestion() {
@@ -21,31 +21,11 @@ public class Question {
         this.question = question;
     }
 
-    public List<Answer> getListOfAnswers() {
-        return listOfAnswers;
+    public Answer getAnswer() {
+        return answer;
     }
 
-    public void setListOfAnswers(List<Answer> listOfAnswers) {
-        this.listOfAnswers = listOfAnswers;
-    }
-
-    public List<Answer> getRightAnswers() {
-
-        List<Answer> rightAnswers = new ArrayList<>();
-        for (Answer tempAns : this.listOfAnswers) {
-            if (tempAns.getIsAnswerRight()) rightAnswers.add(tempAns);
-        }
-
-        return rightAnswers;
-    }
-
-    public List<String> getRightStringAnswers() {
-
-        List<String> rightAnswers = new ArrayList<>();
-        for (Answer tempAns : this.listOfAnswers) {
-            if (tempAns.getIsAnswerRight()) rightAnswers.add(tempAns.getAnswer());
-        }
-
-        return rightAnswers;
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 }

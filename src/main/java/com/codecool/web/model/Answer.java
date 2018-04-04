@@ -2,12 +2,10 @@ package com.codecool.web.model;
 
 public class Answer {
 
-    private String answer = "";
-    private boolean isAnswerRight = false;
+    private String answer;
 
-    public Answer(String answer, boolean isAnswerRight) {
+    public Answer(String answer) {
         this.answer = answer;
-        this.isAnswerRight = isAnswerRight;
     }
 
     public String getAnswer() {
@@ -18,15 +16,4 @@ public class Answer {
         this.answer = answer;
     }
 
-    public boolean getIsAnswerRight() {
-        return isAnswerRight;
-    }
-
-    public void setAnswerRight() {
-        isAnswerRight = true;
-    }
-
-    public void setAnswerFalse() {
-        isAnswerRight = false;
-    }
 }

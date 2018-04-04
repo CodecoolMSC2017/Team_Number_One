@@ -44,4 +44,15 @@ public class DataStorage {
 
     public List<SubPage> getAllSubPages() { return allSubPages; }
 
+    public User getUser(User u){
+        User result = null;
+        for (User tempUser:allUsers) {
+            if(tempUser.getUniqueId().equals(u.getUniqueId())){
+                result = tempUser;
+                break;
+            }
+        }
+        return result;
+    }
+
 }
