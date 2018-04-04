@@ -39,8 +39,11 @@ if (wrongName) {
     </form>
     <c:if test="${user.role eq 'Mentor'}">
         <form action="curriculum" method="POST">
-            <input type="submit" name="addPages" value="Add Content">
+            <input type="submit" name="addPages" value="Add Assignment">
         </form>
+         <form action="curriculum" method="POST">
+            <input type="submit" name="addPages" value="Add Text Page">
+         </form>
         <form action="curriculum" method="POST">
             <input type="submit" name="publish" value="Publish/Unpublish pages">
         </form>
