@@ -19,6 +19,7 @@ public class DataStorage {
         allUsers.get(1).getAttendance().setAttendacePerDays(new LocalDate(), true); //for attednace testing
         allUsers.get(2).getAttendance().setAttendacePerDays(new LocalDate(), false);
         allUsers.get(3).getAttendance().setAttendacePerDays(new LocalDate(), true);
+        allUsers.get(4).getAttendance().setAttendacePerDays(new LocalDate(), true);
         allSubPages.add(new TextPage("Test", "TestText"));
         allSubPages.add(new TextPage("Test2", "TestText2"));
         getAllSubPages().get(1).setPublished();

@@ -21,6 +21,23 @@ public abstract class AttendanceHandler {
         return temp;
     }
 
+    public static List<User> run(String studentName, String inputDate){
+
+        User nameMatch = AttendanceHandler.getGivenUserByName(studentName);
+        List<User> dateMatch = AttendanceHandler.getGivenUserByDate(inputDate);
+
+        List<User> result = new ArrayList<>();
+
+        if (dateMatch != null){
+            result.addAll(dateMatch);
+        }
+        if (!(result.contains(nameMatch))){
+            result.add(nameMatch);
+        }
+        
+        return result;
+    }
+
     public static User getGivenUserByName(String userName){
         if (userName.equals("")){
             return null;
@@ -34,21 +51,22 @@ public abstract class AttendanceHandler {
         return null;
     }
 
-    public static User getGivenUserByDate(String dateNoTime){
+    public static List<User> getGivenUserByDate(String dateNoTime){
         if (dateNoTime.equals("")){
             return null;
         }
         LocalDate myDate = new LocalDate(dateNoTime);
         List<User> tempStudents = getStudentUserList();
+        List<User> result = new ArrayList<>();
         for (User studUsr: tempStudents) {
             Map<LocalDate, Boolean> tempMap = studUsr.getAttendance().getAttendacePerDays();
             for (LocalDate keys: tempMap.keySet()){
                 if(keys.isEqual(myDate)){
-                    return studUsr;
+                    result.add(studUsr);
                 }
             }
         }
-        return null;
+        return result;
     }
 
 

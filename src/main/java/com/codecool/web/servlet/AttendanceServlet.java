@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet("/attend")
@@ -20,18 +21,9 @@ public class AttendanceServlet extends HttpServlet {
         String studentName = request.getParameter("studentName");
         String inputDate = request.getParameter("date");
 
+        List<User> result = AttendanceHandler.run(studentName, inputDate);
 
-        User nameMatch = AttendanceHandler.getGivenUserByName(studentName);
-        User dateMatch = AttendanceHandler.getGivenUserByDate(inputDate);
-
-        if( nameMatch != null){
-            request.setAttribute("matchName", nameMatch);
-        }
-        if (dateMatch != null){
-            request.setAttribute("matchDate", dateMatch);
-        }
-
-
+        request.setAttribute("matchDate", result);
         request.setAttribute("inputDate", inputDate);
         request.setAttribute("userList", AttendanceHandler.getStudentUserList());
         request.getRequestDispatcher("protected/attendance.jsp").forward(request, response);

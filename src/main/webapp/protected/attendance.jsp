@@ -29,18 +29,13 @@
    </p3>
 
    <br><br>
-   <p3>
-    ${matchName}<br>
-    ${matchDate}<br>
-   </p3>
-
     <table style="width:100%">
       <tr>
         <th>Student name</th>
         <th>Date</th>
         <th>Attended</th>
       </tr>
-      <c:forEach items="${userList}" var="studUser">
+      <c:forEach items="${matchDate}" var="studUser">
       <tr>
         <td>${studUser.getName()}</td>
         <c:forEach items="${studUser.getAttendance().getAttendacePerDays()}" var="entry">
