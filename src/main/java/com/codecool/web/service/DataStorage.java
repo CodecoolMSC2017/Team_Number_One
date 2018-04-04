@@ -1,11 +1,9 @@
 package com.codecool.web.service;
 
 import com.codecool.web.model.*;
-
+import org.joda.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DataStorage {
     private List<User> allUsers = new ArrayList<User>();
@@ -15,8 +13,12 @@ public class DataStorage {
         // for testing
         allUsers.add(new User("a", "a@a", "Mentor", "a"));
         allUsers.add(new User("s","s@s","Student", "s"));  //test student user
-        allUsers.get(1).incrementAttendance(); // test user attendance
-        allUsers.get(1).incrementAttendance();
+        allUsers.add(new User("s2","s@s","Student", "s2"));
+        allUsers.add(new User("cekil","s@s","Student", "q"));
+        allUsers.add(new User("cecil","s@s","Student", "c"));
+        allUsers.get(1).getAttendance().setAttendacePerDays(new LocalDate(), true); //for attednace testing
+        allUsers.get(2).getAttendance().setAttendacePerDays(new LocalDate(), false);
+        allUsers.get(2).getAttendance().setAttendacePerDays(new LocalDate(), true);
         allSubPages.add(new TextPage("Test", "TestText"));
         allSubPages.add(new TextPage("Test2", "TestText2"));
         getAllSubPages().get(1).setPublished();

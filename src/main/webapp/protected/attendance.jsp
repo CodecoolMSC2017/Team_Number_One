@@ -12,14 +12,45 @@
    </head>
    <body>
    <p3>
-   <c:forEach items="${userList}" var="users">
-        ${users.getName()}
-        ${users.fakeDaysSinceRegistered()/users.getAttendance()}<br>
-   </c:forEach>
+   <form action="attendance" method="POST">
+        Student name:<br>
+        <input list="Students" name="student_name">
+            <datalist id="Students">
+                <c:forEach items="${userList}" var="studNames">
+                    <option value="${studNames.getName()}">
+                </c:forEach>
+              </datalist>
+          <br><br>
+        Requested date:<br>
+        <input type="date" name="date" id="date"><br><br>
+        <input type="submit" value="Submit"><br>
+   </form>
+
    </p3>
 
-    <form action="curriculum" method="GET">
-        <input id="button" type="submit" value="logout" name="logout">
-    </form>
+
+
+
+    <table style="width:100%">
+      <tr>
+        <th>Student name</th>
+        <th>Date</th>
+        <th>Attended</th>
+      </tr>
+      <c:forEach items="${userList}" var="studUser">
+      <tr>
+        <td>${studUser.getName()}</td>
+        <c:forEach items="${studUser.getAttendance().getAttendacePerDays()}" var="entry">
+                    <td>${entry.key}</td>
+                    <td>${entry.value == true ? "yes" : "no"}</td>
+        </c:forEach>
+      </tr>
+
+   </c:forEach>
+
+
+
+
+
     </body>
     </html>

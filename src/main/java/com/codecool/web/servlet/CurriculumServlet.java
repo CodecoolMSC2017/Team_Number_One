@@ -4,21 +4,16 @@ import com.codecool.web.model.AssignmentPage;
 import com.codecool.web.model.SubPage;
 import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
-import com.codecool.web.service.AttendanceHandler;
-import com.codecool.web.service.AvailablePages;
+import com.codecool.web.service.UserListFilter;
 import com.codecool.web.service.DataStorage;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/curriculum")
@@ -51,7 +46,7 @@ public class CurriculumServlet extends HttpServlet {
         }
 
         if (req.getParameter("attendance") != null) {
-            req.setAttribute("userList", AttendanceHandler.getStudentUserList());
+            req.setAttribute("userList", UserListFilter.getStudentUserList());
             req.getRequestDispatcher("protected/attendance.jsp").forward(req, resp);
         }
 

@@ -6,13 +6,27 @@ import com.codecool.web.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendanceHandler {
+
+//return only the students list
+public class UserListFilter {
 
     public static List<User> getStudentUserList() {
         List<User> temp = new ArrayList<>();
         List<User> userList = DataStorage.getInstance().getUserList();
         for (User usr: userList) {
             if (usr.getRole().equals("Student")){
+                temp.add(usr);
+            }
+        }
+        return temp;
+
+    }
+
+    public static List<User> getMentorsUserList() {
+        List<User> temp = new ArrayList<>();
+        List<User> userList = DataStorage.getInstance().getUserList();
+        for (User usr: userList) {
+            if (usr.getRole().equals("Mentor")){
                 temp.add(usr);
             }
         }

@@ -3,20 +3,18 @@ package com.codecool.web.model;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.LocalDate;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class User {
-    String name;
-    String password;
-    String email = "";
-    String role = "";
-    String uniqueId = "0";
-    DateTime registrationTime = null;
-    int grade = 100;        // might need to make subclasses for student,admin
-    int attendance = 1;     // cannot be 0
-
+    private String name;
+    private String password;
+    private String email = "";
+    private String role = "";
+    private String uniqueId = "0";
+    private UserAttendace attendance;
     private HashMap<Integer, Integer> listOfCompletedAssignments = new HashMap<>();
 
     public User(String name, String email, String role, String password) {
@@ -25,7 +23,7 @@ public class User {
         this.role = (role == null) ? "Student" : role;
         this.password = password;
         uniqueId = generateId();
-        registrationTime = new DateTime();
+        attendance = new UserAttendace();
     }
 
     // for user checking at login, comes from the loginFilter
@@ -36,7 +34,7 @@ public class User {
 
     private String generateId(){
         Random r = new Random();
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         SimpleDateFormat dateFormat = new SimpleDateFormat("00yyyyMMddHHmmssms");
         int counter = 0;
 
@@ -68,31 +66,14 @@ public class User {
         return uniqueId;
     }
 
-    public int getGrade() {
-        return grade;
-    }
-
-    public int getAttendance() {
-        return attendance;
-    }
-
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
-
-    public void incrementAttendance() {
-        attendance++;
-    }
 
     public int daysSinceRegistered(){
-        return Days.daysBetween(registrationTime, new DateTime()).getDays();
+        return Days.daysBetween(attendance.getRegistrationDate(), new LocalDate()).getDays();
     }
 
-    public int fakeDaysSinceRegistered(){
-        return 10;
+    public UserAttendace getAttendance() {
+        return attendance;
     }
-
-
 
     @Override
     public boolean equals(Object o) {
