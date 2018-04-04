@@ -5,25 +5,25 @@ import java.util.List;
 
 public class AssignmentPage extends SubPage {
 
-    private List<Question> listOfTasks = new ArrayList<>();
+    private List<Question> listOfQuestions = new ArrayList<>();
     private int maxScore;
 
-    public AssignmentPage(String title, List<Question> listOfTasks, int maxScore) {
+    public AssignmentPage(String title, List<Question> listOfQuestions, int maxScore) {
         super(title);
-        this.listOfTasks = listOfTasks;
+        this.listOfQuestions = listOfQuestions;
         this.maxScore = maxScore;
     }
 
-    public List<Question> getListOfTasks() {
-        return listOfTasks;
+    public List<Question> getListOfQuestions() {
+        return listOfQuestions;
     }
 
-    public void setListOfTasks(List<Question> listOfTasks) {
-        this.listOfTasks = listOfTasks;
+    public void setListOfQuestions(List<Question> listOfQuestions) {
+        this.listOfQuestions = listOfQuestions;
     }
 
     public void addTask(Question q){
-        listOfTasks.add(q);
+        listOfQuestions.add(q);
     }
 
     public int getMaxScore() {

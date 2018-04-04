@@ -15,7 +15,7 @@
             <input id="maxScore" type="text/html" name="maxScore" value="${tmpAssign.maxScore}" required>
             <br>
             <input type="hidden" name="assignPageTheReal" value="${tmpAssign}">
-            <c:forEach items="${tmpAssign.listOfTasks}" var="q">
+            <c:forEach items="${tmpAssign.listOfQuestions}" var="q">
                 <p>Question:</p>
                 <input type="text/html" name="alreadySubmittedQuestion" value="${q.question}">
                 <br>

@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 
 @WebServlet("/check-answers")
@@ -16,12 +15,19 @@ public class SendAssignment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String answer = req.getParameter("answerGiven");
-        int assignID = Integer.parseInt(req.getParameter("id"));
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
-        DataStorage.getInstance().getUser(user).addCompletedAssignment(assignID, answer);
+        int assignId = Integer.parseInt(req.getParameter("id"));
+        AssignmentPage tempAss = (AssignmentPage) DataStorage.getInstance().getSubPageById(assignId);
+        HashMap<Question, String> tempHash = new HashMap<>();
+        for (Question q:tempAss.getListOfQuestions()) {
+            tempHash.put(q,req.getParameter(q.getAnswer().getAnswer()));
+        }
+        user.addCompletedAssignment(assignId,tempHash);
 
+        req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
+        req.setAttribute("isSucces",true);
+        req.getRequestDispatcher("protected/curriculum.jsp").forward(req,resp);
     }
 }
 

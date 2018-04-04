@@ -1,7 +1,6 @@
 package com.codecool.web.servlet;
 
 import com.codecool.web.model.*;
-import com.codecool.web.service.DataStorage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +33,7 @@ public class NewQuestionServlet extends HttpServlet {
             req.getRequestDispatcher("protected/addQuestion.jsp").forward(req,resp);
         }else{
 
-            questions=tmpAssign.getListOfTasks();
+            questions=tmpAssign.getListOfQuestions();
             String question = req.getParameter("question");
             String answer = req.getParameter("answer");
             questions.add(new Question(question,new Answer(answer)));

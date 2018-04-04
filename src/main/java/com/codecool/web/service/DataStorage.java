@@ -55,4 +55,15 @@ public class DataStorage {
         return result;
     }
 
+    public SubPage getSubPageById(int id){
+        SubPage result = null;
+        for (SubPage temp:allSubPages) {
+            if(temp.getId() == id){
+                result = temp;
+                break;
+            }
+        }
+        return result;
+    }
+
 }

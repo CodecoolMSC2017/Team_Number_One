@@ -13,11 +13,11 @@
         <h1><c:out value = "${ap.title}"/></h1>
         <form action="check-answers" method="post">
             <input type="hidden" name="id" value="${ap.id}">
-            <c:forEach var="q" items="${ap.listOfTasks}">
+            <c:forEach var="q" items="${ap.listOfQuestions}">
                 <p>Question:<br><c:out value="${q.question}"/></p>
                 <p>Answer:<br></p>
                 <br>
-                <input type="text/html" name="answerGiven">
+                <input type="text/html" name="${q.answer.answer}">
 
             </c:forEach>
             <br>
