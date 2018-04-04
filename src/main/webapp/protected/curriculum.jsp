@@ -25,13 +25,20 @@ if (wrongName) {
 <h1 id="welcomeText">Welcome ${user.name}!</h1>
 <div id="choices">
     <c:forEach items="${sessionScope.pageList}" var="page">
-        <c:if test="${user.role eq 'Mentor'}">
-            <input type="checkbox" id="${page.getId()}">
-        </c:if>
+
         <form method="get" id="${page.getId()}" action="curriculum">
             <input type="hidden" name="id" value="${page.id}">
             <input type="submit" value="${page.getTitle()}">
             <br>
+        </form>
+        <c:if test="${page.isPublished()}">
+            <p>P</p>
+        </c:if>
+        <form method="post" id="${page.getId()}" action="publish">
+        <c:if test="${user.role eq 'Mentor'}">
+            <input type="hidden" name="id" value="${page.id}">
+            <input type="submit" value="Publish/Unpublish">
+        </c:if>
         </form>
     </c:forEach>
     <form action="curriculum"  method="GET">
