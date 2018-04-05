@@ -10,6 +10,39 @@ import java.util.Map;
 
 //return only the students list
 public abstract class AttendanceHandler {
+    public static List<User> filterSearch(String studentName, String inputDate){
+        if(studentName.equals("") && inputDate.equals("")){
+            return getStudentUserList();
+        }
+
+        User nameMatch = AttendanceHandler.getGivenUserByName(studentName);
+        List<User> dateMatch = AttendanceHandler.getGivenUserByDate(inputDate);
+        List<User> result = new ArrayList<>();
+
+        if (dateMatch != null){
+            result.addAll(dateMatch);
+        }
+        if ((nameMatch != null) && !(result.contains(nameMatch))){
+            nameMatch.getAttendance().setAttendacePerDays(new LocalDate(), false);
+            result.add(nameMatch);
+        }
+
+        return result;
+    }
+
+    public static void saveAttendance(String id, String date, String wasHere){
+        LocalDate currentDate = makeLocalDate(date);
+        List<User> studUsers = getStudentUserList();
+        if(currentDate != null) {  //check if date is not empty
+            for (User usr : studUsers) {
+                if (usr.getUniqueId().equals(id)) {
+                    usr.getAttendance().setAttendacePerDays(currentDate, wasHere != null);
+                }
+            }
+        }
+    }
+
+
     public static List<User> getStudentUserList() {
         List<User> temp = new ArrayList<>();
         List<User> userList = DataStorage.getInstance().getUserList();
@@ -21,25 +54,8 @@ public abstract class AttendanceHandler {
         return temp;
     }
 
-    public static List<User> run(String studentName, String inputDate){
-
-        User nameMatch = AttendanceHandler.getGivenUserByName(studentName);
-        List<User> dateMatch = AttendanceHandler.getGivenUserByDate(inputDate);
-
-        List<User> result = new ArrayList<>();
-
-        if (dateMatch != null){
-            result.addAll(dateMatch);
-        }
-        if (!(result.contains(nameMatch))){
-            result.add(nameMatch);
-        }
-        
-        return result;
-    }
-
     public static User getGivenUserByName(String userName){
-        if (userName.equals("")){
+        if (userName.equals("")){   //refractor later
             return null;
         }
         List<User> tempStudents = getStudentUserList();
@@ -51,11 +67,19 @@ public abstract class AttendanceHandler {
         return null;
     }
 
+    public static LocalDate makeLocalDate(String dateString){  //retrun null if empty string
+        if (!(dateString.equals(""))) {
+            return new LocalDate(dateString);
+        }
+        return null;
+
+    }
+
     public static List<User> getGivenUserByDate(String dateNoTime){
-        if (dateNoTime.equals("")){
+        if (dateNoTime.equals("")){   //refractor later
             return null;
         }
-        LocalDate myDate = new LocalDate(dateNoTime);
+        LocalDate myDate = makeLocalDate(dateNoTime);
         List<User> tempStudents = getStudentUserList();
         List<User> result = new ArrayList<>();
         for (User studUsr: tempStudents) {

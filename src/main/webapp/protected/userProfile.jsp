@@ -2,7 +2,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html>
 <head>
-    <title>User List</title>
+    <title>User Profile</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
@@ -47,11 +47,16 @@
     <input type="hidden" name="id" value="${profile.uniqueId}">
     <input type="submit" value="Save Changes">
 </form>
+<c:if test="${profile.uniqueId == user.uniqueId}">
+    <form action="updateProfile" method="GET" name="scores">
+        <input type="submit" name="id" value="My Scores">
+    </form>
+</c:if>
+<form action="curriculum" method="GET">
+    <input type="submit" name="showUsers" value="Back to User List">
+</form>
 <form id="backToCurriculum" action="backToMain" method="GET">
     <input id="button" type="submit" value="Back to curriculum">
-</form>
-<form action="curriculum"  method="GET">
-    <input type="submit" name="showUsers" value="Back to User List">
 </form>
 </body>
 </html>

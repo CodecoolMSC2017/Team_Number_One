@@ -20,6 +20,8 @@ public class DataStorage {
         allUsers.add(new User("cekil","s@s","Student", "q"));
         allUsers.add(new User("cecil","s@s","Student", "c"));
         allUsers.get(1).getAttendance().setAttendacePerDays(new LocalDate(), true); //for attednace testing
+        allUsers.get(1).getAttendance().setAttendacePerDays(new LocalDate("2018-04-04"), true);
+        allUsers.get(1).getAttendance().setAttendacePerDays(new LocalDate("2018-04-03"), true);
         allUsers.get(2).getAttendance().setAttendacePerDays(new LocalDate(), false);
         allUsers.get(3).getAttendance().setAttendacePerDays(new LocalDate(), true);
         allUsers.get(4).getAttendance().setAttendacePerDays(new LocalDate(), true);
