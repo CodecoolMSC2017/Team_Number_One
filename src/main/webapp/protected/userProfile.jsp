@@ -48,12 +48,15 @@
     <input type="submit" value="Save Changes">
 </form>
 <c:if test="${profile.uniqueId == user.uniqueId}">
-    <form action="updateProfile" method="GET" id="score">
-        <input type="submit" value="My Scores">
+    <form action="updateProfile" method="GET" name="scores">
+        <input type="submit" name="id" value="My Scores">
     </form>
 </c:if>
 <form action="curriculum" method="GET">
     <input type="submit" name="showUsers" value="Back to User List">
+</form>
+<form id="backToCurriculum" action="backToMain" method="GET">
+    <input id="button" type="submit" value="Back to curriculum">
 </form>
 </body>
 </html>

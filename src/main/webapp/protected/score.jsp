@@ -21,13 +21,19 @@
     <tbody>
     <c:forEach items="${results}" var="result">
         <tr>
-            <td>${result.asstit}</td>
+            <td>${result.ap.title}</td>
             <td>${result.submissionDate}</td>
-            <td>${result.maxScore}</td>
-            <td>${result.actualScore}</td>
+            <td>${result.ap.maxScore}</td>
+            <td>${result.score}</td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+<form action="curriculum" method="GET">
+    <input type="submit" name="showUsers" value="Back to User List">
+</form>
+<form id="backToCurriculum" action="backToMain" method="GET">
+    <input id="button" type="submit" value="Back to curriculum">
+</form>
 </body>
 </html>

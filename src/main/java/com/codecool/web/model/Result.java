@@ -8,11 +8,13 @@ public class Result {
     private User user;
     private int score = 0;
     private Timestamp submissionDate;
+    private AssignmentPage ap;
 
-    public Result(int assignmentPageId, User user, Timestamp submissionDate) {
+    public Result(int assignmentPageId, User user, Timestamp submissionDate, AssignmentPage ap) {
         this.assignmentPageId = assignmentPageId;
         this.user = user;
         this.submissionDate = submissionDate;
+        this.ap=ap;
     }
 
     public int getAssignmentPageId() {
@@ -33,5 +35,9 @@ public class Result {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public AssignmentPage getAp() {
+        return ap;
     }
 }
