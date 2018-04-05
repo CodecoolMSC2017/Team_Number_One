@@ -35,7 +35,7 @@ public class AttendanceServlet extends HttpServlet {
         String isHere = request.getParameter("isHere");
         String id = request.getParameter("userID");
         AttendanceHandler.saveAttendance(id, givenDate, isHere);
-        
+
         request.setAttribute("userList", AttendanceHandler.getStudentUserList());
         request.getRequestDispatcher("protected/attendance.jsp").forward(request, response);
     }

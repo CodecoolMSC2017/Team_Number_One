@@ -16,9 +16,9 @@ public class DataStorage {
     private DataStorage() {
         allUsers.add(new User("a", "a@a", "Mentor", "a"));
         allUsers.add(new User("s","s@s","Student", "s"));  //test student user
-        allUsers.add(new User("s2","s@s","Student", "s2"));
-        allUsers.add(new User("cekil","s@s","Student", "q"));
-        allUsers.add(new User("cecil","s@s","Student", "c"));
+        allUsers.add(new User("gazsi","s@s","Student", "g"));
+        allUsers.add(new User("mari","s@s","Student", "mi"));
+        allUsers.add(new User("maci","s@s","Student", "ma"));
         allUsers.get(1).getAttendance().setAttendacePerDays(new LocalDate(), true); //for attednace testing
         allUsers.get(1).getAttendance().setAttendacePerDays(new LocalDate("2018-04-04"), true);
         allUsers.get(1).getAttendance().setAttendacePerDays(new LocalDate("2018-04-03"), true);
