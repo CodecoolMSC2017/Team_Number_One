@@ -29,6 +29,12 @@
     </c:forEach>
     </tbody>
 </table>
+<br>
+<div>
+    <img src="${path}"
+         width="600" height="400" border="0" usemap="#chart"/>
+</div>
+<br>
 <form action="curriculum" method="GET">
     <input type="submit" name="showUsers" value="Back to User List">
 </form>

@@ -1,6 +1,7 @@
 package com.codecool.web.servlet;
 
 import com.codecool.web.model.Result;
+import com.codecool.web.model.Statistics;
 import com.codecool.web.model.User;
 import com.codecool.web.service.DataStorage;
 
@@ -51,6 +52,8 @@ public class ProfileUpdateServlet extends HttpServlet {
                     results.add(result);
                 }
             }
+            Statistics stat = new Statistics();
+            req = stat.createChart(req);
             req.setAttribute("results", results);
             req.getRequestDispatcher("protected/score.jsp").forward(req, resp);
         }
