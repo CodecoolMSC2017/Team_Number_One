@@ -32,16 +32,20 @@
     <table style="width:100%">
       <tr>
         <th>Student name</th>
+        <th>Attending</th>
         <th>Date</th>
         <th>Attended</th>
       </tr>
       <c:forEach items="${matchDate}" var="studUser">
       <tr>
-        <td>${studUser.getName()}</td>
-        <c:forEach items="${studUser.getAttendance().getAttendacePerDays()}" var="entry">
-                    <td>${entry.key}</td>
-                    <td>${entry.value == true ? "yes" : "no"}</td>
-        </c:forEach>
+        <c:if test="${not empty matchDate}" >
+            <td>${studUser.getName()}</td>
+            <td><input type="checkbox" id="isHere" name="isHere" value="false">Check if here</td>
+            <c:forEach items="${studUser.getAttendance().getAttendacePerDays()}" var="entry">
+                <td>${entry.key}</td>
+                <td>${entry.value == true ? "yes" : "no"}</td>
+            </c:forEach>
+        </c:if>
       </tr>
 
    </c:forEach>
