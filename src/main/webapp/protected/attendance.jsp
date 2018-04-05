@@ -41,9 +41,11 @@
           <tr>
             <c:if test="${not empty result}" >
                 <form action="attend" method="POST">
-                <td>${studUser.getName()}</td>
-                <td><input type="checkbox" id="isHere" name="isHere" value="false">Check if here</td>
-                <td><input type="date" name="date" id="date"></td>
+                <td>${studUser.getName()}
+                    <input type="hidden" name="userID" id="userID" value="${studUser.getUniqueId()}">
+                </td>
+                <td><input type="checkbox" id="isHere" name="isHere" value="true">Check if here</td>
+                <td><input type="date" name="date2" id="date2"></td>
                 <td><input type="submit" value="Save"></td>
 
                 <!-- <c:forEach items="${studUser.getAttendance().getAttendacePerDays()}" var="entry">

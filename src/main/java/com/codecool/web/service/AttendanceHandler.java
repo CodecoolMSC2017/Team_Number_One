@@ -10,7 +10,7 @@ import java.util.Map;
 
 //return only the students list
 public abstract class AttendanceHandler {
-    public static List<User> run(String studentName, String inputDate){
+    public static List<User> filterSearch(String studentName, String inputDate){
         if(studentName.equals("") && inputDate.equals("")){
             return getStudentUserList();
         }
@@ -28,6 +28,18 @@ public abstract class AttendanceHandler {
         }
 
         return result;
+    }
+
+    public static void saveAttendance(String id, String date, String wasHere){
+        LocalDate currentDate = makeLocalDate(date);
+        List<User> studUsers = getStudentUserList();
+        if(currentDate != null) {  //check if date is not empty
+            for (User usr : studUsers) {
+                if (usr.getUniqueId().equals(id)) {
+                    usr.getAttendance().setAttendacePerDays(currentDate, wasHere != null);
+                }
+            }
+        }
     }
 
 
@@ -55,11 +67,19 @@ public abstract class AttendanceHandler {
         return null;
     }
 
+    public static LocalDate makeLocalDate(String dateString){  //retrun null if empty string
+        if (!(dateString.equals(""))) {
+            return new LocalDate(dateString);
+        }
+        return null;
+
+    }
+
     public static List<User> getGivenUserByDate(String dateNoTime){
         if (dateNoTime.equals("")){   //refractor later
             return null;
         }
-        LocalDate myDate = new LocalDate(dateNoTime);
+        LocalDate myDate = makeLocalDate(dateNoTime);
         List<User> tempStudents = getStudentUserList();
         List<User> result = new ArrayList<>();
         for (User studUsr: tempStudents) {

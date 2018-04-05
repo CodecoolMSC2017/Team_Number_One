@@ -17,7 +17,7 @@ public class UserAttendace {
         return attendacePerDays;
     }
 
-    public void setAttendacePerDays(LocalDate date, boolean isHere) {
+    public void setAttendacePerDays(LocalDate date, Boolean isHere) {
         attendacePerDays.put(date, isHere);
     }
 
