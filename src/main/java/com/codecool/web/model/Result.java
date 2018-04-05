@@ -11,12 +11,14 @@ public class Result {
     private int score = 2;
     private Timestamp submissionDate;
     private String assignmentPageTitle;
+    private AssignmentPage ap;
 
     public Result(int assignmentPageId, User user, Timestamp submissionDate) {
         this.assignmentPageId = assignmentPageId;
         this.user = user;
         this.submissionDate = submissionDate;
         this.assignmentPageTitle = DataStorage.getInstance().getSubPageById(assignmentPageId).getTitle();
+        this.ap = (AssignmentPage)DataStorage.getInstance().getSubPageById(assignmentPageId);
     }
 
     public int getAssignmentPageId() {
@@ -41,5 +43,9 @@ public class Result {
 
     public String getAssignmentPageTitle() {
         return assignmentPageTitle;
+    }
+
+    public AssignmentPage getAp() {
+        return ap;
     }
 }
