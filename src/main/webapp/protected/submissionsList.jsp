@@ -14,20 +14,21 @@
             <tr>
                 <td>Student</td>
                 <td>Assignment Title</td>
+                <td>Score</td>
                 <td>Evaluate Submission</td>
             </tr>
-            <c:forEach var="student" items="${students}">
-                <c:forEach var="assignId" items="${student.getAssignIds()}">
-                    <tr>
-                        <td><c:out value="${student.name}"></td>
-                        <td><c:out value="${assignId}"></td>
-                        <td>
-                            <form method="GET" action="evaluation">
-                                <input type="hidden" name="studentName" value="${student.name}">
-                                <input type="submit" value="Submit">
-                            </form>
-                        </td>
-                    </tr>
+            <c:forEach var="result" items="${results}">
+                <tr>
+                    <td><c:out value="${result.user.name}"/></td>
+                    <td><c:out value="${result.assignmentPageTitle}"/></td>
+                    <td><c:out value="${result.score}"/></td>
+                    <td>
+                        <form method="POST" action="evaluation">
+                            <c:set var="result" value="${result}" scope="session"/>
+                            <input type="submit" value="Submit">
+                        </form>
+                    </td>
+                </tr>
             </c:forEach>
         </table>
     </body>

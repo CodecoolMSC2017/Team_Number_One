@@ -42,6 +42,17 @@ public class DataStorage {
         return allUsers;
     }
 
+    public User getUserByName(String name) {
+        User user = null;
+        for (User u:allUsers) {
+            if(u.getName().equals("name")){
+                user = u;
+                break;
+            }
+        }
+        return user;
+    }
+
     public void addSubPage(SubPage subPage) {
 
         int id = allSubPages.size();

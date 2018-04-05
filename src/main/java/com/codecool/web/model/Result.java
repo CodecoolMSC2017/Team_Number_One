@@ -1,5 +1,7 @@
 package com.codecool.web.model;
 
+import com.codecool.web.service.DataStorage;
+
 import java.sql.Timestamp;
 
 public class Result {
@@ -8,13 +10,13 @@ public class Result {
     private User user;
     private int score = 0;
     private Timestamp submissionDate;
-    private AssignmentPage ap;
+    private String assignmentPageTitle;
 
-    public Result(int assignmentPageId, User user, Timestamp submissionDate, AssignmentPage ap) {
+    public Result(int assignmentPageId, User user, Timestamp submissionDate) {
         this.assignmentPageId = assignmentPageId;
         this.user = user;
         this.submissionDate = submissionDate;
-        this.ap=ap;
+        this.assignmentPageTitle = DataStorage.getInstance().getSubPageById(assignmentPageId).getTitle();
     }
 
     public int getAssignmentPageId() {
@@ -37,7 +39,7 @@ public class Result {
         this.score = score;
     }
 
-    public AssignmentPage getAp() {
-        return ap;
+    public String getAssignmentPageTitle() {
+        return assignmentPageTitle;
     }
 }
