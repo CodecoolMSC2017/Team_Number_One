@@ -64,4 +64,15 @@ public class DataStorage {
         return result;
     }
 
+    public List<User> getStudents(){
+        List<User> students = new ArrayList<>();
+        for (User u:allUsers) {
+            if(u.getRole().equals("Student")){
+                students.add(u);
+            }
+        }
+
+        return students;
+    }
+
 }
