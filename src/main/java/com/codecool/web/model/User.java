@@ -95,6 +95,11 @@ public class User {
         return listOfCompletedAssignments;
     }
 
+    public List<Integer> getAssignIds(){
+        List<Integer> assignIds = new ArrayList<>(listOfCompletedAssignments.keySet());
+        return assignIds;
+    }
+
     public void addCompletedAssignment (int assignmentId, HashMap<Question, String> answer) {
         boolean isDuplicated = false;
         for (int tempId:listOfCompletedAssignments.keySet()) {
