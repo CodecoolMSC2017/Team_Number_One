@@ -1,6 +1,7 @@
 package com.codecool.web.model;
 
 
+import com.codecool.web.service.DataStorage;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
@@ -98,6 +99,18 @@ public class User {
     public List<Integer> getAssignIds(){
         List<Integer> assignIds = new ArrayList<>(listOfCompletedAssignments.keySet());
         return assignIds;
+    }
+
+    public List<String> getAssignTitles(){
+        List<String> assignTitles = new ArrayList<>();
+        List<Integer> assignIds = this.getAssignIds();
+
+        for (SubPage sp: DataStorage.getInstance().getAllSubPages()) {
+            if(assignIds.contains(sp.getId())){
+                assignTitles.add(sp.getTitle());
+            }
+        }
+        return assignTitles;
     }
 
     public void addCompletedAssignment (int assignmentId, HashMap<Question, String> answer) {
