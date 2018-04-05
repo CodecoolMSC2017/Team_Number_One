@@ -6,7 +6,7 @@ public class Result {
 
     private int assignmentPageId;
     private User user;
-    private int score;
+    private int score = 0;
     private Timestamp submissionDate;
 
     public Result(int assignmentPageId, User user, Timestamp submissionDate) {

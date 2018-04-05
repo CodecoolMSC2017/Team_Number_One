@@ -1,9 +1,6 @@
 package com.codecool.web.service;
 
-import com.codecool.web.model.AssignmentPage;
-import com.codecool.web.model.SubPage;
-import com.codecool.web.model.TextPage;
-import com.codecool.web.model.User;
+import com.codecool.web.model.*;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -14,6 +11,7 @@ import java.util.Map;
 public class DataStorage {
     private List<User> allUsers = new ArrayList<User>();
     private List<SubPage> allSubPages = new ArrayList<>();
+    private List<Result> allResults = new ArrayList<>();
 
     private DataStorage() {
         allUsers.add(new User("a", "a@a", "Mentor", "a"));
@@ -84,4 +82,11 @@ public class DataStorage {
         return students;
     }
 
+    public List<Result> getAllResults() {
+        return allResults;
+    }
+
+    public void addNewResult(Result result) {
+        allResults.add(result);
+    }
 }
