@@ -12,6 +12,7 @@ public class User {
     private String uniqueId;
 
     private HashMap<Integer, HashMap<Question, String>> listOfCompletedAssignments = new HashMap<>();
+    private HashMap<Integer, Integer> assignmentResults = new HashMap<>();
 
     public User(String name, String email, String role, String password) {
         Random r = new Random();
@@ -113,5 +114,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public HashMap<Integer, Integer> getAssignmentResults() {
+        return assignmentResults;
+    }
+
+    public void addAssignmentResult(int assignId, int result){
+        assignmentResults.put(assignId, result);
     }
 }
