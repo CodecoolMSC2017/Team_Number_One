@@ -12,7 +12,8 @@
    </head>
    <body>
    <p3>
-   <form action="attend" method="POST">
+   <form action="attend" method="GET">
+        Filter student`s list:<br><br>
         Student name:<br>
         <input list="Students" name="studentName">
             <datalist id="Students">
@@ -23,7 +24,7 @@
           <br><br>
         Requested date:<br>
         <input type="date" name="date" id="date"><br><br>
-        <input type="submit" value="Submit"><br>
+        <input type="submit" value="List students"><br>
    </form>
 
    </p3>
@@ -34,21 +35,27 @@
         <th>Student name</th>
         <th>Attending</th>
         <th>Date</th>
-        <th>Attended</th>
+        <th>Save changes</th>
       </tr>
-      <c:forEach items="${matchDate}" var="studUser">
-      <tr>
-        <c:if test="${not empty matchDate}" >
-            <td>${studUser.getName()}</td>
-            <td><input type="checkbox" id="isHere" name="isHere" value="false">Check if here</td>
-            <c:forEach items="${studUser.getAttendance().getAttendacePerDays()}" var="entry">
-                <td>${entry.key}</td>
-                <td>${entry.value == true ? "yes" : "no"}</td>
-            </c:forEach>
-        </c:if>
-      </tr>
+      <c:forEach items="${result}" var="studUser">
+          <tr>
+            <c:if test="${not empty result}" >
+                <form action="attend" method="POST">
+                <td>${studUser.getName()}</td>
+                <td><input type="checkbox" id="isHere" name="isHere" value="false">Check if here</td>
+                <td><input type="date" name="date" id="date"></td>
+                <td><input type="submit" value="Save"></td>
 
-   </c:forEach>
+                <!-- <c:forEach items="${studUser.getAttendance().getAttendacePerDays()}" var="entry">
+                    <td>${entry.key}</td>
+                    <td>${entry.value == true ? "yes" : "no"}</td>
+                </c:forEach> -->
+            </c:if>
+          </tr>
+       </c:forEach>
+   </p3>
+
+
 
 
 
