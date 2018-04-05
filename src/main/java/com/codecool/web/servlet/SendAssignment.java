@@ -27,7 +27,7 @@ public class SendAssignment extends HttpServlet {
         user.addCompletedAssignment(assignId,tempHash);
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         Result result = new Result(assignId,user,ts);
-
+        DataStorage.getInstance().addNewResult(result);
 
         req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
         req.setAttribute("isSucces",true);
