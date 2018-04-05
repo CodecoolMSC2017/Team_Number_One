@@ -1,9 +1,7 @@
 package com.codecool.web.service;
 
-import com.codecool.web.model.AssignmentPage;
-import com.codecool.web.model.SubPage;
-import com.codecool.web.model.TextPage;
-import com.codecool.web.model.User;
+import com.codecool.web.model.*;
+import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,9 +11,18 @@ import java.util.Map;
 public class DataStorage {
     private List<User> allUsers = new ArrayList<User>();
     private List<SubPage> allSubPages = new ArrayList<>();
+    private List<Result> allResults = new ArrayList<>();
 
     private DataStorage() {
         allUsers.add(new User("a", "a@a", "Mentor", "a"));
+        allUsers.add(new User("s","s@s","Student", "s"));  //test student user
+        allUsers.add(new User("s2","s@s","Student", "s2"));
+        allUsers.add(new User("cekil","s@s","Student", "q"));
+        allUsers.add(new User("cecil","s@s","Student", "c"));
+        allUsers.get(1).getAttendance().setAttendacePerDays(new LocalDate(), true); //for attednace testing
+        allUsers.get(2).getAttendance().setAttendacePerDays(new LocalDate(), false);
+        allUsers.get(3).getAttendance().setAttendacePerDays(new LocalDate(), true);
+        allUsers.get(4).getAttendance().setAttendacePerDays(new LocalDate(), true);
         allSubPages.add(new TextPage("Test", "TestText"));
     }
 
@@ -64,4 +71,22 @@ public class DataStorage {
         return result;
     }
 
+    public List<User> getStudents(){
+        List<User> students = new ArrayList<>();
+        for (User u:allUsers) {
+            if(u.getRole().equals("Student")){
+                students.add(u);
+            }
+        }
+
+        return students;
+    }
+
+    public List<Result> getAllResults() {
+        return allResults;
+    }
+
+    public void addNewResult(Result result) {
+        allResults.add(result);
+    }
 }
