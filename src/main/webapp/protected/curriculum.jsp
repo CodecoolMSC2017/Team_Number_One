@@ -32,13 +32,21 @@ if (wrongName) {
             <br>
         </form>
         <c:if test="${page.isPublished()}">
-            <p>P</p>
+            <form method="post" id="${page.getId()}" action="publish">
+            <c:if test="${user.role eq 'Mentor'}">
+                <input type="hidden" name="id" value="${page.id}">
+                <button style="background-color:green" id="publishButton" type="submit">Publish/Unpublish</button>
+
+            </c:if>
         </c:if>
-        <form method="post" id="${page.getId()}" action="publish">
-        <c:if test="${user.role eq 'Mentor'}">
-            <input type="hidden" name="id" value="${page.id}">
-            <button id="publishButton" type="submit">Publish/Unpublish</button>
+        <c:if test="${!page.isPublished()}">
+                    <form method="post" id="${page.getId()}" action="publish">
+                    <c:if test="${user.role eq 'Mentor'}">
+                        <input type="hidden" name="id" value="${page.id}">
+                        <button style="background-color:red" id="publishButton" type="submit">Publish/Unpublish</button>
+                    </c:if>
         </c:if>
+
         </form>
     </c:forEach>
     <form action="curriculum"  method="GET">
