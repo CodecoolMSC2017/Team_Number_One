@@ -58,7 +58,9 @@
        </table>
    </p3>
    <br>
-
+    <form id="backToCurriculum" action="backToMain" method="GET">
+                        <input id="button" type="submit" value="Back to curriculum">
+              </form>
 
 
 
