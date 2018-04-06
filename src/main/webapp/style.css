@@ -157,6 +157,15 @@ h3 {
 
 }
 
+#choices form button{
+    width:60%;
+    margin-left:20%;
+    margin-right:20%;
+    font-family: 'Josefin Sans', sans-serif;
+    padding:4px;
+
+}
+
 #choices form input:hover{
     background-color:#D1E8E2;
         transition:0.5s;

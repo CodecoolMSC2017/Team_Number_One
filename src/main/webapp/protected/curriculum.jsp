@@ -37,7 +37,7 @@ if (wrongName) {
         <form method="post" id="${page.getId()}" action="publish">
         <c:if test="${user.role eq 'Mentor'}">
             <input type="hidden" name="id" value="${page.id}">
-            <input type="submit" value="Publish/Unpublish">
+            <button id="publishButton" type="submit">Publish/Unpublish</button>
         </c:if>
         </form>
     </c:forEach>
