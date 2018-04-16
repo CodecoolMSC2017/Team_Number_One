@@ -15,7 +15,7 @@ CREATE TABLE subpages (
     title TEXT NOT NULL,
     type TEXT NOT NULL,
     description TEXT,
-    questionid INTEGER,
+    questionid INTEGER[],
     maxscore INTEGER,
     FOREIGN KEY (questionid) REFERENCES questions(id)
 );
