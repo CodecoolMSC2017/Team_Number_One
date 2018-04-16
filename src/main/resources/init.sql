@@ -2,12 +2,6 @@
     Database initialization script that runs on every web-application redeployment.
 */
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS subpages;
-DROP TABLE IF EXISTS question;
-DROP TABLE IF EXISTS answers;
-DROP TABLE IF EXISTS results;
-
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
