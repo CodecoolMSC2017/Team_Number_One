@@ -1,14 +1,12 @@
 package com.codecool.web.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Question {
-
+    private int id;
     private String question;
-    private Answer answer;
+    private String answer;
 
-    public Question(String question, Answer answer) {
+    public Question(int id, String question, String answer) {
+        this.id = id;
         this.question = question;
         this.answer = answer;
     }
@@ -21,11 +19,11 @@ public class Question {
         this.question = question;
     }
 
-    public Answer getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Answer answer) {
+    public void setAnswer(String answer) {
         this.answer = answer;
     }
 }
