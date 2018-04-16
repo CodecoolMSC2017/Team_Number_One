@@ -13,6 +13,7 @@
         <spring.jdbc.version>5.0.5.RELEASE</spring.jdbc.version>
         <servlet.api.version>4.0.0</servlet.api.version>
         <junit.jupiter.version>5.0.1</junit.jupiter.version>
+        <postgresql.jdbc.version>42.2.2</postgresql.jdbc.version>
         <junit.platform.version>1.0.3</junit.platform.version>
     </properties>
 
