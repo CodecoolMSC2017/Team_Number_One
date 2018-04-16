@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
+@WebListener
 public class WebServerListener implements ServletContextListener {
     private final String INIT_FILE_PATH = "./init.sql";
 
