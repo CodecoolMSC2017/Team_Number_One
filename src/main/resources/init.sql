@@ -10,20 +10,19 @@ CREATE TABLE users (
     userrole TEXT NOT NULL
 );
 
-CREATE TABLE subpages (
-    id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    type TEXT NOT NULL,
-    description TEXT,
-    questionid INTEGER[],
-    maxscore INTEGER,
-    FOREIGN KEY (questionid) REFERENCES questions(id)
-);
-
-CREATE TABLE question (
+CREATE TABLE questions (
     id SERIAL PRIMARY KEY,
     question TEXT NOT NULL,
     answer TEXT NOT NULL
+);
+
+CREATE TABLE subpages (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        type TEXT NOT NULL,
+        description TEXT,
+        questionid INTEGER[],
+        maxscore INTEGER
 );
 
 CREATE TABLE answers (
@@ -31,7 +30,7 @@ CREATE TABLE answers (
     questionid INTEGER NOT NULL,
     useranswer TEXT,
     FOREIGN KEY (questionid) REFERENCES questions(id),
-    FOREIGN KEY (userid) REFERENCES userss(id)
+    FOREIGN KEY (userid) REFERENCES users(id)
 );
 
 CREATE TABLE results (
@@ -39,7 +38,7 @@ CREATE TABLE results (
     userid INTEGER NOT NULL,
     timestamp TEXT NOT NULL,
     score INTEGER,
-    FOREIGN KEY (pageid_id) REFERENCES subpages(id),
+    FOREIGN KEY (pageid) REFERENCES subpages(id),
     FOREIGN KEY (userid) REFERENCES users(id)
 );
 
