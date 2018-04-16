@@ -5,8 +5,6 @@
 
 DROP TABLE IF EXISTS results;
 DROP TABLE IF EXISTS answers;
-
-
 DROP TABLE IF EXISTS subpages;
 DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS users;
@@ -32,7 +30,8 @@ CREATE TABLE subpages (
         type TEXT NOT NULL,
         description TEXT,
         questionid INTEGER[],
-        maxscore INTEGER
+        maxscore INTEGER,
+        published BOOLEAN
 );
 
 CREATE TABLE answers (
