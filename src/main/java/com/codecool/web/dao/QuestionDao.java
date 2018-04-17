@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class QuestionDao extends AbstractDao {
-    private String inserSql = "INSERT INTO questions(id, question, answer) VALUES(?, ?, ?);"
 
     public QuestionDao(Connection connection) {
         super(connection);
@@ -40,6 +39,7 @@ public final class QuestionDao extends AbstractDao {
         return null;
     }
 
+    @Deprecated
     public Question addQuestion(Question question) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
@@ -83,13 +83,4 @@ public final class QuestionDao extends AbstractDao {
         return new Question(id, question, answer);
     }
 
-
-    public void addQuestion(Question question) throws SQLException {
-        try( PreparedStatement ps = connection.prepareStatement(inserSql)){
-            ps.setInt(1,question.getId());
-            ps.setString(2, question.getQuestion());
-            ps.setString(3, question.getAnswer());
-            executeInsert(ps);
-        }
-    }
 }
