@@ -3,7 +3,8 @@ package com.codecool.web.service;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
 import com.codecool.web.service.exceptions.NoUserRegisteredException;
-import com.codecool.web.service.exceptions.UserNotRegisteredException;
+import com.codecool.web.service.exceptions.NoUserRegisteredException;
+import com.codecool.web.service.UserNotRegisteredException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -30,7 +31,7 @@ public class LoginService {
             }
         }
 
-        throw new UserNotRegisteredException();
+        throw new com.codecool.web.service.UserNotRegisteredException();
 
     }
 }
