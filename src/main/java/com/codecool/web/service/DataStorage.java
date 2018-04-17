@@ -13,13 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DataStorage {
-    private List<User> allUsers = new ArrayList<User>();
     private List<SubPage> allSubPages = new ArrayList<>();
     private List<Result> allResults = new ArrayList<>();
     private Connection connection;
-
-
-
 
     public DataStorage(Connection connection){
         this.connection=connection;
@@ -34,8 +30,8 @@ public class DataStorage {
             e.printStackTrace();
         }
         return users;
-
     }
+
 
     public void addUser(String email,String password,String name,String role){
         UserDao UD = new DatabaseUserDao(connection);
@@ -46,16 +42,35 @@ public class DataStorage {
         }
     }
 
+
     public User getUserByName(String name) {
+        UserDao UD = new DatabaseUserDao(connection);
         User user = null;
-        for (User u:allUsers) {
-            if(u.getName().equals("name")){
-                user = u;
-                break;
-            }
+        try {
+            user = UD.getUserByName(name);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return user;
     }
+
+    public List<User> getStudents(){
+        UserDao UD = new DatabaseUserDao(connection);
+        List<User> students = null;
+        try {
+            students = UD.getAllUsers();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        for(User u : students){
+            if(u.getRole().equals("Mentor")){
+                students.remove(u);
+            }
+        }
+        return students;
+    }
+
 
     public void addSubPage(SubPage subPage) {
 
@@ -79,16 +94,7 @@ public class DataStorage {
         return result;
     }
 
-    public List<User> getStudents(){
-        List<User> students = new ArrayList<>();
-        for (User u:allUsers) {
-            if(u.getRole().equals("Student")){
-                students.add(u);
-            }
-        }
 
-        return students;
-    }
 
     public List<Result> getAllResults() {
         return allResults;
