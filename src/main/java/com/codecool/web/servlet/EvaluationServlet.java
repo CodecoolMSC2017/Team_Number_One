@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @WebServlet("/evaluation")
-public class EvaluationServlet extends HttpServlet{
+public class EvaluationServlet extends AbstractServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

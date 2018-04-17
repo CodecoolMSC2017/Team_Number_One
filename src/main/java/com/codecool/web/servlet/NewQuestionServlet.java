@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/addquestion")
-public class NewQuestionServlet extends HttpServlet {
+public class NewQuestionServlet extends AbstractServlet {
     AssignmentPage tmpAssign;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/curriculum")
-public class CurriculumServlet extends HttpServlet {
+public class CurriculumServlet extends AbstractServlet{
     List<SubPage> ds = DataStorage.getInstance().getAllSubPages();
     List<User> users = DataStorage.getInstance().getUserList();
 

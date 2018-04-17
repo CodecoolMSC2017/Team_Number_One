@@ -11,38 +11,46 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+public class RegisterServlet extends AbstractServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = (Connection)req.getServletContext();
-        DataStorage DS = new DataStorage(connection);
-        List<User> registered = DS.getUserList();
+        try(Connection connection = getConnection(req.getServletContext())) {
+            DataStorage DS = new DataStorage(connection);
+            List<User> registered = DS.getUserList();
 
-        String userName = req.getParameter("username");
+            String userName = req.getParameter("username");
 
-        boolean notOccupiedName = true;
-        for (User usr: registered) {
-            if (usr.getName().equals(userName)) {
-                notOccupiedName = false;
+            boolean notOccupiedName = true;
+            for (User usr : registered) {
+                if (usr.getName().equals(userName)) {
+                    notOccupiedName = false;
+                    break;
+
+                }
             }
+            if(notOccupiedName){
+                DS.addUser(req.getParameter("email"),
+                        req.getParameter("password"),
+                        userName,
+                        req.getParameter("role"));
+
+                resp.sendRedirect("index.html");
+        }else{
+                req.setAttribute("notAvailable", true);
+                req.getRequestDispatcher("register.jsp").forward(req, resp);
+            }
+
+
+        }catch(SQLException ex){
+            ex.printStackTrace();
         }
 
-        if(notOccupiedName){
-            DS.addUser(req.getParameter("email"),
-                    req.getParameter("password"),
-                    userName,
-                    req.getParameter("role"));
 
-            resp.sendRedirect("index.html");
-        }
-        else {
-            req.setAttribute("notAvailable", true);
-            req.getRequestDispatcher("register.jsp").forward(req, resp);
 
         }
     }
-}

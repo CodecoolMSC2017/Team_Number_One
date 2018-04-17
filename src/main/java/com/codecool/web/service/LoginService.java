@@ -31,7 +31,7 @@ public class LoginService {
             }
         }
 
-        throw new com.codecool.web.service.UserNotRegisteredException();
+        throw new UserNotRegisteredException();
 
     }
 }
