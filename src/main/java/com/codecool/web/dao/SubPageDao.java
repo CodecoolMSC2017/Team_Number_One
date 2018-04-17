@@ -76,10 +76,12 @@ public final class SubPageDao extends AbstractDao {
     }
 
     private List<Question> convertToQuestions(Array qids) throws SQLException {
+        QuestionDao qd = new QuestionDao(connection);
+
         Integer[] ids = (Integer[])qids.getArray();
         List<Question> questions = null;
         for (Integer num : ids) {
-            questions.add(findQuestionById(num));
+            questions.add(qd.findQuestionById(num));
         }
         return questions;
     }
