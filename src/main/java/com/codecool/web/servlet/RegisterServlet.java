@@ -1,7 +1,10 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.dao.DatabaseUserDao;
+import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
 import com.codecool.web.service.DataStorage;
+import com.codecool.web.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +23,9 @@ public class RegisterServlet extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try(Connection connection = getConnection(req.getServletContext())) {
-            DataStorage DS = new DataStorage(connection);
-            List<User> registered = DS.getUserList();
+            UserDao userDao = new DatabaseUserDao(connection);
+            UserService userService = new UserService(userDao);
+            List<User> registered = userService.getUserList();
 
             String userName = req.getParameter("username");
 
@@ -34,7 +38,7 @@ public class RegisterServlet extends AbstractServlet {
                 }
             }
             if(notOccupiedName){
-                DS.addUser(req.getParameter("email"),
+                userService.addUser(req.getParameter("email"),
                         req.getParameter("password"),
                         userName,
                         req.getParameter("role"));

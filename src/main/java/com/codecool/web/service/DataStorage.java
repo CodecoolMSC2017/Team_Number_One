@@ -21,55 +21,7 @@ public class DataStorage {
         this.connection=connection;
     }
 
-    public List<User> getUserList() {
-        UserDao UD = new DatabaseUserDao(connection);
-        List<User> users = null;
-        try {
-            users = UD.getAllUsers();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
 
-
-    public void addUser(String email,String password,String name,String role){
-        UserDao UD = new DatabaseUserDao(connection);
-        try {
-            UD.addUser(email,password,name,role);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public User getUserByName(String name) {
-        UserDao UD = new DatabaseUserDao(connection);
-        User user = null;
-        try {
-            user = UD.getUserByName(name);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
-    public List<User> getStudents(){
-        UserDao UD = new DatabaseUserDao(connection);
-        List<User> students = null;
-        try {
-            students = UD.getAllUsers();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        for(User u : students){
-            if(u.getRole().equals("Mentor")){
-                students.remove(u);
-            }
-        }
-        return students;
-    }
 
 
     public void addSubPage(SubPage subPage) {

@@ -1,9 +1,12 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.dao.DatabaseUserDao;
+import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.Result;
 import com.codecool.web.model.Statistics;
 import com.codecool.web.model.User;
 import com.codecool.web.service.DataStorage;
+import com.codecool.web.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +28,9 @@ public class ProfileUpdateServlet extends AbstractServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User toBeUpdated = null;
         try(Connection connection = getConnection(req.getServletContext())) {
-            DataStorage DS = new DataStorage(connection);
-            for (User user : DS.getUserList()) {
+            UserDao userDao = new DatabaseUserDao(connection);
+            UserService userService = new UserService(userDao);
+            for (User user : userService.getUserList()) {
                 if (Integer.toString(user.getUniqueId()) == req.getParameter("id")) {
                     toBeUpdated = user;
                     break;
