@@ -25,7 +25,6 @@ public class DataStorage {
         allUsers.get(2).getAttendance().setAttendacePerDays(new LocalDate(), false);
         allUsers.get(3).getAttendance().setAttendacePerDays(new LocalDate(), true);
         allUsers.get(4).getAttendance().setAttendacePerDays(new LocalDate(), true);
-        allSubPages.add(new TextPage("Test", "TestText"));
     }
 
     private static DataStorage ourInstance = new DataStorage();
