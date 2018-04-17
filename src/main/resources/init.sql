@@ -56,4 +56,17 @@ INSERT INTO users (email, password, username, userrole) VALUES
 	('b@b', 'b', 'b', 'Student');
 
 INSERT INTO subpages (title, type, description) values
-    ('TestText1', 'Text', 'Test text');
+    ('TestText1', 'Text', 'Test text', true);
+
+INSERT INTO questions (question, answer) VALUES
+    ('Are you here?', 'yes'),
+    ('Are you not here?','no');
+
+INSERT INTO subpages (title, type, questionid, maxscore, published) VALUES
+    ('The big questions','A',{(SELECT id FROM questions)},20,true);
+
+INSERT INTO results (pageid, userid, timestamp, score) VALUES
+    ((SELECT id FROM subpages WHERE type = 'A' LIMIT 1), (SELECT id FROM users WHERE userrole = 'Student' LIMIT 1), '', 10);
+
+INSERT INTO answers (pageid, questionid, useranswer) VALUES
+    ((SELECT id FROM subpages WHERE type = 'A' LIMIT 1), (SELECT id FROM questions LIMIT 1), 'no');
