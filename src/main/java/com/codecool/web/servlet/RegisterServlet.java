@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.ConnectException;
+import java.sql.Connection;
 import java.util.List;
 
 @WebServlet("/register")
@@ -16,7 +18,9 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> registered = DataStorage.getInstance().getUserList();
+        Connection connection = (Connection)req.getServletContext();
+        DataStorage DS = new DataStorage(connection);
+        List<User> registered = DS.getUserList();
 
         String userName = req.getParameter("username");
 
@@ -28,12 +32,10 @@ public class RegisterServlet extends HttpServlet {
         }
 
         if(notOccupiedName){
-            User newUser = new User(userName,
-                    req.getParameter("email"),
-                    req.getParameter("role"),
-                    req.getParameter("password"));
-
-            DataStorage.getInstance().addList(newUser);
+            DS.addUser(req.getParameter("email"),
+                    req.getParameter("password"),
+                    userName,
+                    req.getParameter("role"));
 
             resp.sendRedirect("index.html");
         }
