@@ -8,7 +8,7 @@
     <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>
-            com.codecool.web.servlet.LoginFilter
+            com.codecool.web.filter.LoginFilter
         </filter-class>
     </filter>
     <filter-mapping>

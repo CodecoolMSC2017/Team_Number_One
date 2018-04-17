@@ -50,6 +50,8 @@ public class LoginServlet extends HttpServlet {
     // might need to find a more elegant way later
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("index.html").forward(req, resp);
+        req.getSession().invalidate();
+        resp.sendRedirect("index.html");
+        //req.getRequestDispatcher("index.html").forward(req, resp);
     }
 }
