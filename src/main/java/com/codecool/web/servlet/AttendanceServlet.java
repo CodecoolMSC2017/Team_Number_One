@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @WebServlet("/attend")
-public class AttendanceServlet extends HttpServlet {
+public class AttendanceServlet extends AbstractServlet {
 
 
     @Override

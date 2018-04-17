@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/userList")
-public class UserListServlet extends HttpServlet {
+public class UserListServlet extends AbstractServlet {
     List<User> users = DataStorage.getInstance().getUserList();
 
     

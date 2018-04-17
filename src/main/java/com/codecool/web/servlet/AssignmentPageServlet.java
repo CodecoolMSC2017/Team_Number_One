@@ -12,7 +12,7 @@ import javax.xml.crypto.Data;
 import java.io.IOException;
 
 @WebServlet("/assignment-page")
-public class AssignmentPageServlet extends HttpServlet {
+public class AssignmentPageServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

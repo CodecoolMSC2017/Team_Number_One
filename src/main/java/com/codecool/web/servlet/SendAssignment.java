@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.*;
 
 @WebServlet("/check-answers")
-public class SendAssignment extends HttpServlet {
+public class SendAssignment extends AbstractServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
