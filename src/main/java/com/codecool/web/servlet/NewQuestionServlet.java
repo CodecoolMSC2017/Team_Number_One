@@ -22,17 +22,18 @@ public class NewQuestionServlet extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //List<Question> questions;
+
+        String assignTitle=req.getParameter("assignTitle");
+        int maxScore = Integer.parseInt(req.getParameter("maxScore"));
+        String question = req.getParameter("question");
+        String answer = req.getParameter("answer");
+        HttpSession session = req.getSession();
+
         try (Connection connection = getConnection(req.getServletContext())){
             QuestionDao questionDao = new QuestionDao(connection);
             QuestionService questionService = new QuestionService(questionDao);
 
-            String assignTitle=req.getParameter("assignTitle");
-            int maxScore = Integer.parseInt(req.getParameter("maxScore"));
-            String question = req.getParameter("question");
-            String answer = req.getParameter("answer");
-
             questionService.saveQuestion(question, answer);
-
 
 
         } catch (SQLException e) {
@@ -40,9 +41,6 @@ public class NewQuestionServlet extends AbstractServlet {
         }
 
 
-        QuestionDao questionDao = new QuestionDao(getConnection(req.getServletContext()));
-        QuestionService questionService = new QuestionService();
-        HttpSession session = req.getSession();
         if(!req.getParameterMap().containsKey("alreadySubmittedQuestion")){
 
             //questions = new ArrayList<>();
