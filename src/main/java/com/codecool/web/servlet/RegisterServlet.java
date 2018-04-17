@@ -39,7 +39,7 @@ public class RegisterServlet extends AbstractServlet {
                         userName,
                         req.getParameter("role"));
 
-                resp.sendRedirect("index.html");
+                resp.sendRedirect("index.jsp");
         }else{
                 req.setAttribute("notAvailable", true);
                 req.getRequestDispatcher("register.jsp").forward(req, resp);
