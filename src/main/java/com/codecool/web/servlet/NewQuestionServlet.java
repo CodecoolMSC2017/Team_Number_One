@@ -26,6 +26,8 @@ public class NewQuestionServlet extends AbstractServlet {
             int maxScore = Integer.parseInt(req.getParameter("maxScore"));
             String question = req.getParameter("question");
             String answer = req.getParameter("answer");
+
+            
             questions.add(new Question(question,new Answer(answer)));
             tmpAssign = new AssignmentPage(assignTitle,questions,maxScore);
             req.setAttribute("tmpAssign",tmpAssign);
