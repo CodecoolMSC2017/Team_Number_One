@@ -5,9 +5,10 @@ public abstract class SubPage {
     private String title;
     private boolean published;
 
-    public SubPage(String title) {
+    public SubPage(int id, String title, boolean published) {
+        this.id = id;
         this.title = title;
-        this.published = false;
+        this.published = published;
     }
 
     public int getId() {

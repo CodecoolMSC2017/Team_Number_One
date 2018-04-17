@@ -4,8 +4,8 @@ public class TextPage extends SubPage {
 
     private String textContent = "";
 
-    public TextPage(String title, String textContent) {
-        super(title);
+    public TextPage(int id, String title, boolean published, String textContent) {
+        super(id, title, published);
         this.textContent = textContent;
     }
 

@@ -8,8 +8,8 @@ public class AssignmentPage extends SubPage {
     private List<Question> listOfQuestions = new ArrayList<>();
     private int maxScore;
 
-    public AssignmentPage(String title, List<Question> listOfQuestions, int maxScore) {
-        super(title);
+    public AssignmentPage(int id, String title, boolean published, List<Question> listOfQuestions, int maxScore) {
+        super(id, title, published);
         this.listOfQuestions = listOfQuestions;
         this.maxScore = maxScore;
     }
