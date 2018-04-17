@@ -5,9 +5,7 @@ import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.SubPage;
 import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
-import com.codecool.web.service.AvailablePages;
-import com.codecool.web.service.DataStorage;
-import com.codecool.web.service.LoginService;
+import com.codecool.web.service.*;
 import com.codecool.web.service.UserNotRegisteredException;
 import com.codecool.web.service.exceptions.NoUserRegisteredException;
 
@@ -31,7 +29,6 @@ public class LoginServlet extends AbstractServlet {
 
         try (Connection connection = dataSource.getConnection()) {
             UserDao userDao = new DatabaseUserDao(connection);
-
             String userName = req.getParameter("username");
             String passw = req.getParameter("password");
 
