@@ -15,16 +15,18 @@ public final class SubPageDao extends AbstractDao {
         super(connection);
     }
 
-    public List<SubPage> findAll() throws SQLException {
-        String sql = "SELECT id, question, answer FROM questions";
+    public List<SubPage> findSubPages() throws SQLException {
+        List<SubPage> pages = new ArrayList<>();
+        String sql = "SELECT * FROM subpages";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
-            List<SubPage> pages = new ArrayList<>();
             while (resultSet.next()) {
                 pages.add(fetchSubPage(resultSet));
             }
-            return pages;
+        }catch (SQLException er) {
+            er.printStackTrace();
         }
+        return pages;
     }
 
 
@@ -62,10 +64,10 @@ public final class SubPageDao extends AbstractDao {
         Boolean published = resultSet.getBoolean("published");
         String type = resultSet.getString("type");
         SubPage page = null;
-        if (type.equals("Text")) {
+        if (type.equals("T")) {
             String description = resultSet.getString("description");
             page = new TextPage(id, title, published, description);
-        }else if (type.equals("Assignment")){
+        }else if (type.equals("A")){
             int maxscore = resultSet.getInt("maxscore");
             Array qids = resultSet.getArray("questionid");
             Integer[] ids = (Integer[])qids.getArray();
