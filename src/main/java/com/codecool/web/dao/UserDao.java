@@ -13,6 +13,6 @@ public interface UserDao {
 
     User getUserById(int userId) throws SQLException;
 
-    HashMap<Integer, HashMap<Question,String>> getUserAssignments()throws SQLException;
+    User getUserByName(String name) throws SQLException;
 
 }
