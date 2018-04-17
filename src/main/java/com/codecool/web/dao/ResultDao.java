@@ -14,7 +14,7 @@ public final class ResultDao extends AbstractDao {
         super(connection);
     }
 
-    public List<Result> getAllResults() throws SQLException {
+    public List<Result> findAllResults() throws SQLException {
         List<Result> allResults = new ArrayList<>();
         String sql = "SELECT * FROM results";
         try(Statement statement = connection.createStatement();
@@ -27,7 +27,7 @@ public final class ResultDao extends AbstractDao {
         return allResults;
     }
 
-    public List<Result> getResultsByUserId(int userId) throws SQLException {
+    public List<Result> findResultsByUserId(int userId) throws SQLException {
         List<Result> results = new ArrayList<>();
         String sql = "SELECT * FROM results WHERE userid = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -41,7 +41,7 @@ public final class ResultDao extends AbstractDao {
         return results;
     }
 
-    public List<Result> getResultsByPageId(int pageId) throws SQLException {
+    public List<Result> findResultsByPageId(int pageId) throws SQLException {
         List<Result> results = new ArrayList<>();
         String sql = "SELECT * FROM results WHERE pageid = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
