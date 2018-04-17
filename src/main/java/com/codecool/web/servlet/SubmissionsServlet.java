@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/listOfSubmissions")
-public class SubmissionsServlet extends HttpServlet{
+public class SubmissionsServlet extends AbstractServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

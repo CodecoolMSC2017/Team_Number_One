@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/backToMain")
-public class BackToMainServlet extends HttpServlet {
+public class BackToMainServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
