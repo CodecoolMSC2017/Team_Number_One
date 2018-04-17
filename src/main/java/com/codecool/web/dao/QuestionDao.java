@@ -26,6 +26,55 @@ public final class QuestionDao extends AbstractDao {
         }
     }
 
+    public Question findQuestionById(int id) throws SQLException {
+        String sql = "SELECT id, question, answer FROM questions WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return fetchQuestion(resultSet);
+                }
+            }
+        }
+        return null;
+    }
+
+    public Question addQuestion(Question question) throws SQLException {
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "INSERT INTO questions (question, answer) VALUES (?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, question.getQuestion());
+            statement.setString(2,question.getAnswer());
+            executeInsert(statement);
+            int id = fetchGeneratedId(statement);
+            return new Question(id, question.getQuestion(), question.getAnswer());
+        } catch (SQLException ex) {
+            connection.rollback();
+            throw ex;
+        } finally {
+            connection.setAutoCommit(autoCommit);
+        }
+    }
+
+    public Question addQuestion(String question, String answer) throws SQLException {
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "INSERT INTO questions (question, answer) VALUES (?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, question);
+            statement.setString(2, answer);
+            executeInsert(statement);
+            int id = fetchGeneratedId(statement);
+            return new Question(id, question, answer);
+        } catch (SQLException ex) {
+            connection.rollback();
+            throw ex;
+        } finally {
+            connection.setAutoCommit(autoCommit);
+        }
+    }
+
     private Question fetchQuestion(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String question = resultSet.getString("question");
