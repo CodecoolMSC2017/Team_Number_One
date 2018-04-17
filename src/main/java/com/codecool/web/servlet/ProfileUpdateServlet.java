@@ -23,7 +23,7 @@ public class ProfileUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User toBeUpdated = null;
         for (User user : DataStorage.getInstance().getUserList()) {
-            if (user.getUniqueId().equals(req.getParameter("id"))) {
+            if (Integer.toString(user.getUniqueId()).equals(req.getParameter("id"))) {
                 toBeUpdated = user;
                 break;
             }
@@ -48,7 +48,7 @@ public class ProfileUpdateServlet extends HttpServlet {
             User user = (User)session.getAttribute("user");
 
             for (Result result : DataStorage.getInstance().getAllResults()) {
-                if (result.getUser().getUniqueId().equals(user.getUniqueId())) {
+                if (Integer.toString(result.getUser().getUniqueId()).equals(user.getUniqueId())) {
                     results.add(result);
                 }
             }
