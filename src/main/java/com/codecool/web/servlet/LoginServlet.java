@@ -1,24 +1,44 @@
 package com.codecool.web.servlet;
 
-import com.codecool.web.model.SubPage;
-import com.codecool.web.model.TextPage;
-import com.codecool.web.model.User;
-import com.codecool.web.service.AvailablePages;
-import com.codecool.web.service.DataStorage;
+import com.codecool.web.dao.UserDao;
+import com.codecool.web.service.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import com.codecool.web.dao.UserDao;
+import com.codecool.web.model.User;
+import com.codecool.web.service.LoginService;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        DataSource dataSource = (DataSource) req.getServletContext().getAttribute("dataSource");
+
+        try (Connection connection = dataSource.getConnection()) {
+
+            String userName = req.getParameter("username");
+            String passw = req.getParameter("password");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        /*
         User tempForCheck = new User(req.getParameter("username"), req.getParameter("password"));
 
         List<User> registered = DataStorage.getInstance().getUserList();
@@ -43,15 +63,13 @@ public class LoginServlet extends HttpServlet {
             PrintWriter out = resp.getWriter();
             out.println ("<html><body><script>alert('Wrong username or password!');window.location.href = \"index.html\"</script></body></html>");
         }
+        */
     }
 
 
-    // <meta http-equiv=refresh content=1; /> send a GET to to the servlet, what this method catch, nd redirect to the index.html
-    // might need to find a more elegant way later
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
         resp.sendRedirect("index.html");
-        //req.getRequestDispatcher("index.html").forward(req, resp);
     }
 }
