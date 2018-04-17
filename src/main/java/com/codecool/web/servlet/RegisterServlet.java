@@ -28,6 +28,7 @@ public class RegisterServlet extends HttpServlet {
         for (User usr: registered) {
             if (usr.getName().equals(userName)) {
                 notOccupiedName = false;
+                break;
             }
         }
 

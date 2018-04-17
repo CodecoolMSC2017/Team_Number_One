@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,9 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User tempForCheck = new User(req.getParameter("username"), req.getParameter("password"));
-
-        List<User> registered = DataStorage.getInstance().getUserList();
+        Connection connection = (Connection) req.getServletContext();
+        DataStorage DS = new DataStorage(connection);
+        List<User> registered = DS.getUserList();
         List<SubPage> availablePages = new ArrayList<>();
         AvailablePages ap = new AvailablePages();
 
