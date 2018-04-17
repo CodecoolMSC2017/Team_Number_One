@@ -1,10 +1,15 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.dao.DatabaseUserDao;
+import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.SubPage;
 import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
 import com.codecool.web.service.AvailablePages;
 import com.codecool.web.service.DataStorage;
+import com.codecool.web.service.LoginService;
+import com.codecool.web.service.UserNotRegisteredException;
+import com.codecool.web.service.exceptions.NoUserRegisteredException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,9 +30,30 @@ public class LoginServlet extends AbstractServlet {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("dataSource");
 
         try (Connection connection = dataSource.getConnection()) {
+            UserDao userDao = new DatabaseUserDao(connection);
 
             String userName = req.getParameter("username");
             String passw = req.getParameter("password");
+
+            LoginService loginService = new LoginService(userName, passw, userDao);
+            try {
+                User user = loginService.fetchUser();
+                req.getSession().setAttribute("user", user);
+
+                //put available pages here
+                
+                req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
+
+
+            } catch (UserNotRegisteredException e) {
+                req.setAttribute("error", "You are not registered");
+                req.getRequestDispatcher("index.html").forward(req, resp);
+            } catch (NoUserRegisteredException e) {
+                req.setAttribute("error", "No user registered yet");
+                req.getRequestDispatcher("index.html").forward(req, resp);
+            }
+
+
         }
         catch (SQLException e) {
             e.printStackTrace();
