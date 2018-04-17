@@ -14,16 +14,16 @@ public class User {
     private String password;
     private String email = "";
     private String role = "";
-    private String uniqueId = "0";
+    private int uniqueId;
     private UserAttendace attendance;
     private HashMap<Integer, HashMap<Question, String>> listOfCompletedAssignments = new HashMap<>();
 
-    public User(String name, String email, String role, String password) {
+    public User(int uniqueId,String name, String email, String role, String password) {
         this.name = name;
         this.email = email;
         this.role = (role == null) ? "Student" : role;
         this.password = password;
-        uniqueId = generateId();
+        this.uniqueId = uniqueId;
         attendance = new UserAttendace();
     }
 
@@ -63,7 +63,7 @@ public class User {
     }
 
 
-    public String getUniqueId() {
+    public int getUniqueId() {
         return uniqueId;
     }
 
