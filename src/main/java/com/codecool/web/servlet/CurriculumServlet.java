@@ -62,20 +62,5 @@ public class CurriculumServlet extends AbstractServlet{
             req.setAttribute("userList", AttendanceHandler.getStudentUserList());
             req.getRequestDispatcher("protected/attendance.jsp").forward(req, resp);
         }
-
-        // for logout
-        if (req.getParameter("logout") != null) {
-            Cookie[] cookies = req.getCookies();
-            List<User> users = DataStorage.getInstance().getUserList();
-            if (cookies != null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    if (cookies[i].getName().equals("loginsession")) {
-                        cookies[i].setMaxAge(0);
-                        resp.addCookie(cookies[i]);
-                    }
-                }
-            }
-            resp.sendRedirect("index.jsp");
-        }
     }
 }
