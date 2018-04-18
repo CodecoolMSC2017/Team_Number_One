@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AssignmentPage extends SubPage {
 
-    private List<Question> listOfQuestions = new ArrayList<>();
+    private List<Question> listOfQuestions;
     private int maxScore;
 
     public AssignmentPage(int id, String title, boolean published, List<Question> listOfQuestions, int maxScore) {
