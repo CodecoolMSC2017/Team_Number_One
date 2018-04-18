@@ -8,11 +8,11 @@
 <body>
 <form id="addForm" method="POST">
     <p>Assignment title / Max Score:</p>
-    <input id="title" type="text/html" name="assignTitle" value="${tmpAssign.title}" required>
-    <input id="maxScore" type="text/html" name="maxScore" value="${tmpAssign.maxScore}" required>
+    <input id="title" type="text/html" name="assignTitle" value="${sessionScope.tmpAssign.title}" required>
+    <input id="maxScore" type="text/html" name="maxScore" value="${sessionScope.tmpAssign.maxScore}" required>
     <br>
     <input type="hidden" name="assignPageTheReal" value="${tmpAssign}">
-    <c:forEach items="${tmpAssign.listOfQuestions}" var="q">
+    <c:forEach items="${sessionScope.tmpAssign.listOfQuestions}" var="q">
         <p>Question:</p>
         <input type="text/html" name="alreadySubmittedQuestion" value="${q.question}">
         <br>
@@ -29,7 +29,7 @@
 </form>
 
 <input id="button" type="submit" value="Submit" form="addForm" formaction="addpage">
-<input type="hidden" id="tempPage" value="${tempPage}">
+<input type="hidden" id="tempPage" value="${tmpAssign}">
 <input type="submit" id="button" value="Add Question" form="addForm" formaction="addquestion">
 <br>
 <br>

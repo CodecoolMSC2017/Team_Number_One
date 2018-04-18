@@ -19,7 +19,6 @@ import java.util.List;
 
 @WebServlet("/addquestion")
 public class NewQuestionServlet extends AbstractServlet {
-    AssignmentPage tmpAssign;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,14 +26,15 @@ public class NewQuestionServlet extends AbstractServlet {
 
         HttpSession session = req.getSession();
         TempPageServlet tmp = new TempPageServlet();
-        AssignmentPage tmpAssign = (AssignmentPage) session.getAttribute("tempPage");
+        AssignmentPage tmpAssign = (AssignmentPage) session.getAttribute("tmpAssign");
 
         tmpAssign = tmp.tempPageRefresh(req, tmpAssign);
+        System.out.println(tmpAssign.getListOfQuestions().get(0).getQuestion());
 
         session.removeAttribute("tmpAssign");
         req.setAttribute("tmpAssign", tmpAssign);
         session.setAttribute("tmpAssign", tmpAssign);
-        req.getRequestDispatcher("protected/addQuestion.jsp").forward(req, resp);
+        req.getRequestDispatcher("protected/addAssignment.jsp").forward(req, resp);
     }
 
 }
