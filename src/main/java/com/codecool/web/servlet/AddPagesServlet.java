@@ -1,4 +1,4 @@
-package com.codecool.web.servlet;
+/*package com.codecool.web.servlet;
 
 import com.codecool.web.model.*;
 import com.codecool.web.service.DataStorage;
@@ -61,3 +61,4 @@ public class AddPagesServlet extends AbstractServlet {
         req.getRequestDispatcher("curriculum.jsp").forward(req, resp);
     }
 }
+*/
