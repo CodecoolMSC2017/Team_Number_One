@@ -16,9 +16,9 @@ public class AvailablePages {
         List<SubPage> available = new ArrayList<>();
 
         if (user.getRole().equals("Mentor")) {
-            available = spd.getAllSubPages();
+            available = spd.findAllSubPages();
         }else if (user.getRole().equals("Student")) {
-            for (SubPage page:spd.getAllSubPages()) {
+            for (SubPage page:spd.findAllSubPages()) {
                 if (page.isPublished()) {
                     available.add(page);
                 }
