@@ -14,15 +14,18 @@ public class AssignmentPage extends SubPage {
         this.maxScore = maxScore;
     }
 
+    public AssignmentPage() {
+        super(0, "", false);
+        List<Question> listOfQuestions = new ArrayList<>();
+        this.listOfQuestions = listOfQuestions;
+        this.maxScore = 0;
+    }
+
     public List<Question> getListOfQuestions() {
         return listOfQuestions;
     }
 
-    public void setListOfQuestions(List<Question> listOfQuestions) {
-        this.listOfQuestions = listOfQuestions;
-    }
-
-    public void addTask(Question q){
+    public void addTask(Question q) {
         listOfQuestions.add(q);
     }
 
@@ -33,4 +36,5 @@ public class AssignmentPage extends SubPage {
     public void setMaxScore(int maxScore) {
         this.maxScore = maxScore;
     }
+
 }

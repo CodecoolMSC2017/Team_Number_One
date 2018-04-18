@@ -1,64 +1,56 @@
-/*package com.codecool.web.servlet;
+package com.codecool.web.servlet;
 
+import com.codecool.web.dao.SubPageDao;
 import com.codecool.web.model.*;
-import com.codecool.web.service.DataStorage;
+import com.codecool.web.service.TempPageServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 
 @WebServlet("/addpage")
 public class AddPagesServlet extends AbstractServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SubPage sp = null;
-        if(req.getParameterMap().containsKey("maxScore")){
-            AssignmentPage ap;
-            if((AssignmentPage)req.getSession().getAttribute("tmpAssign")!=null){
-                ap=(AssignmentPage)req.getSession().getAttribute("tmpAssign");
-                String question = req.getParameter("question");
-                String answer = req.getParameter("answer");
-                Question tmpQ = new Question(question,new Answer(answer));
-                ap.addTask(tmpQ);
-            }else{
-                List<Question> q = new ArrayList<>();
-                q.add(new Question(req.getParameter("question"),new Answer(req.getParameter("answer"))));
-                ap=new AssignmentPage(req.getParameter("assignTitle"),q,Integer.parseInt(req.getParameter("maxScore")));
+        HttpSession session = req.getSession();
+        DataSource dataSource = (DataSource) req.getServletContext().getAttribute("dataSource");
 
+        if (req.getParameterMap().containsKey("maxScore")) {
+            TempPageServlet tmp = new TempPageServlet();
+            AssignmentPage tmpAssign = (AssignmentPage) session.getAttribute("tmpAssign");
+            session.removeAttribute("tmpAssign");
+            tmpAssign = tmp.tempPageRefresh(req, tmpAssign);
+
+            try (Connection connection = dataSource.getConnection()) {
+                SubPageDao spd = new SubPageDao(connection);
+
+                spd.addAssignmentPage(tmpAssign.getTitle(), tmpAssign.getMaxScore(), tmpAssign.getListOfQuestions());
+                req.setAttribute("pageList", spd.findAllSubPages());
+                req.setAttribute("isSuccess", true);
+                req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
+        } else {
+            try (Connection connection = dataSource.getConnection()) {
+                SubPageDao spd = new SubPageDao(connection);
+                spd.addTextPage(req.getParameter("textTitle"), req.getParameter("textContent"));
 
-            DataStorage.getInstance().addSubPage(ap);
-            req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
-            req.setAttribute("isSuccess", true);
-            req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
-
-        }else{
-            String title = req.getParameter("textTitle");       //redundant
-            String content = req.getParameter("textContent");
-            sp = new TextPage(title, content);
-            DataStorage.getInstance().addSubPage(sp);
-            req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
-            req.setAttribute("isSuccess", true);
-            req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
+                req.setAttribute("pageList", spd.findAllSubPages());
+                req.setAttribute("isSuccess", true);
+                req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-
-    }
-
-
-    //for the back bottom
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("pageList", DataStorage.getInstance().getAllSubPages());
-        req.setAttribute("isSuccess", false);
-        req.getRequestDispatcher("curriculum.jsp").forward(req, resp);
     }
 }
-*/

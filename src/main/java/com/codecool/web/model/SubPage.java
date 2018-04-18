@@ -31,7 +31,13 @@ public abstract class SubPage {
         this.published = true;
     }
 
-    public void setUnPublished(){
+    public void setUnPublished() {
         this.published = false;
+    }
+
+    public void setTitle(String title) {
+        if (title != null) {
+            this.title = title;
+        }
     }
 }
