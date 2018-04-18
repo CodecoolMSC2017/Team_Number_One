@@ -73,7 +73,12 @@ public class UserService implements UserServiceInterface{
     @Override
     public void updateUser(User user, Connection connection) {
         UserDao usd = new DatabaseUserDao(connection);
-        
+        try {
+            usd.updateUser(user.getUniqueId(), user.getName(), user.getRole());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

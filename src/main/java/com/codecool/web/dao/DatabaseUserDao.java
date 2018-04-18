@@ -79,16 +79,12 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
             statement.setString(1,name);
             statement.setString(2,role);
             statement.setInt(3,id);
-            statement.executeUpdate(sql);
+            statement.executeUpdate();
         }
 
         connection.commit();
     }
 
-    public void updateUserData(int id, String name, String role){
-        String updateSql = "UPDATE users SET username = ?, role = ? WHERE id = ?";
-
-    }
 
     private User createUser(ResultSet resultSet) throws SQLException{
         int id=resultSet.getInt("id");
