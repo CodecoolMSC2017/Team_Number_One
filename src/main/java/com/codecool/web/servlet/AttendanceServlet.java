@@ -1,7 +1,10 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.dao.DatabaseUserDao;
+import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
 import com.codecool.web.service.AttendanceHandler;
+import com.codecool.web.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -25,7 +30,14 @@ public class AttendanceServlet extends AbstractServlet {
 
         request.setAttribute("result", result);
         request.setAttribute("inputDate", inputDate);
-        request.setAttribute("userList", AttendanceHandler.getStudentUserList());
+        try(Connection connection = getConnection(request.getServletContext())) {
+            UserDao uDao = new DatabaseUserDao(connection);
+            UserService uService = new UserService(uDao);
+            AttendanceHandler.uService=uService;
+            request.setAttribute("userList", AttendanceHandler.getStudentUserList());
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
         request.getRequestDispatcher("protected/attendance.jsp").forward(request, response);
     }
 

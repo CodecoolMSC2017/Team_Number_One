@@ -10,6 +10,9 @@ import java.util.Map;
 
 //return only the students list
 public abstract class AttendanceHandler {
+
+    public static UserService uService;
+
     public static List<User> filterSearch(String studentName, String inputDate){
         if(studentName.equals("") && inputDate.equals("")){
             return getStudentUserList();
@@ -35,7 +38,7 @@ public abstract class AttendanceHandler {
         List<User> studUsers = getStudentUserList();
         if(currentDate != null) {  //check if date is not empty
             for (User usr : studUsers) {
-                if (usr.getUniqueId().equals(id)) {
+                if (Integer.toString(usr.getUniqueId()).equals(id)) {
                     usr.getAttendance().setAttendacePerDays(currentDate, wasHere != null);
                 }
             }
@@ -45,7 +48,7 @@ public abstract class AttendanceHandler {
 
     public static List<User> getStudentUserList() {
         List<User> temp = new ArrayList<>();
-        List<User> userList = DataStorage.getInstance().getUserList();
+        List<User> userList = uService.getUserList();
         for (User usr: userList) {
             if (usr.getRole().equals("Student")){
                 temp.add(usr);
@@ -96,7 +99,7 @@ public abstract class AttendanceHandler {
 
     public static List<User> getMentorsUserList() {
         List<User> temp = new ArrayList<>();
-        List<User> userList = DataStorage.getInstance().getUserList();
+        List<User> userList = uService.getUserList();
         for (User usr: userList) {
             if (usr.getRole().equals("Mentor")){
                 temp.add(usr);
