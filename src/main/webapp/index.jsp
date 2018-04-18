@@ -15,7 +15,7 @@
 	<p>Password:</p>
 	<input type="text/html" name="password" required>
 	<c:if test="${not empty error}" >
-	    ${error}
+	    <br><h5>${error}</h5>
 	</c:if>
 	<br>
 	<br>
