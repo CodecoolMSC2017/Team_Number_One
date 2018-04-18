@@ -9,17 +9,26 @@ import java.util.Map;
 
 
 //return only the students list
-public abstract class AttendanceHandler {
+public class AttendanceHandler {
 
-    public static UserService uService;
+    UserService uService;
 
-    public static List<User> filterSearch(String studentName, String inputDate){
+    public AttendanceHandler(UserService uService){
+        this.uService=uService;
+    }
+
+    public AttendanceHandler(){
+
+    }
+
+
+    public List<User> filterSearch(String studentName, String inputDate){
         if(studentName.equals("") && inputDate.equals("")){
             return getStudentUserList();
         }
 
-        User nameMatch = AttendanceHandler.getGivenUserByName(studentName);
-        List<User> dateMatch = AttendanceHandler.getGivenUserByDate(inputDate);
+        User nameMatch = getGivenUserByName(studentName);
+        List<User> dateMatch = getGivenUserByDate(inputDate);
         List<User> result = new ArrayList<>();
 
         if (dateMatch != null){
@@ -33,7 +42,7 @@ public abstract class AttendanceHandler {
         return result;
     }
 
-    public static void saveAttendance(String id, String date, String wasHere){
+    public void saveAttendance(String id, String date, String wasHere){
         LocalDate currentDate = makeLocalDate(date);
         List<User> studUsers = getStudentUserList();
         if(currentDate != null) {  //check if date is not empty
@@ -46,7 +55,7 @@ public abstract class AttendanceHandler {
     }
 
 
-    public static List<User> getStudentUserList() {
+    public List<User> getStudentUserList() {
         List<User> temp = new ArrayList<>();
         List<User> userList = uService.getUserList();
         for (User usr: userList) {
@@ -57,7 +66,7 @@ public abstract class AttendanceHandler {
         return temp;
     }
 
-    public static User getGivenUserByName(String userName){
+    public User getGivenUserByName(String userName){
         if (userName.equals("")){   //refractor later
             return null;
         }
@@ -70,7 +79,7 @@ public abstract class AttendanceHandler {
         return null;
     }
 
-    public static LocalDate makeLocalDate(String dateString){  //retrun null if empty string
+    public LocalDate makeLocalDate(String dateString){  //retrun null if empty string
         if (!(dateString.equals(""))) {
             return new LocalDate(dateString);
         }
@@ -78,7 +87,7 @@ public abstract class AttendanceHandler {
 
     }
 
-    public static List<User> getGivenUserByDate(String dateNoTime){
+    public List<User> getGivenUserByDate(String dateNoTime){
         if (dateNoTime.equals("")){   //refractor later
             return null;
         }
@@ -97,7 +106,7 @@ public abstract class AttendanceHandler {
     }
 
 
-    public static List<User> getMentorsUserList() {
+    public List<User> getMentorsUserList() {
         List<User> temp = new ArrayList<>();
         List<User> userList = uService.getUserList();
         for (User usr: userList) {

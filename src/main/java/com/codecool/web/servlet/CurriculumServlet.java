@@ -48,6 +48,7 @@ public class CurriculumServlet extends AbstractServlet{
             SubPageService spService = new SubPageService(spDao);
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new UserService(userDao);
+            AttendanceHandler AH = new AttendanceHandler(userService);
 
             List<SubPage> ds = spService.getAllSubPages();
             List<User> users = userService.getUserList();
@@ -72,7 +73,7 @@ public class CurriculumServlet extends AbstractServlet{
             }
 
             if (req.getParameter("attendance") != null) {
-                req.setAttribute("userList", AttendanceHandler.getStudentUserList());
+                req.setAttribute("userList", AH.getStudentUserList());
                 req.getRequestDispatcher("protected/attendance.jsp").forward(req, resp);
             }
         }catch (SQLException ex){

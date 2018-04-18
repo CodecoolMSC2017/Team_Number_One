@@ -83,7 +83,6 @@ public final class SubPageDao extends AbstractDao {
         }else if (type.equals("A")){
             int maxscore = resultSet.getInt("maxscore");
             Array qids = resultSet.getArray("questionid");
-            Integer[] ids = (Integer[])qids.getArray();
             List<Question> questions = convertToQuestions(qids);
             page = new AssignmentPage(id, title, published, questions, maxscore);
         }
