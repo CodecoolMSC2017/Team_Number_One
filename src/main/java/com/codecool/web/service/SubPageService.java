@@ -19,6 +19,10 @@ public class SubPageService {
         return subPageDao.findAllSubPages();
     }
 
+    public SubPage getSubPageById(int id) throws SQLException {
+        return subPageDao.findSubPageById(id);
+    }
+
     public int saveTextPage(String title, String description) throws SQLException{
         return subPageDao.addTextPage(title, description);
     }
