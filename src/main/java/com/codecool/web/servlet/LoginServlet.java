@@ -51,7 +51,7 @@ public class LoginServlet extends AbstractServlet {
 
 
             } catch (UserNotRegisteredException e) {
-                req.setAttribute("error", "Wrong password of user name!");
+                req.setAttribute("error", "Wrong password or user name!");
                 req.getRequestDispatcher("index.jsp").forward(req, resp);
             } catch (NoUserRegisteredException e) {
                 req.setAttribute("error", "No user registered yet!");
