@@ -23,18 +23,20 @@ public class AttendanceServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String studentName = request.getParameter("studentName");
-        String inputDate = request.getParameter("date");
-
-        List<User> result = AttendanceHandler.filterSearch(studentName, inputDate);
-
-        request.setAttribute("result", result);
-        request.setAttribute("inputDate", inputDate);
         try(Connection connection = getConnection(request.getServletContext())) {
             UserDao uDao = new DatabaseUserDao(connection);
             UserService uService = new UserService(uDao);
-            AttendanceHandler.uService=uService;
-            request.setAttribute("userList", AttendanceHandler.getStudentUserList());
+            AttendanceHandler AH = new AttendanceHandler(uService);
+        String studentName = request.getParameter("studentName");
+        String inputDate = request.getParameter("date");
+
+        List<User> result = AH.filterSearch(studentName, inputDate);
+
+        request.setAttribute("result", result);
+        request.setAttribute("inputDate", inputDate);
+
+
+            request.setAttribute("userList", AH.getStudentUserList());
         }catch(SQLException ex){
             ex.printStackTrace();
         }
@@ -46,9 +48,16 @@ public class AttendanceServlet extends AbstractServlet {
         String givenDate = request.getParameter("date2");
         String isHere = request.getParameter("isHere");
         String id = request.getParameter("userID");
-        AttendanceHandler.saveAttendance(id, givenDate, isHere);
+        try (Connection connection = getConnection(request.getServletContext())) {
+            UserDao uDao = new DatabaseUserDao(connection);
+            UserService uService = new UserService(uDao);
+            AttendanceHandler AH = new AttendanceHandler(uService);
+            AH.saveAttendance(id, givenDate, isHere);
 
-        request.setAttribute("userList", AttendanceHandler.getStudentUserList());
-        request.getRequestDispatcher("protected/attendance.jsp").forward(request, response);
+            request.setAttribute("userList", AH.getStudentUserList());
+            request.getRequestDispatcher("protected/attendance.jsp").forward(request, response);
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 }

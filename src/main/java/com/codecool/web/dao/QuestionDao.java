@@ -26,15 +26,16 @@ public final class QuestionDao extends AbstractDao {
 
     public Question findQuestionById(int id) throws SQLException {
         String sql = "SELECT id, question, answer FROM questions WHERE id = ?";
+        Question q = null;
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
-            try (ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery(sql)) {
                 if (resultSet.next()) {
-                    return fetchQuestion(resultSet);
+                    q = fetchQuestion(resultSet);
                 }
             }
         }
-        return null;
+        return q;
     }
 
     @Deprecated
