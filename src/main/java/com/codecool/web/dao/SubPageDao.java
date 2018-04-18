@@ -29,6 +29,19 @@ public final class SubPageDao extends AbstractDao {
         return pages;
     }
 
+    public SubPage findSubPageById(int id) throws SQLException {
+        SubPage sb = null;
+        String sql = "SELECT * FROM subpages WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                sb = fetchSubPage(resultSet);
+            }
+        }
+        return sb;
+    }
+
 
     public int addTextPage(String title, String description) throws SQLException {
         String sql = "INSERT INTO subpages (title, description, published, type) VALUES (?, ?, 'false', 'TEXT')";
