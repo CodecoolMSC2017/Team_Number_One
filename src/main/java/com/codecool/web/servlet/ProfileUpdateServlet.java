@@ -1,11 +1,13 @@
 package com.codecool.web.servlet;
 
 import com.codecool.web.dao.DatabaseUserDao;
+import com.codecool.web.dao.ResultDao;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.Result;
 import com.codecool.web.model.Statistics;
 import com.codecool.web.model.User;
 import com.codecool.web.service.DataStorage;
+import com.codecool.web.service.ResultService;
 import com.codecool.web.service.UserService;
 
 import javax.servlet.ServletException;
@@ -55,6 +57,8 @@ public class ProfileUpdateServlet extends AbstractServlet {
 
         try(Connection connection = getConnection(req.getServletContext())) {
             DataStorage DS = new DataStorage(connection);
+            ResultDao resultDao = new ResultDao(connection);
+            ResultService resultSerivce = new ResultService(resultDao);
             if (req.getParameter("id").equals("My Scores")) {
                 List<Result> results = new ArrayList<>();
                 HttpSession session = req.getSession(false);
@@ -65,7 +69,9 @@ public class ProfileUpdateServlet extends AbstractServlet {
                         results.add(result);
                     }
                 }
-                Statistics stat = new Statistics();
+
+
+                Statistics stat = new Statistics(resultSerivce);
                 req = stat.createChart(req);
                 req.setAttribute("results", results);
                 req.getRequestDispatcher("protected/score.jsp").forward(req, resp);

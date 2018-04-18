@@ -37,7 +37,7 @@ public class SendAssignment extends AbstractServlet {
             }
             user.addCompletedAssignment(assignId, tempHash);
             Timestamp ts = new Timestamp(System.currentTimeMillis());
-            Result result = new Result(assignId, user, ts);
+            Result result = new Result(assignId, user, ts, spService);
             rService.saveResult(result);
 
             req.setAttribute("pageList", spService.getAllSubPages());
