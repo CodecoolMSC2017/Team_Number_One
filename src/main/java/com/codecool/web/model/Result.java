@@ -24,6 +24,14 @@ public class Result {
         this.ap = (AssignmentPage) spService.getSubPageById(assignmentPageId);
     }
 
+    public Result(int assignmentPageId, User user, Timestamp submissionDate) throws SQLException {
+        this.assignmentPageId = assignmentPageId;
+        this.user = user;
+        this.submissionDate = submissionDate;
+        this.assignmentPageTitle = spService.getSubPageById(assignmentPageId).getTitle();
+        this.ap = (AssignmentPage) spService.getSubPageById(assignmentPageId);
+    }
+
     public int getAssignmentPageId() {
         return assignmentPageId;
     }
