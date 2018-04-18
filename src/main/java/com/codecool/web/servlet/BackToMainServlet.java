@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,12 @@ public class BackToMainServlet extends AbstractServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<SubPage> availablePages = new ArrayList<>();
         AvailablePages ap = new AvailablePages();
-        availablePages = ap.selectPages((User)req.getSession().getAttribute("user"));
+        try(Connection connection = getConnection(req.getServletContext())) {
+            availablePages = ap.selectPages(connection,(User) req.getSession().getAttribute("user"));
+        }catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
         req.setAttribute("pageList", availablePages);
         req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
     }
