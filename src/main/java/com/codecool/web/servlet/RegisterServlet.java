@@ -38,10 +38,7 @@ public class RegisterServlet extends AbstractServlet {
                 }
             }
             if(notOccupiedName){
-                userService.addUser(req.getParameter("email"),
-                        req.getParameter("password"),
-                        userName,
-                        req.getParameter("role"));
+                userService.addUser(req.getParameter("email"), req.getParameter("password"), userName,"Student");
 
                 resp.sendRedirect("index.jsp");
         }else{

@@ -23,7 +23,7 @@
 	<a href="register.jsp"><p>Create account</p></a>
 </form>
 <c:if test="${not empty error}" >
-	    <br><h5>${error}</h5>
+	    <h5>${error}</h5>
 </c:if>
 
 
