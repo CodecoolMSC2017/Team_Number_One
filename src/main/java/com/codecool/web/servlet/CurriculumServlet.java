@@ -1,12 +1,13 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.dao.DatabaseUserDao;
+import com.codecool.web.dao.SubPageDao;
+import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.AssignmentPage;
 import com.codecool.web.model.SubPage;
 import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
-import com.codecool.web.service.AttendanceHandler;
-import com.codecool.web.service.AvailablePages;
-import com.codecool.web.service.DataStorage;
+import com.codecool.web.service.*;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -18,13 +19,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/curriculum")
 public class CurriculumServlet extends AbstractServlet{
-    List<SubPage> ds = DataStorage.getInstance().getAllSubPages();
-    List<User> users = DataStorage.getInstance().getUserList();
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,29 +40,40 @@ public class CurriculumServlet extends AbstractServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try (Connection connection = getConnection(req.getServletContext())) {
+            SubPageDao spDao = new SubPageDao(connection);
+            SubPageService spService = new SubPageService(spDao);
+            UserDao userDao = new DatabaseUserDao(connection);
+            UserService userService = new UserService(userDao);
 
-        if (req.getParameter("id") != null) {
-            for (SubPage page : ds) {
-                if (page.getId() == Integer.parseInt(req.getParameter("id"))) {
-                    if (page instanceof TextPage) {
-                        req.setAttribute("tp", page);
-                        req.getRequestDispatcher("protected/displayTextPage.jsp").forward(req, resp);
-                    } else {
-                        req.setAttribute("ap", page);
-                        req.getRequestDispatcher("protected/displayAssignPage.jsp").forward(req, resp);
+            List<SubPage> ds = spService.getAllSubPages();
+            List<User> users = userService.getUserList();
+
+            if (req.getParameter("id") != null) {
+                for (SubPage page : ds) {
+                    if (page.getId() == Integer.parseInt(req.getParameter("id"))) {
+                        if (page instanceof TextPage) {
+                            req.setAttribute("tp", page);
+                            req.getRequestDispatcher("protected/displayTextPage.jsp").forward(req, resp);
+                        } else {
+                            req.setAttribute("ap", page);
+                            req.getRequestDispatcher("protected/displayAssignPage.jsp").forward(req, resp);
+                        }
                     }
                 }
             }
-        }
 
-        if (req.getParameter("showUsers") != null) {
-            req.setAttribute("users", users);
-            req.getRequestDispatcher("protected/users.jsp").forward(req, resp);
-        }
+            if (req.getParameter("showUsers") != null) {
+                req.setAttribute("users", users);
+                req.getRequestDispatcher("protected/users.jsp").forward(req, resp);
+            }
 
-        if (req.getParameter("attendance") != null) {
-            req.setAttribute("userList", AttendanceHandler.getStudentUserList());
-            req.getRequestDispatcher("protected/attendance.jsp").forward(req, resp);
+            if (req.getParameter("attendance") != null) {
+                req.setAttribute("userList", AttendanceHandler.getStudentUserList());
+                req.getRequestDispatcher("protected/attendance.jsp").forward(req, resp);
+            }
+        }catch (SQLException ex){
+            ex.printStackTrace();
         }
     }
 }
