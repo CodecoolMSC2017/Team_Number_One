@@ -15,7 +15,7 @@ public final class SubPageDao extends AbstractDao {
         super(connection);
     }
 
-    public List<SubPage> getAllSubPages() throws SQLException {
+    public List<SubPage> findAllSubPages() throws SQLException {
         List<SubPage> pages = new ArrayList<>();
         String sql = "SELECT * FROM subpages";
         try (Statement statement = connection.createStatement();
