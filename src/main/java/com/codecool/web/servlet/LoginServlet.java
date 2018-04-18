@@ -44,9 +44,10 @@ public class LoginServlet extends AbstractServlet {
             try {
                 User user = loginService.fetchUser();
                 req.getSession().setAttribute("user", user);
+                AvailablePages ap = new AvailablePages();
+                List<SubPage> availables = ap.selectPages(connection, user);
 
-                //put available pages here
-                
+                req.setAttribute("pageList", availables);
                 req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
 
 
@@ -63,36 +64,6 @@ public class LoginServlet extends AbstractServlet {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-        /*
-        User tempForCheck = new User(req.getParameter("username"), req.getParameter("password"));
-        try(Connection connection = getConnection(req.getServletContext())) {
-            DataStorage DS = new DataStorage(connection);
-            List<User> registered = DS.getUserList();
-            List<SubPage> availablePages = new ArrayList<>();
-            AvailablePages ap = new AvailablePages();
-
-            if (registered.size() > 0 && registered.contains(tempForCheck)) {
-                String userID = null;
-                for (User user : registered) {
-                    if (user.equals(tempForCheck)) {
-                        HttpSession session = req.getSession();
-                        session.setAttribute("user", user);
-                        session.setMaxInactiveInterval(30 * 60);
-                        availablePages = ap.selectPages(user);
-                    }
-                }
-                req.getSession(false).setAttribute("pageList", availablePages);
-                req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
-            } else {
-                PrintWriter out = resp.getWriter();
-                out.println("<html><body><script>alert('Wrong username or password!');window.location.href = \"index.jsp\"</script></body></html>");
-            }
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        */
     }
 
 }

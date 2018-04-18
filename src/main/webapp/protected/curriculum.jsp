@@ -24,7 +24,7 @@ if (wrongName) {
 
 <h1 id="welcomeText">Welcome ${user.name}!</h1>
 <div id="choices">
-    <c:forEach items="${sessionScope.pageList}" var="page">
+    <c:forEach items="${pageList}" var="page">
 
         <form method="get" id="${page.getId()}" action="curriculum">
             <input type="hidden" name="id" value="${page.id}">

@@ -34,7 +34,7 @@ public final class SubPageDao extends AbstractDao {
         String sql = "SELECT * FROM subpages WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 sb = fetchSubPage(resultSet);
             }
@@ -116,8 +116,8 @@ public final class SubPageDao extends AbstractDao {
     private List<Question> convertToQuestions(Array qids) throws SQLException {
         QuestionDao qd = new QuestionDao(connection);
 
-        Integer[] ids = (Integer[]) qids.getArray();
-        List<Question> questions = null;
+        Integer[] ids = (Integer[])qids.getArray();
+        List<Question> questions = new ArrayList<>();
         for (Integer num : ids) {
             questions.add(qd.findQuestionById(num));
         }

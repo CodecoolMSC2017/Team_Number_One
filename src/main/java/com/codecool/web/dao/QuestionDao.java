@@ -29,7 +29,7 @@ public final class QuestionDao extends AbstractDao {
         Question q = null;
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
-            try (ResultSet resultSet = statement.executeQuery(sql)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     q = fetchQuestion(resultSet);
                 }
