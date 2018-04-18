@@ -25,8 +25,8 @@ public class AddPagesServlet extends AbstractServlet {
 
         if (req.getParameterMap().containsKey("maxScore")) {
             TempPageServlet tmp = new TempPageServlet();
-            AssignmentPage tmpAssign = (AssignmentPage) session.getAttribute("tmpAssign");
-            session.removeAttribute("tmpAssign");
+            AssignmentPage tmpAssign = (AssignmentPage) session.getAttribute("sessTmpAssign");
+            session.removeAttribute("sessTmpAssign");
             tmpAssign = tmp.tempPageRefresh(req, tmpAssign);
 
             try (Connection connection = dataSource.getConnection()) {

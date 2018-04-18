@@ -1,3 +1,6 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import ="com.codecool.web.model.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>add_pages</title>
@@ -8,11 +11,11 @@
 <body>
 <form id="addForm" method="POST">
     <p>Assignment title / Max Score:</p>
-    <input id="title" type="text/html" name="assignTitle" value="${sessionScope.tmpAssign.title}" required>
-    <input id="maxScore" type="text/html" name="maxScore" value="${sessionScope.tmpAssign.maxScore}" required>
+    <input id="title" type="text/html" name="assignTitle" value="${reqTmpAssign.title}" required>
+    <input id="maxScore" type="text/html" name="maxScore" value="${reqTmpAssign.maxScore}" required>
     <br>
-    <input type="hidden" name="assignPageTheReal" value="${tmpAssign}">
-    <c:forEach items="${sessionScope.tmpAssign.listOfQuestions}" var="q">
+    <input type="hidden" name="assignPageTheReal" value="${reqTmpAssign}">
+    <c:forEach items="${reqTmpAssign.listOfQuestions}" var="q">
         <p>Question:</p>
         <input type="text/html" name="alreadySubmittedQuestion" value="${q.question}">
         <br>
@@ -29,7 +32,7 @@
 </form>
 
 <input id="button" type="submit" value="Submit" form="addForm" formaction="addpage">
-<input type="hidden" id="tempPage" value="${tmpAssign}">
+<input type="hidden" id="tempPage" value="${sessTmpAssign}">
 <input type="submit" id="button" value="Add Question" form="addForm" formaction="addquestion">
 <br>
 <br>

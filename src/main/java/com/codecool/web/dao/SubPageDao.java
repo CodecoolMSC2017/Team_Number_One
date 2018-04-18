@@ -23,7 +23,7 @@ public final class SubPageDao extends AbstractDao {
             while (resultSet.next()) {
                 pages.add(fetchSubPage(resultSet));
             }
-        }catch (SQLException er) {
+        } catch (SQLException er) {
             er.printStackTrace();
         }
         return pages;
@@ -32,10 +32,10 @@ public final class SubPageDao extends AbstractDao {
     public SubPage findSubPageById(int id) throws SQLException {
         SubPage sb = null;
         String sql = "SELECT * FROM subpages WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)){
-            statement.setInt(1,id);
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery(sql);
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 sb = fetchSubPage(resultSet);
             }
         }
@@ -44,7 +44,9 @@ public final class SubPageDao extends AbstractDao {
 
 
     public int addTextPage(String title, String description) throws SQLException {
-        String sql = "INSERT INTO subpages (title, description, published, type) VALUES (?, ?, 'false', 'TEXT')";
+        String sql = "INSERT INTO subpages (title, description, published, type) VALUES (?, ?, 'false', 'T')";
+        connection.setAutoCommit(false);
+
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             statement.setString(1, title);
             statement.setString(2, description);
@@ -52,21 +54,43 @@ public final class SubPageDao extends AbstractDao {
             int id = fetchGeneratedId(statement);
             connection.commit();
             return id;
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(true);
         }
     }
 
 
     public int addAssignmentPage(String title, int maxscore, List<Question> questions) throws SQLException {
-        Array ids= getQuestionIds(questions);
-        String sql = "INSERT INTO subpages (title, maxscore, ids, published, type) VALUES (?, ?, ?, 'false', 'TEXT')";
+        QuestionDao qd = new QuestionDao(connection);
+        connection.setAutoCommit(false);
+        String sql = "INSERT INTO subpages (title, maxscore, questionid, published, type) VALUES (?, ?, ?, false, 'A')";
+
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            List<Question> quids = new ArrayList<>();
+
+            for (Question question : questions) {
+                Question finalQuestion = qd.addQuestion(question.getQuestion(), question.getAnswer());
+                quids.add(finalQuestion);
+            }
+
+            Array ids = getQuestionIds(quids);
             statement.setString(1, title);
             statement.setInt(2, maxscore);
             statement.setArray(3, ids);
             executeInsert(statement);
             int id = fetchGeneratedId(statement);
+            System.out.println(id);
             connection.commit();
+            System.out.println(id);
             return id;
+        } catch (SQLException ex) {
+            connection.rollback();
+            throw ex;
+        } finally {
+            connection.setAutoCommit(true);
         }
     }
 
@@ -80,7 +104,7 @@ public final class SubPageDao extends AbstractDao {
         if (type.equals("T")) {
             String description = resultSet.getString("description");
             page = new TextPage(id, title, published, description);
-        }else if (type.equals("A")){
+        } else if (type.equals("A")) {
             int maxscore = resultSet.getInt("maxscore");
             Array qids = resultSet.getArray("questionid");
             List<Question> questions = convertToQuestions(qids);
@@ -92,7 +116,7 @@ public final class SubPageDao extends AbstractDao {
     private List<Question> convertToQuestions(Array qids) throws SQLException {
         QuestionDao qd = new QuestionDao(connection);
 
-        Integer[] ids = (Integer[])qids.getArray();
+        Integer[] ids = (Integer[]) qids.getArray();
         List<Question> questions = null;
         for (Integer num : ids) {
             questions.add(qd.findQuestionById(num));
@@ -102,8 +126,8 @@ public final class SubPageDao extends AbstractDao {
 
 
     private Array getQuestionIds(List<Question> questions) throws SQLException {
-        List<Integer> quids = null;
-        for(Question question : questions) {
+        List<Integer> quids = new ArrayList<>();
+        for (Question question : questions) {
             quids.add(question.getId());
         }
         Object[] tempArray = quids.toArray();

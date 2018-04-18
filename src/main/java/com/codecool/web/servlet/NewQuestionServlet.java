@@ -26,14 +26,14 @@ public class NewQuestionServlet extends AbstractServlet {
 
         HttpSession session = req.getSession();
         TempPageServlet tmp = new TempPageServlet();
-        AssignmentPage tmpAssign = (AssignmentPage) session.getAttribute("tmpAssign");
+        AssignmentPage tmpAssign = (AssignmentPage) session.getAttribute("sessTmpAssign");
 
         tmpAssign = tmp.tempPageRefresh(req, tmpAssign);
         System.out.println(tmpAssign.getListOfQuestions().get(0).getQuestion());
 
-        session.removeAttribute("tmpAssign");
-        req.setAttribute("tmpAssign", tmpAssign);
-        session.setAttribute("tmpAssign", tmpAssign);
+        session.removeAttribute("sessTmpAssign");
+        req.setAttribute("reqTmpAssign", tmpAssign);
+        session.setAttribute("sessTmpAssign", tmpAssign);
         req.getRequestDispatcher("protected/addAssignment.jsp").forward(req, resp);
     }
 

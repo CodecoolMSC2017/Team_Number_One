@@ -56,7 +56,7 @@ INSERT INTO users (email, password, username, userrole) VALUES
 	('b@b', 'b', 'b', 'Student');
 
 INSERT INTO subpages (title, type, description, published) values
-    ('TestText1', 'Text', 'Test text', true);
+    ('TestText1', 'T', 'Test text', true);
 
 INSERT INTO questions (question, answer) VALUES
     ('Are you here?', 'yes'),

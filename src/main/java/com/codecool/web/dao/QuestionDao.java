@@ -40,7 +40,6 @@ public final class QuestionDao extends AbstractDao {
 
     @Deprecated
     public Question addQuestion(Question question) throws SQLException {
-        boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
         String sql = "INSERT INTO questions (question, answer) VALUES (?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
@@ -52,8 +51,6 @@ public final class QuestionDao extends AbstractDao {
         } catch (SQLException ex) {
             connection.rollback();
             throw ex;
-        } finally {
-            connection.setAutoCommit(autoCommit);
         }
     }
 
