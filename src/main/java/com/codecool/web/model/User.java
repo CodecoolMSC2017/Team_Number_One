@@ -33,6 +33,7 @@ public class User {
         this.password = password;
     }
 
+    @Deprecated
     private String generateId(){
         Random r = new Random();
         StringBuilder sb = new StringBuilder();
