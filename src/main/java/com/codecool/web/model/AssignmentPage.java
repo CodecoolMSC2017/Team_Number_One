@@ -25,10 +25,6 @@ public class AssignmentPage extends SubPage {
         return listOfQuestions;
     }
 
-    public void setListOfQuestions(List<Question> listOfQuestions) {
-        this.listOfQuestions = listOfQuestions;
-    }
-
     public void addTask(Question q) {
         listOfQuestions.add(q);
     }
