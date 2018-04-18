@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html>
 <head>
 	<title>TeamOneLMS</title>
@@ -12,6 +14,9 @@
 	<br>
 	<p>Password:</p>
 	<input type="text/html" name="password" required>
+	<c:if test="${not empty error}" >
+	    ${error}
+	</c:if>
 	<br>
 	<br>
 	<input id="button" type="submit" value="Login">

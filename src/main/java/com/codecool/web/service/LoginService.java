@@ -3,7 +3,6 @@ package com.codecool.web.service;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
 import com.codecool.web.service.exceptions.NoUserRegisteredException;
-import com.codecool.web.service.exceptions.NoUserRegisteredException;
 import com.codecool.web.service.UserNotRegisteredException;
 
 import java.sql.SQLException;

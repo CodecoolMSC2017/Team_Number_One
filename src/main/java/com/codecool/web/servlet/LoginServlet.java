@@ -43,11 +43,11 @@ public class LoginServlet extends AbstractServlet {
 
 
             } catch (UserNotRegisteredException e) {
-                req.setAttribute("error", "You are not registered");
-                req.getRequestDispatcher("index.html").forward(req, resp);
+                req.setAttribute("error", "Wrong password of user name!");
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
             } catch (NoUserRegisteredException e) {
-                req.setAttribute("error", "No user registered yet");
-                req.getRequestDispatcher("index.html").forward(req, resp);
+                req.setAttribute("error", "No user registered yet!");
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
             }
 
 
@@ -79,7 +79,7 @@ public class LoginServlet extends AbstractServlet {
                 req.getRequestDispatcher("protected/curriculum.jsp").forward(req, resp);
             } else {
                 PrintWriter out = resp.getWriter();
-                out.println("<html><body><script>alert('Wrong username or password!');window.location.href = \"index.html\"</script></body></html>");
+                out.println("<html><body><script>alert('Wrong username or password!');window.location.href = \"index.jsp\"</script></body></html>");
             }
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -91,6 +91,6 @@ public class LoginServlet extends AbstractServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
-        resp.sendRedirect("index.html");
+        resp.sendRedirect("index.jsp");
     }
 }

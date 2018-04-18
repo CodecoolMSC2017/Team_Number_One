@@ -75,7 +75,7 @@ public class CurriculumServlet extends AbstractServlet{
                     }
                 }
             }
-            resp.sendRedirect("index.html");
+            resp.sendRedirect("index.jsp");
         }
     }
 }

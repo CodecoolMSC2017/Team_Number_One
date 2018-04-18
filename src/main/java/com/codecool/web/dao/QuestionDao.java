@@ -37,6 +37,7 @@ public final class QuestionDao extends AbstractDao {
         return null;
     }
 
+    @Deprecated
     public Question addQuestion(Question question) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
@@ -79,4 +80,5 @@ public final class QuestionDao extends AbstractDao {
         String answer = resultSet.getString("answer");
         return new Question(id, question, answer);
     }
+
 }

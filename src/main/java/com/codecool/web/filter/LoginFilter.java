@@ -23,7 +23,7 @@ public final class LoginFilter implements Filter {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            resp.sendRedirect("index.html");
+            resp.sendRedirect("index.jsp");
         } else {
             chain.doFilter(req, resp);
         }
