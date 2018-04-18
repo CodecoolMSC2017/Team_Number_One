@@ -22,7 +22,15 @@ import java.util.List;
 
 @WebServlet("/loginServlet")
 public class LoginServlet extends AbstractServlet {
+    //logout
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().invalidate();
+        resp.sendRedirect("index.jsp");
+    }
+    
 
+    //login
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("dataSource");
@@ -87,10 +95,4 @@ public class LoginServlet extends AbstractServlet {
         */
     }
 
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().invalidate();
-        resp.sendRedirect("index.jsp");
-    }
 }

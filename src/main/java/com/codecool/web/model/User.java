@@ -33,6 +33,7 @@ public class User {
         this.password = password;
     }
 
+    @Deprecated
     private String generateId(){
         Random r = new Random();
         StringBuilder sb = new StringBuilder();
@@ -101,6 +102,9 @@ public class User {
         return assignIds;
     }
 
+
+    /*
+    @Deprecated
     public List<String> getAssignTitles(){
         List<String> assignTitles = new ArrayList<>();
         List<Integer> assignIds = this.getAssignIds();
@@ -111,7 +115,7 @@ public class User {
             }
         }
         return assignTitles;
-    }
+    }*/
 
     public void addCompletedAssignment (int assignmentId, HashMap<Question, String> answer) {
         boolean isDuplicated = false;

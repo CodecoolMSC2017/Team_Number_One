@@ -15,7 +15,7 @@ public final class SubPageDao extends AbstractDao {
         super(connection);
     }
 
-    public List<SubPage> getAllSubPages() throws SQLException {
+    public List<SubPage> findAllSubPages() throws SQLException {
         List<SubPage> pages = new ArrayList<>();
         String sql = "SELECT * FROM subpages";
         try (Statement statement = connection.createStatement();
@@ -27,6 +27,19 @@ public final class SubPageDao extends AbstractDao {
             er.printStackTrace();
         }
         return pages;
+    }
+
+    public SubPage findSubPageById(int id) throws SQLException {
+        SubPage sb = null;
+        String sql = "SELECT * FROM subpages WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                sb = fetchSubPage(resultSet);
+            }
+        }
+        return sb;
     }
 
 

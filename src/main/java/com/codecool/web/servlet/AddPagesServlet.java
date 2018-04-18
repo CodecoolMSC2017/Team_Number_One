@@ -29,7 +29,7 @@ public class AddPagesServlet extends AbstractServlet {
             AssignmentPage tmpAssign = (AssignmentPage) session.getAttribute("tempPage");
             session.removeAttribute("tmpAssign");
             tmpAssign = tmp.tempPageRefresh(req, tmpAssign);
-            
+
             ap = new AssignmentPage(req.getParameter("assignTitle"), q, Integer.parseInt(req.getParameter("maxScore")));
 
         }

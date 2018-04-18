@@ -28,7 +28,7 @@ public class NewQuestionServlet extends AbstractServlet {
         HttpSession session = req.getSession();
         TempPageServlet tmp = new TempPageServlet();
         AssignmentPage tmpAssign = (AssignmentPage) session.getAttribute("tempPage");
-
+        
         tmpAssign = tmp.tempPageRefresh(req, tmpAssign);
 
         session.removeAttribute("tmpAssign");

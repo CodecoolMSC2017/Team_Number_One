@@ -1,7 +1,9 @@
 package com.codecool.web.model;
 
 import com.codecool.web.service.DataStorage;
+import com.codecool.web.service.SubPageService;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class Result {
@@ -12,13 +14,14 @@ public class Result {
     private Timestamp submissionDate;
     private String assignmentPageTitle;
     private AssignmentPage ap;
+    SubPageService spService;
 
-    public Result(int assignmentPageId, User user, Timestamp submissionDate) {
+    public Result(int assignmentPageId, User user, Timestamp submissionDate, SubPageService spService) throws SQLException {
         this.assignmentPageId = assignmentPageId;
         this.user = user;
         this.submissionDate = submissionDate;
-        this.assignmentPageTitle = DataStorage.getInstance().getSubPageById(assignmentPageId).getTitle();
-        this.ap = (AssignmentPage)DataStorage.getInstance().getSubPageById(assignmentPageId);
+        this.assignmentPageTitle = spService.getSubPageById(assignmentPageId).getTitle();
+        this.ap = (AssignmentPage) spService.getSubPageById(assignmentPageId);
     }
 
     public int getAssignmentPageId() {
