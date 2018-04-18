@@ -67,6 +67,22 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
             statement.setString(4,userRole);
             executeInsert(statement);
         }
+
+    }
+
+    @Override
+    public void updateUser(int id, String name, String role) throws SQLException {
+        String sql = "UPDATE users SET username=?,userrole=?" +
+                "WHERE id=?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setString(1,name);
+            statement.setString(2,role);
+            statement.setInt(3,id);
+            statement.executeUpdate(sql);
+        }
+
+        connection.commit();
     }
 
     private User createUser(ResultSet resultSet) throws SQLException{
