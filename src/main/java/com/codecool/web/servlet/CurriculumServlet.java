@@ -28,6 +28,9 @@ public class CurriculumServlet extends AbstractServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        AssignmentPage tempAssign = new AssignmentPage();
+        req.getSession().setAttribute("tempPage", tempAssign);
+        req.setAttribute("tmpAssign", tempAssign);
         if (req.getParameter("addPages").equals("Add Assignment")) {
             req.getRequestDispatcher("protected/addAssignment.jsp").forward(req, resp);
         }else if(req.getParameter("addPages").equals("Add Text Page")){
