@@ -18,7 +18,10 @@ abstract class AbstractDao {
         if (insertCount != 1) {
             connection.rollback();
             throw new SQLException("Expected 1 row to be inserted");
+        }else{
+            connection.commit();
         }
+
     }
 
     int fetchGeneratedId(PreparedStatement statement) throws SQLException {

@@ -33,14 +33,21 @@ public class ProfileUpdateServlet extends AbstractServlet {
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new UserService(userDao);
             for (User user : userService.getUserList()) {
-                if (Integer.toString(user.getUniqueId()) == req.getParameter("id")) {
+                if (Integer.toString(user.getUniqueId()).equals(req.getParameter("id"))) {
                     toBeUpdated = user;
                     break;
                 }
             }
+            try {
 
-            toBeUpdated.setName(req.getParameter("userName"));
-            toBeUpdated.setRole(req.getParameter("userRole"));
+                toBeUpdated.setName(req.getParameter("userName"));
+                toBeUpdated.setRole(req.getParameter("userRole"));
+                userService.updateUser(toBeUpdated, connection);
+            }
+            catch (NullPointerException ne){
+                ne.printStackTrace();
+            }
+
 
             JOptionPane.showMessageDialog(null, "User information has been updated!");
 

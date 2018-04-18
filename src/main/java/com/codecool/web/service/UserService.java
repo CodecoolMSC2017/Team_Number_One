@@ -3,6 +3,8 @@ package com.codecool.web.service;
 import com.codecool.web.dao.DatabaseUserDao;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -33,6 +35,14 @@ public class UserService implements UserServiceInterface{
         }
     }
 
+    public void updateUser(int id,String name,String role){
+        try {
+            userDao.updateUser(id,name,role);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public User getUserByName(String name) {
         User user = null;
@@ -58,6 +68,18 @@ public class UserService implements UserServiceInterface{
             }
         }
         return students;
+    }
+
+    @Override
+    public void updateUser(User user, Connection connection) {
+        UserDao usd = new DatabaseUserDao(connection);
+        try {
+            usd.updateUser(user.getUniqueId(), user.getName(), user.getRole());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public User getUserById(int userId){

@@ -2,6 +2,7 @@ package com.codecool.web.service;
 
 import com.codecool.web.model.User;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface UserServiceInterface {
     List<User> getStudents()throws SQLException;
 
 
+    void updateUser(User toBeUpdated, Connection connection);
 }
