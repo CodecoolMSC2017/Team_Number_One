@@ -35,6 +35,14 @@ public class UserService implements UserServiceInterface{
         }
     }
 
+    public void updateUser(int id,String name,String role){
+        try {
+            userDao.updateUser(id,name,role);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public User getUserByName(String name) {
         User user = null;
