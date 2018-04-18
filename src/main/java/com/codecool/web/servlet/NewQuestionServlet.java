@@ -40,6 +40,10 @@ public class NewQuestionServlet extends AbstractServlet {
             e.printStackTrace();
         }
 
+        /*
+        // still need to complete, but need Assigment page for that
+
+
 
         if(!req.getParameterMap().containsKey("alreadySubmittedQuestion")){
 
@@ -63,6 +67,7 @@ public class NewQuestionServlet extends AbstractServlet {
             req.getRequestDispatcher("protected/addQuestion.jsp").forward(req,resp);
 
         }
+        */
 
 
 
