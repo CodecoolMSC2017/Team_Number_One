@@ -39,9 +39,10 @@ public class ProfileUpdateServlet extends AbstractServlet {
                 }
             }
             try {
-                int userID = toBeUpdated.getUniqueId();
+
                 toBeUpdated.setName(req.getParameter("userName"));
                 toBeUpdated.setRole(req.getParameter("userRole"));
+                userService.updateUser(toBeUpdated, connection);
             }
             catch (NullPointerException ne){
                 ne.printStackTrace();

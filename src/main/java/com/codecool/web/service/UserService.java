@@ -3,6 +3,8 @@ package com.codecool.web.service;
 import com.codecool.web.dao.DatabaseUserDao;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -58,6 +60,13 @@ public class UserService implements UserServiceInterface{
             }
         }
         return students;
+    }
+
+    @Override
+    public void updateUser(User user, Connection connection) {
+        UserDao usd = new DatabaseUserDao(connection);
+        
+
     }
 
     public User getUserById(int userId){
