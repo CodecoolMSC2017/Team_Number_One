@@ -12,7 +12,7 @@ import java.util.List;
 public class AvailablePages {
 
     public List<SubPage> selectPages(Connection connection, User user) throws SQLException {
-        SubPageDao spd = new SubPageDao(connection)
+        SubPageDao spd = new SubPageDao(connection);
         List<SubPage> available = new ArrayList<>();
 
         if (user.getRole().equals("Mentor")) {
