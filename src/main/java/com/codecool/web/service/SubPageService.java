@@ -30,4 +30,12 @@ public class SubPageService {
     public int saveAssignmentPage(String title, int maxscore, List<Question> questions) throws SQLException {
         return subPageDao.addAssignmentPage(title, maxscore, questions);
     }
+
+    public void setPublished(int pageId)throws SQLException{
+        subPageDao.setPublished(pageId);
+    }
+
+    public void setUnPublished(int pageId)throws SQLException{
+        subPageDao.setUnPublished(pageId);
+    }
 }

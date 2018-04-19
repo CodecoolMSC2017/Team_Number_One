@@ -10,14 +10,14 @@
             <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     </head>
     <body>
+    <jsp:include page="sideBar.jsp"/>
+    <div class="content">
         <h1><c:out value = "${tp.title}" /></h1>
         <textarea disabled id="contentTextArea" colum="120" wrap="soft">
             <c:out value = "${tp.textContent}" />
         </textarea>
         <br>
-        <form method="get" id="${page.getId()}" action="backToMain">
-            <input id="textPageButton" type="submit" value="Back to curriculum">
-            <input type="hidden" name="id" value="${tp.id}">
-        </form>
+
+    </div>
     </body>
 </html>

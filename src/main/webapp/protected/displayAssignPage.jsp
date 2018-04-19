@@ -10,6 +10,8 @@
             <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     </head>
     <body>
+    <jsp:include page="sideBar.jsp"/>
+    <div class="content">
         <h1><c:out value = "${ap.title}"/></h1>
         <form action="check-answers" method="post">
             <input type="hidden" name="id" value="${ap.id}">
@@ -17,11 +19,12 @@
                 <p>Question:<br><c:out value="${q.question}"/></p>
                 <p>Answer:<br></p>
                 <br>
-                <input type="text/html" name="${q.answer.answer}">
+                <input type="text/html" name="${q.answer}">
 
             </c:forEach>
             <br>
             <input type="submit" value="Submit">
         </form>
+    </div>
     </body>
 </html>

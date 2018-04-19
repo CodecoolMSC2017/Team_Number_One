@@ -6,6 +6,8 @@
 
     </head>
     <body>
+    <jsp:include page="sideBar.jsp"/>
+    <div class="content">
         <form id="addForm" action="addpage" method="POST">
             <p>Title:</p>
             <input id="titleTextArea" type="text/html" name="textTitle" id="textTitle" required>
@@ -21,8 +23,7 @@
         <br>
         <br>
 
-        <form id="backToCurriculum" action="backToMain" method="GET">
-            <input id="button" type="submit" value="Back to curriculum">
-        </form>
+
+    </div>
     </body>
 </html>

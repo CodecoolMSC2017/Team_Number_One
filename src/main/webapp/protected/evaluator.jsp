@@ -10,6 +10,8 @@
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     </head>
     <body>
+    <jsp:include page="sideBar.jsp"/>
+    <div class="content">
         <h1><c:out value = "${assignTitle}"/></h1>
         <h3><c:out value="${userName}"/></h3>
             <c:forEach var="q" items="${map}">
@@ -25,5 +27,6 @@
                 <input type="text/html" name="score" value="${result.score}">
                 <input type="submit" value="Submit">
             </form>
+    </div>
     </body>
 </html>

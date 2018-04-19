@@ -13,6 +13,18 @@
 	
 }
 
+#userTable{
+    width:50%;
+    margin-left:25%;
+    margin-right:25%;
+     border-collapse: collapse;
+
+        padding:10px;
+}
+
+
+
+
 #registerForm{
 	text-align:center;
 	background-color:#254E58;
@@ -30,11 +42,8 @@
 
 
 html{
-	background: #5f8284; /* Old browsers */
-    background: -moz-linear-gradient(45deg, #5f8284 0%, #b7f7ff 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(45deg, #5f8284 0%,#b7f7ff 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(45deg, #5f8284 0%,#b7f7ff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5f8284', endColorstr='#b7f7ff',GradientType=1 );
+	background-color: #aec6cf; /* Old browsers */
+
     text-align:center;
 
     width:100%;
@@ -50,6 +59,8 @@ p{
 a{
 	text-decoration:none;
 }
+
+
 
 a:focus{
 	outline:none;
@@ -235,6 +246,8 @@ h5 {
     font-color:black;
     transition:1s;
 }
+
+
 
 
 
