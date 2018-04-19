@@ -1,7 +1,9 @@
 package com.codecool.web.model;
 
+import com.codecool.web.dao.SubPageDao;
 import com.codecool.web.service.SubPageService;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
@@ -13,7 +15,7 @@ public class Result {
     private Timestamp submissionDate;
     private String assignmentPageTitle;
     private AssignmentPage ap;
-    SubPageService spService;
+    private SubPageService spService;
 
     public Result(int assignmentPageId, User user, Timestamp submissionDate, SubPageService spService) throws SQLException {
         this.assignmentPageId = assignmentPageId;
@@ -23,7 +25,8 @@ public class Result {
         this.ap = (AssignmentPage) spService.getSubPageById(assignmentPageId);
     }
 
-    public Result(int assignmentPageId, User user, Timestamp submissionDate) throws SQLException {
+    public Result(int assignmentPageId, User user, Timestamp submissionDate, Connection connection) throws SQLException {
+        this.spService = new SubPageService(new SubPageDao(connection));
         this.assignmentPageId = assignmentPageId;
         this.user = user;
         this.submissionDate = submissionDate;
