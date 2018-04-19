@@ -29,8 +29,12 @@ public class PagePublisherServlet extends AbstractServlet {
             SubPage sp = spService.getSubPageById(pageId);
             if (sp.isPublished()) {
                 sp.setUnPublished();
+
+                spService.setUnPublished(pageId);
             } else {
                 sp.setPublished();
+                spService.setPublished(pageId);
+
             }
 
             User user = (User)req.getSession().getAttribute("user");

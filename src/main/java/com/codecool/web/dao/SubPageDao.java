@@ -17,7 +17,7 @@ public final class SubPageDao extends AbstractDao {
 
     public List<SubPage> findAllSubPages() throws SQLException {
         List<SubPage> pages = new ArrayList<>();
-        String sql = "SELECT * FROM subpages";
+        String sql = "SELECT * FROM subpages ORDER BY id";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
@@ -101,6 +101,7 @@ public final class SubPageDao extends AbstractDao {
         Boolean published = resultSet.getBoolean("published");
         String type = resultSet.getString("type");
         SubPage page = null;
+
         if (type.equals("T")) {
             String description = resultSet.getString("description");
             page = new TextPage(id, title, published, description);
@@ -133,5 +134,37 @@ public final class SubPageDao extends AbstractDao {
         Object[] tempArray = quids.toArray();
         Array ids = connection.createArrayOf("INTEGER", tempArray);
         return ids;
+    }
+
+    public void setPublished(int pageId){
+        String sql = "UPDATE subpages SET published=true " +
+                "WHERE id=?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setInt(1, pageId);
+            statement.executeQuery();
+            connection.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void setUnPublished(int pageId){
+        String sql = "UPDATE subpages SET published=false " +
+                "WHERE id=?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setInt(1, pageId);
+            statement.executeQuery();
+            connection.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

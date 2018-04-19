@@ -17,7 +17,7 @@
                 <p>Question:<br><c:out value="${q.question}"/></p>
                 <p>Answer:<br></p>
                 <br>
-                <input type="text/html" name="${q.answer.answer}">
+                <input type="text/html" name="${q.answer}">
 
             </c:forEach>
             <br>
