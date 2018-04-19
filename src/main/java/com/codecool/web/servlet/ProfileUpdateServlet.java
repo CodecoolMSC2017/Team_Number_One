@@ -6,7 +6,6 @@ import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.Result;
 import com.codecool.web.model.Statistics;
 import com.codecool.web.model.User;
-import com.codecool.web.service.DataStorage;
 import com.codecool.web.service.ResultService;
 import com.codecool.web.service.UserService;
 
@@ -63,22 +62,21 @@ public class ProfileUpdateServlet extends AbstractServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try(Connection connection = getConnection(req.getServletContext())) {
-            DataStorage DS = new DataStorage(connection);
             ResultDao resultDao = new ResultDao(connection);
-            ResultService resultSerivce = new ResultService(resultDao);
+            ResultService resultService = new ResultService(resultDao);
             if (req.getParameter("id").equals("My Scores")) {
                 List<Result> results = new ArrayList<>();
                 HttpSession session = req.getSession(false);
                 User user = (User) session.getAttribute("user");
 
-                for (Result result : DS.getAllResults()) {
+                for (Result result : resultService.getAllResults()) {
                     if (result.getUser().getUniqueId() == user.getUniqueId()) {
                         results.add(result);
                     }
                 }
 
 
-                Statistics stat = new Statistics(resultSerivce);
+                Statistics stat = new Statistics(resultService);
                 req = stat.createChart(req);
                 req.setAttribute("results", results);
                 req.getRequestDispatcher("protected/score.jsp").forward(req, resp);

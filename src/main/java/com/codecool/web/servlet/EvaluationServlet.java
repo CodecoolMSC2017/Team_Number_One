@@ -2,18 +2,13 @@ package com.codecool.web.servlet;
 
 import com.codecool.web.model.Question;
 import com.codecool.web.model.Result;
-import com.codecool.web.model.User;
-import com.codecool.web.service.DataStorage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.List;
 
 @WebServlet("/evaluation")
 public class EvaluationServlet extends AbstractServlet{

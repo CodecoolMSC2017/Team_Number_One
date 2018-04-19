@@ -3,7 +3,6 @@ package com.codecool.web.servlet;
 import com.codecool.web.dao.ResultDao;
 import com.codecool.web.dao.SubPageDao;
 import com.codecool.web.model.*;
-import com.codecool.web.service.DataStorage;
 import com.codecool.web.service.ResultService;
 import com.codecool.web.service.SubPageService;
 

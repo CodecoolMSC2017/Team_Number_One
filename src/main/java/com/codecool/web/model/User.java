@@ -1,8 +1,6 @@
 package com.codecool.web.model;
 
 
-import com.codecool.web.service.DataStorage;
-import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 

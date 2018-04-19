@@ -1,6 +1,5 @@
 package com.codecool.web.model;
 
-import com.codecool.web.service.DataStorage;
 import com.codecool.web.service.SubPageService;
 
 import java.sql.SQLException;
