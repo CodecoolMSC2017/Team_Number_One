@@ -11,65 +11,46 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="sideBar.jsp"/>
 
+    <div class="content">
+    <script type="text/javascript">
+        var wrongName = <%= (Boolean)request.getAttribute("isSuccess") %> ;
+    if (wrongName) {
+        window.alert("Your entry has been saved!");
+        }
+    </script>
 
-<script type="text/javascript">
-    var wrongName = <%= (Boolean)request.getAttribute("isSuccess") %> ;
-if (wrongName) {
-    window.alert("Your entry has been saved!");
-    }
-</script>
+    <% User user = (User)session.getAttribute("user"); %>
 
-<% User user = (User)session.getAttribute("user"); %>
+    <h1 id="welcomeText">Welcome ${user.name}!</h1>
+    <div id="choices">
+        <c:forEach items="${pageList}" var="page">
 
-<h1 id="welcomeText">Welcome ${user.name}!</h1>
-<div id="choices">
-    <c:forEach items="${pageList}" var="page">
-
-        <form method="get" id="${page.getId()}" action="curriculum">
-            <input type="hidden" name="id" value="${page.id}">
-            <input type="submit" value="${page.getTitle()}">
-            <br>
-        </form>
-        <c:if test="${page.isPublished()}">
-            <form method="post" id="${page.getId()}" action="publish">
-            <c:if test="${user.role eq 'Mentor'}">
+            <form method="get" id="${page.getId()}" action="curriculum">
                 <input type="hidden" name="id" value="${page.id}">
-                <button style="background-color:green" id="publishButton" type="submit">Publish/Unpublish</button>
+                <input type="submit" value="${page.getTitle()}">
+                <br>
+            </form>
+            <c:if test="${page.isPublished()}">
+                <form method="post" id="${page.getId()}" action="publish">
+                <c:if test="${user.role eq 'Mentor'}">
+                    <input type="hidden" name="id" value="${page.id}">
+                    <button style="background-color:green" id="publishButton" type="submit">Publish/Unpublish</button>
 
+                </c:if>
             </c:if>
-        </c:if>
-        <c:if test="${!page.isPublished()}">
-                    <form method="post" id="${page.getId()}" action="publish">
-                    <c:if test="${user.role eq 'Mentor'}">
-                        <input type="hidden" name="id" value="${page.id}">
-                        <button style="background-color:red" id="publishButton" type="submit">Publish/Unpublish</button>
-                    </c:if>
-        </c:if>
+            <c:if test="${!page.isPublished()}">
+                        <form method="post" id="${page.getId()}" action="publish">
+                        <c:if test="${user.role eq 'Mentor'}">
+                            <input type="hidden" name="id" value="${page.id}">
+                            <button style="background-color:red" id="publishButton" type="submit">Publish/Unpublish</button>
+                        </c:if>
+            </c:if>
 
-        </form>
-    </c:forEach>
-    <form action="curriculum"  method="GET">
-        <input type="submit" name="showUsers" value="User List">
-    </form>
-    <c:if test="${user.role eq 'Mentor'}">
-        <form action="curriculum" method="POST">
-            <input type="submit" name="addPages" value="Add Assignment">
-        </form>
-         <form action="curriculum" method="POST">
-            <input type="submit" name="addPages" value="Add Text Page">
-         </form>
-        <form action="listOfSubmissions" method="GET">
-            <input type="submit" name="submission" value="Submissions">
-        </form>
-         <form action="curriculum" method="GET">
-            <input type="submit" name="attendance" value="Attendance">
-        </form>
-    </c:if>
+            </form>
+        </c:forEach>
+
 </div>
-<br>
-<form action="loginServlet" method="GET">
-    <input id="button" type="submit" value="logout" name="logout">
-</form>
 </body>
 </html>

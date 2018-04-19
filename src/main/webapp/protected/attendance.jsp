@@ -11,6 +11,8 @@
        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
    </head>
    <body>
+   <jsp:include page="sideBar.jsp"/>
+   <div class="content">
    <p3>
    <form action="attend" method="GET">
         Filter student`s list:<br><br>
@@ -58,8 +60,6 @@
        </table>
    </p3>
    <br>
-    <form id="backToCurriculum" action="backToMain" method="GET">
-                        <input id="button" type="submit" value="Back to curriculum">
-              </form>
+
     </body>
     </html>

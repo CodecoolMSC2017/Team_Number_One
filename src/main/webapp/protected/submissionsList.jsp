@@ -10,31 +10,32 @@
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     </head>
     <body>
-        <table border="2">
-            <tr>
-                <td>Student</td>
-                <td>Assignment Title</td>
-                <td>Score</td>
-                <td>Evaluate Submission</td>
-            </tr>
-            <c:forEach var="result" items="${results}">
+    <jsp:include page="sideBar.jsp"/>
+    <div class="content">
+            <table border="2">
                 <tr>
-                    <td><c:out value="${result.user.name}"/></td>
-                    <td><c:out value="${result.assignmentPageTitle}"/></td>
-                    <td><c:out value="${result.score}"/></td>
-                    <td>
-                        <form method="POST" action="evaluation">
-                            <c:set var="result" value="${result}" scope="session"/>
-                            <input type="submit" value="Submit">
-                        </form>
-                    </td>
+                    <td>Student</td>
+                    <td>Assignment Title</td>
+                    <td>Score</td>
+                    <td>Evaluate Submission</td>
                 </tr>
-            </c:forEach>
-        </table>
-        <br>
-        <br>
-        <form id="backToCurriculum" action="backToMain" method="GET">
-                    <input id="button" type="submit" value="Back to curriculum">
-                </form>
+                <c:forEach var="result" items="${results}">
+                    <tr>
+                        <td><c:out value="${result.user.name}"/></td>
+                        <td><c:out value="${result.assignmentPageTitle}"/></td>
+                        <td><c:out value="${result.score}"/></td>
+                        <td>
+                            <form method="POST" action="evaluation">
+                                <c:set var="result" value="${result}" scope="session"/>
+                                <input type="submit" value="Submit">
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+            <br>
+            <br>
+
+    </div>
     </body>
 </html>

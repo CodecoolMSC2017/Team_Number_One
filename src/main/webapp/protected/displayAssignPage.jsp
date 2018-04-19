@@ -10,6 +10,8 @@
             <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     </head>
     <body>
+    <jsp:include page="sideBar.jsp"/>
+    <div class="content">
         <h1><c:out value = "${ap.title}"/></h1>
         <form action="check-answers" method="post">
             <input type="hidden" name="id" value="${ap.id}">
@@ -23,5 +25,6 @@
             <br>
             <input type="submit" value="Submit">
         </form>
+    </div>
     </body>
 </html>

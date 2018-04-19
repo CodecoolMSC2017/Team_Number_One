@@ -11,8 +11,11 @@
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     </head>
     <body>
+    <jsp:include page="sideBar.jsp"/>
+    <div class="content">
         <p>Dear <c:out value = "${userName}"/></p>
         <p>Your result on <c:out value = "${assignTitle}"/> is</p>
         <p><c:out value = "${result}"/></p>
+    </div>
     </body>
 </html>
