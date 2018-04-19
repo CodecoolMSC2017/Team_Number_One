@@ -5,6 +5,7 @@
 	left:0px;
 	width:20%;
 	height:100%;
+
 	-webkit-box-shadow: 5px 3px 17px 0px rgba(0,0,0,0.47);
 	-moz-box-shadow: 5px 3px 17px 0px rgba(0,0,0,0.47);
 	box-shadow: 5px 3px 17px 0px rgba(0,0,0,0.47);
@@ -19,6 +20,7 @@
 	color:white;
 	margin-top:50px;
 	font-family:Josefin Sans;
+	font-size:17px;
 }
 
 .sideBar input:focus{
