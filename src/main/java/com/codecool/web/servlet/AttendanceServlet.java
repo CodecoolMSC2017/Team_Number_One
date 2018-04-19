@@ -31,7 +31,7 @@ public class AttendanceServlet extends AbstractServlet {
 
         List<User> result = AH.filterSearch(studentName, inputDate);
 
-        request.setAttribute("result", result);
+        request.setAttribute("attendResults", result);
         request.setAttribute("inputDate", inputDate);
 
 

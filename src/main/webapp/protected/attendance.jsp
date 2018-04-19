@@ -39,9 +39,9 @@
                     <th>Date</th>
                     <th>Save changes</th>
                   </tr>
-                  <c:forEach items="${results}" var="studUser">
+                  <c:forEach items="${attendResults}" var="studUser">
                       <tr>
-                        <c:if test="${not empty result}" >
+                        <c:if test="${not empty attendResults}" >
                             <form action="attend" method="POST">
                             <td>${studUser.getName()}
                                 <input type="hidden" name="userID" id="userID" value="${studUser.getUniqueId()}">
