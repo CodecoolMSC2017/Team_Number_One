@@ -3,6 +3,7 @@ package com.codecool.web.servlet;
 import com.codecool.web.dao.DatabaseUserDao;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
+import com.codecool.web.service.RegisterService;
 import com.codecool.web.service.UserService;
 
 import javax.servlet.ServletException;
@@ -22,24 +23,23 @@ public class RegisterServlet extends AbstractServlet {
         try(Connection connection = getConnection(req.getServletContext())) {
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new UserService(userDao);
-            List<User> registered = userService.getUserList();
+            RegisterService rs = new RegisterService(connection);
 
             String userName = req.getParameter("username");
+            String userEmail = req.getParameter("email");
 
-            boolean notOccupiedName = true;
-            for (User usr : registered) {
-                if (usr.getName().equals(userName)) {
-                    notOccupiedName = false;
-                    break;
+            boolean isNameFree = rs.isNotRegisteredName(userName);
 
-                }
-            }
-            if(notOccupiedName){
-                userService.addUser(req.getParameter("email"), req.getParameter("password"), userName,"Student");
-
+            if(isNameFree && rs.isNotRegisteredEmail(userEmail)){
+                userService.addUser(userEmail, req.getParameter("password"), userName,"Student");
                 resp.sendRedirect("index.jsp");
-        }else{
-                req.setAttribute("notAvailable", true);
+            }
+            else if (!(isNameFree)){
+                req.setAttribute("notAvailable", "This user name is already taken!");
+                req.getRequestDispatcher("register.jsp").forward(req, resp);
+            }
+            else {
+                req.setAttribute("notAvailable", "This email is already registered!");
                 req.getRequestDispatcher("register.jsp").forward(req, resp);
             }
 

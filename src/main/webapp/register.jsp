@@ -7,12 +7,7 @@
 <body>
 
 
-<script type="text/javascript">
-    var wrongName = <%= (Boolean)request.getAttribute("notAvailable") %> ;
-if (wrongName) {
-    window.alert("This user name is taken!");
-    }
-</script>
+
 
 
 <form method="post" id="registerForm" action="register">
@@ -31,6 +26,7 @@ if (wrongName) {
 	<br>
 	<a id="registerLink" href="index.jsp"><p>Back to homepage</p></a>
 </form>
+    <h5><c:if test="not empty notAvailable">${notAvailable}</c:if></h5>
 
 
 
