@@ -3,12 +3,10 @@ package com.codecool.web.servlet;
 import com.codecool.web.dao.DatabaseUserDao;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
-import com.codecool.web.service.DataStorage;
 import com.codecool.web.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
