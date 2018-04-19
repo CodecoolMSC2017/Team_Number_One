@@ -31,7 +31,7 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
                 "WHERE id = ?;";
         try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setInt(1,userId);
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 user=createUser(resultSet);
             }
@@ -61,6 +61,7 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
         String sql = "INSERT INTO users (email,password,username,userrole)" +
                 "VALUES(?,?,?,?);";
         try (PreparedStatement statement = connection.prepareStatement(sql)){
+            connection.setAutoCommit(false);
             statement.setString(1,email);
             statement.setString(2,password);
             statement.setString(3,userName);
@@ -82,7 +83,7 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
             statement.executeUpdate();
         }
 
-        connection.commit();
+        //connection.commit();
     }
 
 
