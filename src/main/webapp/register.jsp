@@ -29,7 +29,7 @@ if (wrongName) {
 	<br>
 	<input id="button" type="submit" value="Register">
 	<br>
-	<a id="registerLink" href="index.html"><p>Back to homepage</p></a>
+	<a id="registerLink" href="index.jsp"><p>Back to homepage</p></a>
 </form>
 
 
