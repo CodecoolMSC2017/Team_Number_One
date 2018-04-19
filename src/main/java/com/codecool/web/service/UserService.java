@@ -6,6 +6,7 @@ import com.codecool.web.model.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService implements UserServiceInterface{
@@ -55,16 +56,12 @@ public class UserService implements UserServiceInterface{
     }
 
     public List<User> getStudents(){
-        List<User> students = null;
-        try {
-            students = userDao.getAllUsers();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<User> allUser = getUserList();
+        List<User> students = new ArrayList<>();
 
-        for(User u : students){
-            if(u.getRole().equals("Mentor")){
-                students.remove(u);
+        for(User u : allUser){
+            if(u.getRole().equals("Student")){
+                students.add(u);
             }
         }
         return students;

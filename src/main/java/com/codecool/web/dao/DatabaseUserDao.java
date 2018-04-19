@@ -47,7 +47,7 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
                 "WHERE username = ?;";
         try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1,name);
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 user=createUser(resultSet);
             }
