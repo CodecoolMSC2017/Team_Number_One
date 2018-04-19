@@ -12,7 +12,7 @@
     <body>
     <jsp:include page="sideBar.jsp"/>
     <div class="content">
-            <table border="2">
+            <table border="2" id="userTable">
                 <tr>
                     <td>Student</td>
                     <td>Assignment Title</td>
