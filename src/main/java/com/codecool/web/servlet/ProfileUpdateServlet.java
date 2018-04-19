@@ -24,6 +24,7 @@ import java.util.List;
 @WebServlet("/updateProfile")
 public class ProfileUpdateServlet extends AbstractServlet {
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User toBeUpdated = null;
@@ -40,6 +41,7 @@ public class ProfileUpdateServlet extends AbstractServlet {
 
                 toBeUpdated.setName(req.getParameter("userName"));
                 toBeUpdated.setRole(req.getParameter("userRole"));
+
                 userService.updateUser(toBeUpdated, connection);
             }
             catch (NullPointerException ne){

@@ -42,6 +42,7 @@
                         </c:when>
                         <c:otherwise>
                             <td>${profile.role}</td>
+                            <input type="hidden" id="userRole" name="userRole" value="${profile.role}">
                         </c:otherwise>
                     </c:choose>
                 </tr>

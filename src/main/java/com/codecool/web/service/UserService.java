@@ -73,8 +73,11 @@ public class UserService implements UserServiceInterface{
     @Override
     public void updateUser(User user, Connection connection) {
         UserDao usd = new DatabaseUserDao(connection);
+        String userName = user.getName();
+        String role = user.getRole();
+        int id = user.getUniqueId();
         try {
-            usd.updateUser(user.getUniqueId(), user.getName(), user.getRole());
+            usd.updateUser(id, userName, role);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -91,4 +94,6 @@ public class UserService implements UserServiceInterface{
         }
         return user;
     }
+
+
 }
