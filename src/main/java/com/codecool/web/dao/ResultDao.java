@@ -80,9 +80,8 @@ public final class ResultDao extends AbstractDao {
         int userId = resultSet.getInt("userid");
         String timeStamp = resultSet.getString("timestamp");
         int score = resultSet.getInt("score");
-        Result result = new Result(assignmentPageId, userDao.getUserById(userId), Timestamp.valueOf(timeStamp));
+        Result result = new Result(assignmentPageId, userDao.getUserById(userId), Timestamp.valueOf(timeStamp), connection);
         result.setScore(score);
         return result;
     }
-
 }

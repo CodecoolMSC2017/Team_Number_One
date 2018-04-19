@@ -27,11 +27,11 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
     @Override
     public User getUserById(int userId) throws SQLException {
         User user = null;
-        String sql = "SELECT * FROM users" +
-                "WHERE id = ?;";
+        String sql = "SELECT * FROM users " +
+                "WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setInt(1,userId);
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 user=createUser(resultSet);
             }
@@ -43,7 +43,7 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
     @Override
     public User getUserByName(String name) throws SQLException {
         User user = null;
-        String sql = "SELECT * FROM users" +
+        String sql = "SELECT * FROM users " +
                 "WHERE username = ?;";
         try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1,name);
@@ -58,7 +58,7 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
 
     @Override
     public void addUser(String email, String password, String userName, String userRole) throws SQLException {
-        String sql = "INSERT INTO users (email,password,username,userrole)" +
+        String sql = "INSERT INTO users (email,password,username,userrole) " +
                 "VALUES(?,?,?,?);";
         try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1,email);
@@ -72,7 +72,7 @@ public class DatabaseUserDao extends AbstractDao implements UserDao {
 
     @Override
     public void updateUser(int id, String name, String role) throws SQLException {
-        String sql = "UPDATE users SET username=?,userrole=?" +
+        String sql = "UPDATE users SET username=?,userrole=? " +
                 "WHERE id=?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)){
