@@ -20,7 +20,7 @@ public class RegisterServlet extends AbstractServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try(Connection connection = getConnection(req.getServletContext())) {
+        try (Connection connection = getConnection(req.getServletContext())) {
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new UserService(userDao);
             RegisterService rs = new RegisterService(connection);
@@ -47,8 +47,5 @@ public class RegisterServlet extends AbstractServlet {
         }catch(SQLException ex){
             ex.printStackTrace();
         }
-
-
-
-        }
     }
+}
