@@ -11,7 +11,6 @@ import com.codecool.web.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +23,7 @@ import java.util.List;
 
 @WebServlet("/updateProfile")
 public class ProfileUpdateServlet extends AbstractServlet {
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,6 +41,7 @@ public class ProfileUpdateServlet extends AbstractServlet {
 
                 toBeUpdated.setName(req.getParameter("userName"));
                 toBeUpdated.setRole(req.getParameter("userRole"));
+
                 userService.updateUser(toBeUpdated, connection);
             }
             catch (NullPointerException ne){

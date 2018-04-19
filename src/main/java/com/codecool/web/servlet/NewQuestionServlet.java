@@ -1,21 +1,14 @@
 package com.codecool.web.servlet;
 
-import com.codecool.web.dao.QuestionDao;
 import com.codecool.web.model.*;
-import com.codecool.web.service.QuestionService;
 import com.codecool.web.service.TempPageServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/addquestion")
 public class NewQuestionServlet extends AbstractServlet {

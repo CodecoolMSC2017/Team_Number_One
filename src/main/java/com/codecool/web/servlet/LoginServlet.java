@@ -3,7 +3,6 @@ package com.codecool.web.servlet;
 import com.codecool.web.dao.DatabaseUserDao;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.SubPage;
-import com.codecool.web.model.TextPage;
 import com.codecool.web.model.User;
 import com.codecool.web.service.*;
 import com.codecool.web.service.UserNotRegisteredException;
@@ -14,10 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/loginServlet")
