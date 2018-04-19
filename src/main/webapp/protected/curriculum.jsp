@@ -41,7 +41,7 @@
                 <form method="post" id="${page.getId()}" action="publish">
                     <c:if test="${user.role eq 'Mentor'}">
                         <input type="hidden" name="id" value="${page.id}">
-                        <button style="background-color:green" id="publishButton" type="submit"></button>
+                        <button style="background-color:#bfff00" id="publishButton" type="submit"></button>
                     </c:if>
                 </form>
                 </td>
