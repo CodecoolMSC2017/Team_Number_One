@@ -12,7 +12,7 @@
         <h1 id="welcomeText">Welcome ${user.name}!</h1>
         <br>
         <form type="submit" method="POST" action="updateProfile">
-            <table border="1">
+            <table border="1" id="userTable">
                 <tr>
                     <td>User Name</td>
                     <c:choose>

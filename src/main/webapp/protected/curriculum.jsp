@@ -25,32 +25,46 @@
 
     <h1 id="welcomeText">Welcome ${user.name}!</h1>
     <div id="choices">
+    <table id="pagesTable">
         <c:forEach items="${pageList}" var="page">
-
+            <tr>
+            <td>
             <form method="get" id="${page.getId()}" action="curriculum">
                 <input type="hidden" name="id" value="${page.id}">
                 <input type="submit" value="${page.getTitle()}">
-                <br>
             </form>
+            </td>
+
+
             <c:if test="${page.isPublished()}">
+                <td>
                 <form method="post" id="${page.getId()}" action="publish">
-                <c:if test="${user.role eq 'Mentor'}">
-                    <input type="hidden" name="id" value="${page.id}">
-                    <button style="background-color:green" id="publishButton" type="submit">Publish/Unpublish</button>
-
-                </c:if>
+                    <c:if test="${user.role eq 'Mentor'}">
+                        <input type="hidden" name="id" value="${page.id}">
+                        <button style="background-color:green" id="publishButton" type="submit"></button>
+                    </c:if>
+                </form>
+                </td>
             </c:if>
+
+
+
             <c:if test="${!page.isPublished()}">
-                        <form method="post" id="${page.getId()}" action="publish">
-                        <c:if test="${user.role eq 'Mentor'}">
-                            <input type="hidden" name="id" value="${page.id}">
-                            <button style="background-color:red" id="publishButton" type="submit">Publish/Unpublish</button>
-                        </c:if>
+                <td>
+                <form method="post" id="${page.getId()}" action="publish">
+                    <c:if test="${user.role eq 'Mentor'}">
+                        <input type="hidden" name="id" value="${page.id}">
+                        <button style="background-color:red" id="publishButton" type="submit"></button>
+                    </c:if>
+                </form>
+                </td>
             </c:if>
-
-            </form>
+            </tr>
         </c:forEach>
-
-</div>
+    </div>
 </body>
 </html>
+
+
+
+
