@@ -6,11 +6,14 @@
 </head>
 <body>
 
-
 <script type="text/javascript">
     var wrongName = <%= (Boolean)request.getAttribute("notAvailable") %> ;
+    var emailTaken = <%= (Boolean)request.getAttribute("emailTaken") %> ;
 if (wrongName) {
     window.alert("This user name is taken!");
+    }
+else if (emailTaken) {
+    window.alert("Email is registered already!");
     }
 </script>
 
@@ -31,8 +34,6 @@ if (wrongName) {
 	<br>
 	<a id="registerLink" href="index.jsp"><p>Back to homepage</p></a>
 </form>
-
-
 
 </body>
 </html>

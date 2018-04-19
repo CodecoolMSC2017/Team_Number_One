@@ -19,7 +19,7 @@ public class RegisterServlet extends AbstractServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try(Connection connection = getConnection(req.getServletContext())) {
+        try (Connection connection = getConnection(req.getServletContext())) {
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new UserService(userDao);
             List<User> registered = userService.getUserList();
@@ -27,28 +27,29 @@ public class RegisterServlet extends AbstractServlet {
             String userName = req.getParameter("username");
 
             boolean notOccupiedName = true;
+            boolean emailAvailable = true;
             for (User usr : registered) {
                 if (usr.getName().equals(userName)) {
                     notOccupiedName = false;
                     break;
-
+                }else if (usr.getEmail().equals(req.getParameter("email"))) {
+                    emailAvailable = false;
+                    break;
                 }
             }
-            if(notOccupiedName){
-                userService.addUser(req.getParameter("email"), req.getParameter("password"), userName,"Student");
-
+            if (notOccupiedName && emailAvailable) {
+                userService.addUser(req.getParameter("email"), req.getParameter("password"), userName, "Student");
                 resp.sendRedirect("index.jsp");
-        }else{
+            } else if (!notOccupiedName) {
                 req.setAttribute("notAvailable", true);
+                req.getRequestDispatcher("register.jsp").forward(req, resp);
+            } else {
+                req.setAttribute("emailTaken", true);
                 req.getRequestDispatcher("register.jsp").forward(req, resp);
             }
 
-
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
-
-
-        }
     }
+}

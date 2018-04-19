@@ -62,5 +62,4 @@ public class LoginServlet extends AbstractServlet {
             e.printStackTrace();
         }
     }
-
 }
